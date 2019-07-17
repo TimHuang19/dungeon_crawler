@@ -6,11 +6,10 @@ public class ClosedState implements DoorState {
 	public ClosedState(Door door) {
 		this.door = door;
 	}
-	
+
 	@Override
-	public void useKey() {
-		// TODO Auto-generated method stub
-		
+	public void openDoor() {
+		door.setState(door.getOpenState());
 	}
 
 }

@@ -52,9 +52,9 @@ public class Dungeon {
     
     public Entity getEntity(int x, int y) {
     	for (Entity e : entities) {
-    		if (x == e.getX() && y == e.getY()) {
-    			return e;
-    		}
+			if (x == e.getX() && y == e.getY()) {
+				return e;
+			}
     	}
     	return null;
     }

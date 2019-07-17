@@ -6,10 +6,9 @@ public class OpenState implements DoorState {
 	public OpenState(Door door) {
 		this.door = door;
 	}
-	
+
 	@Override
-	public void useKey() {
-		// TODO Auto-generated method stub
+	public void openDoor() {
 		
 	}
 
