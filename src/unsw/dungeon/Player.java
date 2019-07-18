@@ -21,6 +21,7 @@ public class Player extends Entity implements Subject {
     private int direction;
     private boolean invincible;
     private int invincibleSteps;
+    private ArrayList<Bomb> bombs;
 
     /**
      * Create a player positioned in square (x,y)
@@ -35,15 +36,23 @@ public class Player extends Entity implements Subject {
         this.direction = RIGHT;
         this.invincible = false;
         this.invincibleSteps = 0;
+        this.bombs = new ArrayList<Bomb>();
     }
+    
+    public boolean isInvincible() {
+    	return invincible;
+    }
+    
     @Override
     public void registerObserver(Observer o){
     	if(! listObservers.contains(o)) listObservers.add(o);
     }
+    
     @Override
 	public void removeObserver(Observer o) {
 		listObservers.remove(o);
 	}
+    
     @Override
 	public void notifyObservers() {
 		for( Observer obs : listObservers) {
@@ -115,6 +124,14 @@ public class Player extends Entity implements Subject {
     		} else if (e instanceof Potion) {
     			this.invincibleSteps = 20;
     			this.invincible = true;
+    		} else if (e instanceof Bomb) {
+    			if (bombs.size() == 3) {
+    				return;
+    			}
+    			bombs.add((Bomb) e);
+    			dungeon.removeEntity(e);
+    		} else if (e instanceof Treasure) {
+    			dungeon.removeEntity(e);
     		}
     	}
     }
@@ -157,6 +174,16 @@ public class Player extends Entity implements Subject {
     }
     
     public void dropBomb() {
+    	if (bombs.size() == 0) {
+    		return;
+    	}
+    	
+    	Bomb b = bombs.remove(0);
+    	b.dropBomb();
+    	b.x().set(getX());
+    	b.y().set(getY());
+    	dungeon.addEntity(b);
+    	
     }
     
     private boolean isObstacle(ArrayList<Entity> entities) {
@@ -171,8 +198,7 @@ public class Player extends Entity implements Subject {
 	    		} else if (d.isClosed()) {
 	    			return true;
 	    		}
-	    	} else if (e instanceof Boulder)
-{
+	    	} else if (e instanceof Boulder) {
 	    		Boulder b = (Boulder) e;
 	    		
 	    		if (!blockedBoulder(b)) {
@@ -239,4 +265,5 @@ public class Player extends Entity implements Subject {
     		invincible = false;
     	}
     }
+    
 }

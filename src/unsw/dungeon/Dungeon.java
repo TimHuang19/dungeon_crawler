@@ -64,25 +64,17 @@ public class Dungeon {
     	return entities;
     }
     
-    public boolean isWall(int x, int y) {
-    	for (Entity e : entities) {
-    		if (e instanceof Wall) {
-    			if (x == e.getX() && y == e.getY()) {
-    				return true;
-    			}
+    public ArrayList<Entity> getExplosionTargets(int x, int y) {
+    	ArrayList<Entity> entities = new ArrayList<Entity>();
+    	for (Entity e : this.entities) {
+    		if ((x == e.getX() && y == e.getY()) ||
+    				((x + 1) == e.getX() && y == e.getY()) ||
+    				((x - 1) == e.getX() && y == e.getY()) ||
+    				(x == e.getX() && (y + 1) == e.getY()) ||
+    				(x == e.getX() && (y - 1) == e.getY())) {
+    			entities.add(e);
     		}
     	}
-    	return false;
-    }
-    
-    public boolean isClosedDoor(int x, int y) {
-    	for (Entity e : entities) {
-    		if (e instanceof Door) {
-    			if (x == e.getX() && y == e.getY() && ((Door) e).isClosed()) {
-    				return true;
-    			}
-    		}
-    	}
-    	return false;
+    	return entities;
     }
 }

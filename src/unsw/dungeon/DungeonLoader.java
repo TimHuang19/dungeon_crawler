@@ -67,7 +67,7 @@ public abstract class DungeonLoader {
         	entity = exit;
         	break;
     	case "enemy":
-    		Enemy enemy = new Enemy(dungeon,x, y);
+    		Enemy enemy = new Enemy(dungeon, x, y);
     		onLoad(enemy);
     		entity = enemy;
     		break;
@@ -86,6 +86,21 @@ public abstract class DungeonLoader {
         	onLoad(potion);
         	entity = potion;
         	break;
+        case "sword":
+        	Sword sword = new Sword(x, y);
+        	onLoad(sword);
+        	entity = sword;
+        	break;
+        case "bomb":
+        	Bomb bomb = new Bomb(dungeon, x, y);
+        	onLoad(bomb);
+        	entity = bomb;
+        	break;
+        case "treasure":
+        	Treasure treasure = new Treasure(x, y);
+        	onLoad(treasure);
+        	entity = treasure;
+        	break;
         }
         dungeon.addEntity(entity);
     }
@@ -96,6 +111,7 @@ public abstract class DungeonLoader {
 
     // TODO Create additional abstract methods for the other entities
     public abstract void onLoad(Exit exit);
+    
     public abstract void onLoad(Enemy enemy);
     
     public abstract void onLoad(Boulder boulder);
@@ -103,4 +119,10 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Switch s);
     
     public abstract void onLoad(Potion potion);
+    
+    public abstract void onLoad(Sword sword);
+    
+    public abstract void onLoad(Bomb bomb);
+    
+    public abstract void onLoad(Treasure treasure);
 }
