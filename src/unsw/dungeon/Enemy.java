@@ -38,7 +38,7 @@ public class Enemy extends Entity implements Observer, DungeonSubject {
 	public void update(Player obj) {
 		this.playerX = obj.getX();
 		this.playerY = obj.getY();
-		if(hasCollided()) dungeon.gameOver();
+		if(hasCollided()) System.out.println("Game Over!");
 	}
 	
 	public Boolean hasCollided() {
@@ -48,35 +48,35 @@ public class Enemy extends Entity implements Observer, DungeonSubject {
 		return false;
 	}
 	
-    private void moveUp() {
-    	Entity e = dungeon.getEntity(getX(), getY() - 1);
+    public void moveUp() {
+    	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY() - 1);
 
-        if (getY() > 0 && !isObstacle(e)) {
+        if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
             
         }
     }
+	
+	public void moveDown() {
+    	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY() + 1);
 
-    private void moveDown() {
-    	Entity e = dungeon.getEntity(getX(), getY() + 1);
-
-        if (getY() < dungeon.getHeight() - 1 && !isObstacle(e)) {
+        if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
         }
     }
 
-    private void moveLeft() {
-    	Entity e = dungeon.getEntity(getX() - 1, getY());
+    public void moveLeft() {
+    	ArrayList<Entity> entities = dungeon.getEntities(getX() - 1, getY());
 
-        if (getX() > 0 && !isObstacle(e)) {
+        if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
         }
     }
 
-    private void moveRight() {
-    	Entity e = dungeon.getEntity(getX() + 1, getY());
-
-        if (getX() < dungeon.getWidth() - 1 && !isObstacle(e) ){
+    public void moveRight() {
+    	ArrayList<Entity> entities = dungeon.getEntities(getX() + 1, getY());
+    	
+        if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
         }
     }
@@ -88,11 +88,19 @@ public class Enemy extends Entity implements Observer, DungeonSubject {
     	moveRight();
     }
     
-    private boolean isObstacle(Entity e) {
-
-    	if (e == null) {
-    		return false;
-    	} 
-    	else return true;
+    private boolean isObstacle(ArrayList<Entity> entities) {
+    	for (Entity e : entities) {
+	    	if (e instanceof Wall) {
+	    		return true;
+	    	} else if (e instanceof Door) {
+	    		Door d = (Door) e;
+	    		if (d.isClosed()) {
+	    			return true;
+	    		}
+	    	} else if (e instanceof Boulder) {
+	    		return true;
+	    	}
+    	}
+    	return false;
     }
 }

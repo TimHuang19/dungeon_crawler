@@ -72,6 +72,17 @@ public abstract class DungeonLoader {
     		entity = enemy;
     		break;
     	}
+        case "boulder":
+        	Boulder boulder = new Boulder(x, y);
+        	onLoad(boulder);
+        	entity = boulder;
+        	break;
+        case "switch":
+        	Switch s = new Switch(x, y);
+        	onLoad(s);
+        	entity = s;
+        	break;
+        }
         dungeon.addEntity(entity);
     }
 
@@ -83,4 +94,7 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Exit exit);
     public abstract void onLoad(Enemy enemy);
     
+    public abstract void onLoad(Boulder boulder);
+    
+    public abstract void onLoad(Switch s);
 }
