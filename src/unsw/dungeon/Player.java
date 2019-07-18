@@ -1,12 +1,14 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 /**
  * The player entity
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity {
-
+public class Player extends Entity implements Subject {
+	ArrayList<Observer> listObservers = new ArrayList<Observer>();
     private Dungeon dungeon;
     private Key key;
 
@@ -19,11 +21,25 @@ public class Player extends Entity {
         super(x, y);
         this.dungeon = dungeon;
     }
-
+    @Override
+    public void registerObserver(Observer o) {
+    	if(! listObservers.contains(o)) listObservers.add(o);
+    }
+    @Override
+	public void removeObserver(Observer o) {
+		listObservers.remove(o);
+	}
+    @Override
+	public void notifyObservers() {
+		for( Observer obs : listObservers) {
+			obs.update(this);
+		}
+	}
+    
     public void moveUp() {
     	Entity e = dungeon.getEntity(getX(), getY() - 1);
 
-        if (getY() > 0 && !isObstacle(e) {
+        if (getY() > 0 && !isObstacle(e) ){
             y().set(getY() - 1);
             
         }
@@ -32,7 +48,7 @@ public class Player extends Entity {
     public void moveDown() {
     	Entity e = dungeon.getEntity(getX(), getY() + 1);
 
-        if (getY() < dungeon.getHeight() - 1 && !isObstacle(e) {
+        if (getY() < dungeon.getHeight() - 1 && !isObstacle(e)) {
             y().set(getY() + 1);
         }
     }
@@ -40,7 +56,7 @@ public class Player extends Entity {
     public void moveLeft() {
     	Entity e = dungeon.getEntity(getX() - 1, getY());
 
-        if (getX() > 0 && !isObstacle(e) {
+        if (getX() > 0 && !isObstacle(e)) {
             x().set(getX() - 1);
         }
     }
@@ -48,7 +64,7 @@ public class Player extends Entity {
     public void moveRight() {
     	Entity e = dungeon.getEntity(getX() + 1, getY());
 
-        if (getX() < dungeon.getWidth() - 1 && !isObstacle(e) {
+        if (getX() < dungeon.getWidth() - 1 && !isObstacle(e)) {
             x().set(getX() + 1);
         }
     }
