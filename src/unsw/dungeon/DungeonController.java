@@ -62,6 +62,13 @@ public class DungeonController {
         case RIGHT:
             player.moveRight();
             break;
+        case Z:
+        	player.pickUp();
+        	break;
+        case X:
+        	player.swingSword();
+        case SPACE:
+        	player.dropBomb();
         default:
             break;
         }

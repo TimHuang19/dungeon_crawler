@@ -8,9 +8,15 @@ import java.util.ArrayList;
  *
  */
 public class Player extends Entity {
+    private static final int UP = 0;
+    private static final int DOWN = 1;
+    private static final int LEFT = 2;
+    private static final int RIGHT = 3;
 
     private Dungeon dungeon;
     private Key key;
+    private Sword sword;
+    private int direction;
 
     /**
      * Create a player positioned in square (x,y)
@@ -20,6 +26,9 @@ public class Player extends Entity {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
+        this.key = null;
+        this.sword = null;
+        this.direction = RIGHT;
     }
 
     public void moveUp() {
@@ -27,6 +36,7 @@ public class Player extends Entity {
 
         if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
+            direction = UP;
             
         }
     }
@@ -36,6 +46,7 @@ public class Player extends Entity {
 
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
+            direction = DOWN;
         }
     }
 
@@ -44,6 +55,7 @@ public class Player extends Entity {
 
         if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
+            direction = LEFT;
         }
     }
 
@@ -52,7 +64,73 @@ public class Player extends Entity {
     	
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
+            direction = RIGHT;
         }
+    }
+    
+    public void pickUp() {
+    	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
+    	
+    	for (Entity e : entities) {
+    		if (e instanceof Key) {
+    			Key newKey = (Key) e;
+    			dungeon.removeEntity(e);
+    			if (this.key == null) {
+    				this.key = newKey;
+    			} else {
+    				this.key.x().set(getX());
+    				this.key.y().set(getY());
+    				dungeon.addEntity(this.key);
+    				this.key = newKey;
+    			}
+    		} else if (e instanceof Sword) {
+    			if (this.sword == null) {
+    				this.sword = (Sword) e;
+    				dungeon.removeEntity(e);
+    			}
+    		}
+    	}
+    }
+    
+    public void swingSword() {
+    	if (sword == null) {
+    		return;
+    	}
+    	
+    	int x, y;
+    	
+    	switch (direction) {
+    	case UP:
+    		x = getX();
+    		y = getY() - 1;
+    		break;
+    	case DOWN:
+    		x = getX();
+    		y = getY() + 1;
+    		break;
+    	case LEFT:
+    		x = getX() - 1;
+    		y = getY();
+    		break;
+    	default:
+    		x = getX() + 1;
+    		y = getY();
+]    	}
+    	
+    	ArrayList<Entity> entities = dungeon.getEntities(x, y);
+    	for (Entity e : entities) {
+    		if (e instanceof Enemy) {
+    			dungeon.removeEntity(e);
+    		}
+    	}
+    	
+    	if (!sword.swing()) {
+    		dungeon.removeEntity(sword);
+    		this.sword = null;
+    	}
+    }
+    
+    public void dropBomb() {
     }
     
     private boolean isObstacle(ArrayList<Entity> entities) {
@@ -93,12 +171,18 @@ public class Player extends Entity {
 		if (playerX == boulderX) {
 			targetX = playerX;
 			targetY = (boulderY > playerY) ? boulderY + 1 : boulderY - 1;
+			if (targetY == -1 || targetY == dungeon.getHeight()) {
+				return true;
+			}
 			
 		} else {
 			targetY = playerY;
 			targetX = (boulderX > playerX) ? boulderX + 1 : boulderX - 1;
+			if (targetX == -1 || targetX == dungeon.getWidth()) {
+				return true;
+			}
 		}
-		
+				
 		ArrayList<Entity> entities = dungeon.getEntities(targetX, targetY);
 		
 		boolean canMove = true;

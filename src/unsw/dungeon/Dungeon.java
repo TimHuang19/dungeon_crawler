@@ -50,13 +50,15 @@ public class Dungeon {
         entities.add(entity);
     }
     
+    public void removeEntity(Entity entity) {
+    	entities.remove(entity);
+    }
+    
     public ArrayList<Entity> getEntities(int x, int y) {
     	ArrayList<Entity> entities = new ArrayList<Entity>();
     	for (Entity e : this.entities) {
 			if (x == e.getX() && y == e.getY()) {
 				entities.add(e);
-				System.out.println("DSFSDFSDF");
-
 			}
     	}
     	return entities;
