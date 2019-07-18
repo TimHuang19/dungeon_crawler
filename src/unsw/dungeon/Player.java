@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 /**
  * The player entity
@@ -16,8 +17,10 @@ public class Player extends Entity implements Subject {
 
     private Dungeon dungeon;
     private Key key;
-    private Sword sword;
+    private boolean sword;
     private int direction;
+    private boolean invincible;
+    private int invincibleSteps;
 
     /**
      * Create a player positioned in square (x,y)
@@ -28,8 +31,10 @@ public class Player extends Entity implements Subject {
         super(x, y);
         this.dungeon = dungeon;
         this.key = null;
-        this.sword = null;
+        this.sword = false;
         this.direction = RIGHT;
+        this.invincible = false;
+        this.invincibleSteps = 0;
     }
     @Override
     public void registerObserver(Observer o){
@@ -51,6 +56,7 @@ public class Player extends Entity implements Subject {
 
         if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
+            updateInvincibility();
             direction = UP;
             
         }
@@ -61,6 +67,7 @@ public class Player extends Entity implements Subject {
 
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
+            updateInvincibility();
             direction = DOWN;
         }
     }
@@ -70,6 +77,7 @@ public class Player extends Entity implements Subject {
 
         if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
+            updateInvincibility();
             direction = LEFT;
         }
     }
@@ -79,6 +87,7 @@ public class Player extends Entity implements Subject {
     	
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
+            updateInvincibility();
             direction = RIGHT;
         }
     }
@@ -99,17 +108,20 @@ public class Player extends Entity implements Subject {
     				this.key = newKey;
     			}
     		} else if (e instanceof Sword) {
-    			if (this.sword == null) {
-    				this.sword = (Sword) e;
+    			if (this.sword == false) {
+    				this.sword = true;
     				dungeon.removeEntity(e);
     			}
+    		} else if (e instanceof Potion) {
+    			this.invincibleSteps = 20;
+    			this.invincible = true;
     		}
     	}
     }
     
     public void swingSword() {
 
-    	if (sword == null) {
+    	if (sword == false) {
     		return;
     	}
     	
@@ -213,5 +225,18 @@ public class Player extends Entity implements Subject {
 		}
 		
 		return true;
+    }
+    
+    private void updateInvincibility() {
+    	System.out.println(invincibleSteps);
+    	if (!invincible) {
+    		return;
+    	}
+    	if (invincibleSteps > 0) {
+    		invincibleSteps--;
+    	}
+    	if (invincibleSteps == 0) {
+    		invincible = false;
+    	}
     }
 }

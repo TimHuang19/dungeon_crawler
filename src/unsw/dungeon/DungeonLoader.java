@@ -81,6 +81,11 @@ public abstract class DungeonLoader {
         	onLoad(s);
         	entity = s;
         	break;
+        case "invincibility":
+        	Potion potion = new Potion(x, y);
+        	onLoad(potion);
+        	entity = potion;
+        	break;
         }
         dungeon.addEntity(entity);
     }
@@ -96,4 +101,6 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Boulder boulder);
     
     public abstract void onLoad(Switch s);
+    
+    public abstract void onLoad(Potion potion);
 }

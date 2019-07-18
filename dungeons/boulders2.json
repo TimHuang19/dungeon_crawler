@@ -43,6 +43,11 @@
       "type": "switch"
     },
     {
+        "x": 5,
+        "y": 7,
+        "type": "invincibility"
+    },
+    {
       "x": 2,
       "y": 2,
       "type": "player"
