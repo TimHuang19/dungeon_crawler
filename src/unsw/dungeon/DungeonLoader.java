@@ -71,7 +71,6 @@ public abstract class DungeonLoader {
     		onLoad(enemy);
     		entity = enemy;
     		break;
-    	}
         case "boulder":
         	Boulder boulder = new Boulder(x, y);
         	onLoad(boulder);

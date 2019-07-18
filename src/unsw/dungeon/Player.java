@@ -133,7 +133,7 @@ public class Player extends Entity implements Subject {
     	default:
     		x = getX() + 1;
     		y = getY();
-]    	}
+    	}
     	
     	ArrayList<Entity> entities = dungeon.getEntities(x, y);
     	for (Entity e : entities) {
@@ -141,12 +141,6 @@ public class Player extends Entity implements Subject {
     			dungeon.removeEntity(e);
     		}
     	}
-    	
-
-
-    	Entity(getX(), getY() - 1);
-
-    	}Entity(getX(), getY() - 1);
 
     }
     
@@ -165,7 +159,7 @@ public class Player extends Entity implements Subject {
 	    		} else if (d.isClosed()) {
 	    			return true;
 	    		}
-	    	} else if (e instanceof Boulder)Entity(getX(), getY() - 1);
+	    	} else if (e instanceof Boulder)
 {
 	    		Boulder b = (Boulder) e;
 	    		
