@@ -50,13 +50,16 @@ public class Dungeon {
         entities.add(entity);
     }
     
-    public Entity getEntity(int x, int y) {
-    	for (Entity e : entities) {
+    public ArrayList<Entity> getEntities(int x, int y) {
+    	ArrayList<Entity> entities = new ArrayList<Entity>();
+    	for (Entity e : this.entities) {
 			if (x == e.getX() && y == e.getY()) {
-				return e;
+				entities.add(e);
+				System.out.println("DSFSDFSDF");
+
 			}
     	}
-    	return null;
+    	return entities;
     }
     
     public boolean isWall(int x, int y) {
