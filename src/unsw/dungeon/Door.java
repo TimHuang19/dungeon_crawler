@@ -7,12 +7,13 @@ public class Door extends Entity {
 	private DoorState state;
 	private Key key;
 
-    public Door(int x, int y) {
+    public Door(int x, int y, Key key) {
         super(x, y);
         
         closedState = new ClosedState(this);
         openState = new OpenState(this);
         
+        this.key = key;
         state = closedState;
     }
     
