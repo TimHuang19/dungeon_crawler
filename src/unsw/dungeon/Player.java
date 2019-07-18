@@ -21,32 +21,39 @@ public class Player extends Entity {
     }
 
     public void moveUp() {
-        if (getY() > 0 && !isObstacle(getX(), getY() - 1)) {
+    	Entity e = dungeon.getEntity(getX(), getY() - 1);
+
+        if (getY() > 0 && !isObstacle(e) {
             y().set(getY() - 1);
             
         }
     }
 
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1 && !isObstacle(getX(), getY() + 1)) {
+    	Entity e = dungeon.getEntity(getX(), getY() + 1);
+
+        if (getY() < dungeon.getHeight() - 1 && !isObstacle(e) {
             y().set(getY() + 1);
         }
     }
 
     public void moveLeft() {
-        if (getX() > 0 && !isObstacle(getX() - 1, getY())) {
+    	Entity e = dungeon.getEntity(getX() - 1, getY());
+
+        if (getX() > 0 && !isObstacle(e) {
             x().set(getX() - 1);
         }
     }
 
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1 && !isObstacle(getX() + 1, getY())) {
+    	Entity e = dungeon.getEntity(getX() + 1, getY());
+
+        if (getX() < dungeon.getWidth() - 1 && !isObstacle(e) {
             x().set(getX() + 1);
         }
     }
     
-    private boolean isObstacle(int x, int y) {
-    	Entity e = dungeon.getEntity(x, y);
+    private boolean isObstacle(Entity e) {
 
     	if (e == null) {
     		return false;
@@ -60,6 +67,11 @@ public class Player extends Entity {
     		} else if (d.isClosed()) {
     			return true;
     		}
+    	} else if (e instanceof Boulder) {
+    		int playerX = getX();
+    		int playerY = getY();
+    		
+    		
     	}
     	return false;
     }

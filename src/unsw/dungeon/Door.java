@@ -6,7 +6,6 @@ public class Door extends Entity {
 	
 	private DoorState state;
 	private Key key;
-	private int lol;
 
     public Door(int x, int y, Key key) {
         super(x, y);
