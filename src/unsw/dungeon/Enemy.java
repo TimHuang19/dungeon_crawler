@@ -1,7 +1,10 @@
 package unsw.dungeon;
 
-public class Enemy extends Entity implements Observer {
+import java.util.ArrayList;
+
+public class Enemy extends Entity implements Observer, DungeonSubject {
 	
+	private ArrayList<DungeonObserver> listDungeonObservers = new ArrayList<DungeonObserver>();
 	private Dungeon dungeon;
 	private int playerX, playerY;
 	
@@ -9,6 +12,22 @@ public class Enemy extends Entity implements Observer {
         super(x, y);
         this.dungeon = dungeon;
     }
+	
+	
+	@Override
+    public void registerDungeonObserver(DungeonObserver o) {
+    	if(! listDungeonObservers.contains(o)) listDungeonObservers.add(o);
+    }
+    @Override
+	public void removeDungeonObserver(DungeonObserver o) {
+		listDungeonObservers.remove(o);
+	}
+    @Override
+	public void notifyDungeonObservers() {
+		for( DungeonObserver obs : listDungeonObservers) {
+			obs.update(this);
+		}
+	}
 	
 	public void update(Subject obj) {
 		if(obj instanceof Player) {
