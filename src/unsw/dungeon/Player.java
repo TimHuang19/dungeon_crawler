@@ -67,6 +67,7 @@ public class Player extends Entity implements Subject {
             y().set(getY() - 1);
             updateInvincibility();
             direction = UP;
+            notifyObservers();
             
         }
     }
@@ -78,6 +79,7 @@ public class Player extends Entity implements Subject {
             y().set(getY() + 1);
             updateInvincibility();
             direction = DOWN;
+            notifyObservers();
         }
     }
 
@@ -88,6 +90,7 @@ public class Player extends Entity implements Subject {
             x().set(getX() - 1);
             updateInvincibility();
             direction = LEFT;
+            notifyObservers();
         }
     }
 
@@ -98,6 +101,7 @@ public class Player extends Entity implements Subject {
             x().set(getX() + 1);
             updateInvincibility();
             direction = RIGHT;
+            notifyObservers();
         }
     }
     

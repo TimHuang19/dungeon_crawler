@@ -2,11 +2,13 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class Enemy extends Entity implements Observer, DungeonSubject {
+public class Enemy extends Entity implements Observer, Subject {
 	
-	private ArrayList<DungeonObserver> listDungeonObservers = new ArrayList<DungeonObserver>();
+	private ArrayList<Observer> listObservers = new ArrayList<Observer>();
+	private EnemyMovementStrategy strategy = new EnemyMoveToward();
 	private Dungeon dungeon;
 	private int playerX, playerY;
+	private Boolean invincible;
 	
 	public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
@@ -15,16 +17,16 @@ public class Enemy extends Entity implements Observer, DungeonSubject {
 	
 	
 	@Override
-    public void registerDungeonObserver(DungeonObserver o) {
-    	if(! listDungeonObservers.contains(o)) listDungeonObservers.add(o);
+    public void registerObserver(Observer o) {
+    	if(! listObservers.contains(o)) listObservers.add(o);
     }
     @Override
-	public void removeDungeonObserver(DungeonObserver o) {
-		listDungeonObservers.remove(o);
+	public void removeObserver(Observer o) {
+		listObservers.remove(o);
 	}
     @Override
-	public void notifyDungeonObservers() {
-		for( DungeonObserver obs : listDungeonObservers) {
+	public void notifyObservers() {
+		for(Observer obs : listObservers) {
 			obs.update(this);
 		}
 	}
@@ -38,6 +40,7 @@ public class Enemy extends Entity implements Observer, DungeonSubject {
 	public void update(Player obj) {
 		this.playerX = obj.getX();
 		this.playerY = obj.getY();
+		this.invincible = obj.isInvincible();
 		if(hasCollided()) System.out.println("Game Over!");
 	}
 	
@@ -82,10 +85,27 @@ public class Enemy extends Entity implements Observer, DungeonSubject {
     }
     
     public void enemyMovement() {
-    	moveUp();
-    	moveLeft();
-    	moveDown();
-    	moveRight();
+    	if(invincible) {
+    		strategy = new EnemyMoveAway();
+    	}
+    	else {
+    		strategy = new EnemyMoveToward();
+    	}
+    	String direction = strategy.enemyMovement(playerX, playerY, getX(), getY(), dungeon);
+    	switch(direction) {
+    	case "left":
+    		moveLeft();
+    		break;
+    	case "right":
+    		moveRight();
+    		break;
+    	case "up":
+    		moveUp();
+    		break;
+    	case "down":
+    		moveDown();
+    		break;
+    	}
     }
     
     private boolean isObstacle(ArrayList<Entity> entities) {
