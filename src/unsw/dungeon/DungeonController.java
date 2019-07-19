@@ -22,7 +22,7 @@ public class DungeonController {
     private List<ImageView> initialEntities;
 
     private Player player;
-
+    
     private Dungeon dungeon;
 
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {

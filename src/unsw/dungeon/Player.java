@@ -9,12 +9,13 @@ import java.util.TimerTask;
  *
  */
 public class Player extends Entity implements Subject {
-	ArrayList<Observer> listObservers = new ArrayList<Observer>();
+	ArrayList<Observer> observers;
     private static final int UP = 0;
     private static final int DOWN = 1;
     private static final int LEFT = 2;
     private static final int RIGHT = 3;
-
+    
+    private boolean initialisedObservers;
     private Dungeon dungeon;
     private Key key;
     private boolean sword;
@@ -37,6 +38,8 @@ public class Player extends Entity implements Subject {
         this.invincible = false;
         this.invincibleSteps = 0;
         this.bombs = new ArrayList<Bomb>();
+        this.observers = new ArrayList<Observer>();
+        this.initialisedObservers = false;
     }
     
     public boolean isInvincible() {
@@ -45,22 +48,23 @@ public class Player extends Entity implements Subject {
     
     @Override
     public void registerObserver(Observer o){
-    	if(! listObservers.contains(o)) listObservers.add(o);
+    	observers.add(o);
     }
     
     @Override
 	public void removeObserver(Observer o) {
-		listObservers.remove(o);
+    	observers.remove(o);
 	}
     
     @Override
 	public void notifyObservers() {
-		for( Observer obs : listObservers) {
+		for( Observer obs : observers) {
 			obs.update(this);
 		}
 	}
     
     public void moveUp() {
+    	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY() - 1);
 
         if (getY() > 0 && !isObstacle(entities)) {
@@ -73,6 +77,7 @@ public class Player extends Entity implements Subject {
     }
 
     public void moveDown() {
+    	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY() + 1);
 
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
@@ -85,6 +90,7 @@ public class Player extends Entity implements Subject {
     }
 
     public void moveLeft() {
+    	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX() - 1, getY());
 
         if (getX() > 0 && !isObstacle(entities)) {
@@ -175,6 +181,7 @@ public class Player extends Entity implements Subject {
     	for (Entity e : entities) {
     		if (e instanceof Enemy) {
     			dungeon.removeEntity(e);
+    			this.removeObserver((Observer) e);
     		}
     	}
 
@@ -279,6 +286,16 @@ public class Player extends Entity implements Subject {
     		if (e instanceof Exit) {
     			dungeon.setComplete(Goal.EXIT, true);
     		}
+    	}
+    }
+    
+    private void initialiseObs() {
+    	if (!initialisedObservers) {
+    		ArrayList<Entity> enemies = dungeon.getEnemies();
+    		for (Entity e: enemies) {
+    			registerObserver((Observer) e);
+    		}
+    		initialisedObservers = true;
     	}
     }
 }

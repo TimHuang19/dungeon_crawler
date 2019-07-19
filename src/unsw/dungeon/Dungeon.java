@@ -59,6 +59,16 @@ public class Dungeon implements Observer {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public ArrayList<Entity> getEnemies(){
+    	ArrayList<Entity> enemies = new ArrayList<>();
+    	for (Entity e: entities) {
+    		if (e instanceof Enemy) {
+    			enemies.add(e);
+    		}
+    	}
+    	return enemies;
+    }
     
     public void setGoals(GoalExpression goals) {
     	this.goals = goals;

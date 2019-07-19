@@ -5,45 +5,58 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class EnemyMoveToward implements EnemyMovementStrategy {
-	
+    private static final int UP = 0;
+    private static final int DOWN = 1;
+    private static final int LEFT = 2;
+    private static final int RIGHT = 3;
+    private static final int UNABLE = 4;
+    
 	//More complex movement Pattern
-	public String enemyMovement(int playerX, int playerY, int enemyX, int enemyY, Dungeon dungeon) {
-		int width = dungeon.getWidth();
-		int height = dungeon.getHeight();
-		String moveDirection="unable";
-		Boolean[][] visited = new Boolean[width][height];
+	public int enemyMovement(int playerX, int playerY, int enemyX, int enemyY, Dungeon dungeon) {
+		int width = dungeon.getWidth()-1;
+		int height = dungeon.getHeight()-1;
+		int moveDirection=UNABLE;
+		boolean[][] visited = new boolean[width][height];
+		
 		Queue<Point> q = new LinkedList<>();
-		if(!isObstacle(playerX+1, playerY,dungeon)) {
-			q.add(new Point(playerX+1,playerY,"right"));
+		if(isWithinBounds(enemyX+1, enemyY, dungeon) && !isObstacle(enemyX+1, enemyY,dungeon)) {
+
+			q.add(new Point(enemyX+1,enemyY,RIGHT));
 		}
-		if(!isObstacle(playerX-1, playerY,dungeon)) {
-			q.add(new Point(playerX-1,playerY,"left"));
+		if(isWithinBounds(enemyX-1, enemyY, dungeon) && !isObstacle(enemyX-1, enemyY,dungeon)) {
+
+			q.add(new Point(enemyX-1,enemyY,LEFT));
 		}
-		if(!isObstacle(playerX, playerY-1,dungeon)) {
-			q.add(new Point(playerX,playerY-1,"up"));
+		if(isWithinBounds(enemyX, enemyY-1, dungeon) && !isObstacle(enemyX, enemyY-1,dungeon)) {
+
+			q.add(new Point(enemyX,enemyY-1,UP));
 		}
-		if(!isObstacle(playerX, playerY+1,dungeon)) {
-			q.add(new Point(playerX,playerY+1,"down"));
+		if(isWithinBounds(enemyX, enemyY+1, dungeon) && !isObstacle(enemyX, enemyY+1,dungeon)) {
+
+			q.add(new Point(enemyX,enemyY+1,DOWN));
 		}
+		
 		while(q.size()>0) {
-			Point a;
 			Point b = q.remove();
+
+
 			if(b.x==playerX && b.y==playerY) {
+				System.out.println("HELSEIF");
 				moveDirection = b.signature;
 				break;
 			}
 			if(visited[b.x][b.y]) continue;
 			visited[b.x][b.y]= true;
-			if(!isObstacle(b.x + 1, b.y,dungeon) && visited[b.x + 1][b.y]) {
+			if(!isObstacle(b.x + 1, b.y,dungeon) && !visited[b.x + 1][b.y]) {
 				q.add(new Point(b.x + 1,b.y,b.signature));
 			}
-			if(!isObstacle(b.x - 1, b.y,dungeon) && visited[b.x - 1][b.y]) {
+			if(!isObstacle(b.x - 1, b.y,dungeon) && !visited[b.x - 1][b.y]) {
 				q.add(new Point(b.x - 1,b.y,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y + 1,dungeon) && visited[b.x][b.y + 1]) {
+			if(!isObstacle(b.x, b.y + 1,dungeon) && !visited[b.x][b.y + 1]) {
 				q.add(new Point(b.x,b.y + 1,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y - 1,dungeon) && visited[b.x][b.y - 1]) {
+			if(!isObstacle(b.x, b.y - 1,dungeon) && !visited[b.x][b.y - 1]) {
 				q.add(new Point(b.x,b.y - 1,b.signature));
 			}
 		}
@@ -52,9 +65,6 @@ public class EnemyMoveToward implements EnemyMovementStrategy {
 	}
 	
     private boolean isObstacle(int targetX, int targetY, Dungeon dungeon) {
-    	if(targetX<0 || targetX >= dungeon.getWidth() || targetY < 0 || targetY >= dungeon.getHeight()) {
-    		return false;
-    	}
     	ArrayList<Entity> entities = dungeon.getEntities(targetX, targetY);
     	for (Entity e : entities) {
 	    	if (e instanceof Wall) {
@@ -70,13 +80,20 @@ public class EnemyMoveToward implements EnemyMovementStrategy {
     	}
     	return false;
     }
+    private boolean isWithinBounds(int targetX, int targetY, Dungeon dungeon) {
+    	if(targetX<0 || targetX > dungeon.getWidth()-1 || targetY < 0 || targetY > dungeon.getHeight()) {
+    		return false;
+    	}
+    	return true;
+    }
 	
     class Point{
     	int x,y,count;
-    	String signature;
-    	public Point(int x, int y, String signature) {
+    	int signature;
+    	public Point(int x, int y, int signature) {
     		this.x=x;
     		this.y=y;
+    		this.signature= signature;
     	}
     }
 }

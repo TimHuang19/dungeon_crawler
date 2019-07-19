@@ -5,28 +5,32 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class EnemyMoveAway implements EnemyMovementStrategy {
-	
+    private static final int UP = 0;
+    private static final int DOWN = 1;
+    private static final int LEFT = 2;
+    private static final int RIGHT = 3;
+    private static final int UNABLE = 4;
+    
 	//More complex movement Pattern
-	public String enemyMovement(int playerX, int playerY, int enemyX, int enemyY, Dungeon dungeon) {
-		int width = dungeon.getWidth();
-		int height = dungeon.getHeight();
-		String moveDirection="unable";
-		Boolean[][] visited = new Boolean[width][height];
+	public int enemyMovement(int playerX, int playerY, int enemyX, int enemyY, Dungeon dungeon) {
+		int width = dungeon.getWidth() - 1;
+		int height = dungeon.getHeight() - 1;
+		int moveDirection = UNABLE;
+		boolean[][] visited = new boolean[width][height];
 		Queue<Point> q = new LinkedList<>();
-		if(!isObstacle(enemyX+1, enemyY,dungeon)) {
-			q.add(new Point(playerX+1,playerY,"left"));
+		if(isWithinBounds(enemyX+1, enemyY, dungeon) && !isObstacle(enemyX+1, enemyY,dungeon)) {
+			q.add(new Point(enemyX+1,enemyY,LEFT));
 		}
-		if(!isObstacle(enemyX-1, enemyY,dungeon)) {
-			q.add(new Point(enemyX-1,enemyY,"right"));
+		if(isWithinBounds(enemyX-1, enemyY, dungeon) && !isObstacle(enemyX-1, enemyY,dungeon)) {
+			q.add(new Point(enemyX-1,enemyY,RIGHT));
 		}
-		if(!isObstacle(enemyX, enemyY-1,dungeon)) {
-			q.add(new Point(enemyX,enemyY-1,"down"));
+		if(isWithinBounds(enemyX, enemyY-1, dungeon) && !isObstacle(enemyX, enemyY-1,dungeon)) {
+			q.add(new Point(enemyX,enemyY-1,DOWN));
 		}
-		if(!isObstacle(enemyX, enemyY+1,dungeon)) {
-			q.add(new Point(enemyX,enemyY+1,"up"));
+		if(isWithinBounds(enemyX, enemyY+1, dungeon) && !isObstacle(enemyX, enemyY+1,dungeon)) {
+			q.add(new Point(enemyX,enemyY+1,UP));
 		}
 		while(q.size()>0) {
-			Point a;
 			Point b = q.remove();
 			if(b.x==playerX && b.y==playerY) {
 				moveDirection = b.signature;
@@ -34,73 +38,73 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
 			}
 			if(visited[b.x][b.y]) continue;
 			visited[b.x][b.y]= true;
-			if(!isObstacle(b.x + 1, b.y,dungeon) && visited[b.x + 1][b.y]) {
+			if(!isObstacle(b.x + 1, b.y,dungeon) && !visited[b.x + 1][b.y]) {
 				q.add(new Point(b.x + 1,b.y,b.signature));
 			}
-			if(!isObstacle(b.x - 1, b.y,dungeon) && visited[b.x - 1][b.y]) {
+			if(!isObstacle(b.x - 1, b.y,dungeon) && !visited[b.x - 1][b.y]) {
 				q.add(new Point(b.x - 1,b.y,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y + 1,dungeon) && visited[b.x][b.y + 1]) {
+			if(!isObstacle(b.x, b.y + 1,dungeon) && !visited[b.x][b.y + 1]) {
 				q.add(new Point(b.x,b.y + 1,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y - 1,dungeon) && visited[b.x][b.y - 1]) {
+			if(!isObstacle(b.x, b.y - 1,dungeon) && !visited[b.x][b.y - 1]) {
 				q.add(new Point(b.x,b.y - 1,b.signature));
 			}
 		}
-		if(moveDirection.equals("left")) {
+		if(moveDirection == LEFT) {
 			if(!isObstacle(enemyX-1, enemyY,dungeon)) {
-				moveDirection="left";
+				moveDirection=LEFT;
 			}
 			else if(!isObstacle(enemyX, enemyY-1,dungeon)) {
-				moveDirection="up";
+				moveDirection=UP;
 			}
 			else if(!isObstacle(enemyX, enemyY+1,dungeon)) {
-				moveDirection="down";
+				moveDirection=DOWN;
 			}
 			else {
-				moveDirection="right";
+				moveDirection=RIGHT;
 			}
 		}
-		if(moveDirection.equals("right")) {
+		if(moveDirection == RIGHT) {
 			if(!isObstacle(enemyX+1, enemyY,dungeon)) {
-				moveDirection="right";
+				moveDirection=RIGHT;
 			}
 			else if(!isObstacle(enemyX, enemyY+1,dungeon)) {
-				moveDirection="down";
+				moveDirection=DOWN;
 			}
 			else if(!isObstacle(enemyX, enemyY-1,dungeon)) {
-				moveDirection="up";
+				moveDirection=UP;
 			}
 			else {
-				moveDirection="left";
+				moveDirection=LEFT;
 			}
 		}
-		if(moveDirection.equals("up")) {
+		if(moveDirection == UP) {
 			if(!isObstacle(enemyX, enemyY-1,dungeon)) {
-				moveDirection="up";
+				moveDirection=UP;
 			}
 			else if(!isObstacle(enemyX+1, enemyY,dungeon)) {
-				moveDirection="right";
+				moveDirection=RIGHT;
 			}
 			else if(!isObstacle(enemyX-1, enemyY,dungeon)) {
-				moveDirection="left";
+				moveDirection=LEFT;
 			}
 			else {
-				moveDirection="down";
+				moveDirection=DOWN;
 			}
 		}
-		if(moveDirection.equals("down")) {
+		if(moveDirection == DOWN) {
 			if(!isObstacle(enemyX, enemyY+1,dungeon)) {
-				moveDirection="down";
+				moveDirection=DOWN;
 			}
 			else if(!isObstacle(enemyX-1, enemyY,dungeon)) {
-				moveDirection="left";
+				moveDirection=LEFT;
 			}
 			else if(!isObstacle(enemyX+1, enemyY,dungeon)) {
-				moveDirection="right";
+				moveDirection=RIGHT;
 			}
 			else {
-				moveDirection="up";
+				moveDirection=UP;
 			}
 		}
 		return moveDirection;
@@ -126,13 +130,21 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
     	}
     	return false;
     }
+    
+    private boolean isWithinBounds(int targetX, int targetY, Dungeon dungeon) {
+    	if(targetX<0 || targetX > dungeon.getWidth()-1 || targetY < 0 || targetY > dungeon.getHeight()) {
+    		return false;
+    	}
+    	return true;
+    }
 	
     class Point{
     	int x,y,count;
-    	String signature;
-    	public Point(int x, int y, String signature) {
+    	int signature;
+    	public Point(int x, int y, int signature) {
     		this.x=x;
     		this.y=y;
+    		this.signature = signature;
     	}
     }
 }

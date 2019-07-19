@@ -3,16 +3,24 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public class Enemy extends Entity implements Observer, Subject {
+    private static final int UP = 0;
+    private static final int DOWN = 1;
+    private static final int LEFT = 2;
+    private static final int RIGHT = 3;
+    private static final int UNABLE = 4;
 	
 	private ArrayList<Observer> listObservers = new ArrayList<Observer>();
 	private EnemyMovementStrategy strategy = new EnemyMoveToward();
 	private Dungeon dungeon;
 	private int playerX, playerY;
 	private Boolean invincible;
+	private int round;
 	
 	public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
+        invincible = false;
         this.dungeon = dungeon;
+        this.round = 1;
     }
 	
 	
@@ -33,7 +41,12 @@ public class Enemy extends Entity implements Observer, Subject {
 	
 	public void update(Subject obj) {
 		if(obj instanceof Player) {
-			update((Player) obj);
+			if (round%2 == 0) {
+				update((Player) obj);
+				round = 1;
+			} else {
+				round = 0;
+			}
 		}
 	}
 	
@@ -41,6 +54,7 @@ public class Enemy extends Entity implements Observer, Subject {
 		this.playerX = obj.getX();
 		this.playerY = obj.getY();
 		this.invincible = obj.isInvincible();
+		enemyMovement();
 		if(hasCollided()) System.out.println("Game Over!");
 	}
 	
@@ -91,18 +105,19 @@ public class Enemy extends Entity implements Observer, Subject {
     	else {
     		strategy = new EnemyMoveToward();
     	}
-    	String direction = strategy.enemyMovement(playerX, playerY, getX(), getY(), dungeon);
+    	int direction = strategy.enemyMovement(playerX, playerY, getX(), getY(), dungeon);
+    	System.out.println(direction);
     	switch(direction) {
-    	case "left":
+    	case LEFT:
     		moveLeft();
     		break;
-    	case "right":
+    	case RIGHT:
     		moveRight();
     		break;
-    	case "up":
+    	case UP:
     		moveUp();
     		break;
-    	case "down":
+    	case DOWN:
     		moveDown();
     		break;
     	}
