@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class Enemy extends Entity implements Observer, Subject {
+public class Enemy extends Entity implements Observer {
     private static final int UP = 0;
     private static final int DOWN = 1;
     private static final int LEFT = 2;
@@ -13,53 +13,49 @@ public class Enemy extends Entity implements Observer, Subject {
 	private EnemyMovementStrategy strategy = new EnemyMoveToward();
 	private Dungeon dungeon;
 	private int playerX, playerY;
-	private Boolean invincible;
-	private int round;
+	private boolean invincible;
+	private boolean canMove;
 	
 	public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
         invincible = false;
         this.dungeon = dungeon;
-        this.round = 1;
+        this.canMove = false;
     }
-	
-	
-	@Override
-    public void registerObserver(Observer o) {
-    	if(! listObservers.contains(o)) listObservers.add(o);
-    }
-    @Override
-	public void removeObserver(Observer o) {
-		listObservers.remove(o);
-	}
-    @Override
-	public void notifyObservers() {
-		for(Observer obs : listObservers) {
-			obs.update(this);
-		}
-	}
 	
 	public void update(Subject obj) {
 		if(obj instanceof Player) {
-			if (round%2 == 0) {
-				update((Player) obj);
-				round = 1;
-			} else {
-				round = 0;
-			}
+			update((Player) obj);
 		}
 	}
 	
-	public void update(Player obj) {
-		this.playerX = obj.getX();
-		this.playerY = obj.getY();
-		this.invincible = obj.isInvincible();
-		enemyMovement();
-		if(hasCollided()) dungeon.gameOver();
+	public void update(Player p) {
+		this.playerX = p.getX();
+		this.playerY = p.getY();
+		this.invincible = p.isInvincible();
+		
+		if (collided() && !invincible) {
+			dungeon.gameOver();
+		} else if (collided() && invincible) {
+			dungeon.killEnemy(this);
+		}
+		
+		if (canMove) {
+			enemyMovement();
+			canMove = false;
+		} else {
+			canMove = true;
+		}
+		
+		if (collided() && !invincible) {
+			dungeon.gameOver();
+		} else if (collided() && invincible) {
+			dungeon.killEnemy(this);
+		}
 	}
 	
-	public Boolean hasCollided() {
-		if (this.playerX == getX() && this.playerY == getY()) {
+	public boolean collided() {
+		if (playerX == getX() && playerY == getY()) {
 			return true;
 		}
 		return false;
@@ -106,7 +102,7 @@ public class Enemy extends Entity implements Observer, Subject {
     		strategy = new EnemyMoveToward();
     	}
     	int direction = strategy.enemyMovement(playerX, playerY, getX(), getY(), dungeon);
-    	System.out.println(direction);
+    	
     	switch(direction) {
     	case LEFT:
     		moveLeft();

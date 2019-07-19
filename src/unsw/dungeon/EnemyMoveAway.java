@@ -13,8 +13,8 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
     
 	//More complex movement Pattern
 	public int enemyMovement(int playerX, int playerY, int enemyX, int enemyY, Dungeon dungeon) {
-		int width = dungeon.getWidth() - 1;
-		int height = dungeon.getHeight() - 1;
+		int width = dungeon.getWidth();
+		int height = dungeon.getHeight();
 		int moveDirection = UNABLE;
 		boolean[][] visited = new boolean[width][height];
 		Queue<Point> q = new LinkedList<>();
@@ -30,6 +30,7 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
 		if(isWithinBounds(enemyX, enemyY+1, dungeon) && !isObstacle(enemyX, enemyY+1,dungeon)) {
 			q.add(new Point(enemyX,enemyY+1,UP));
 		}
+		
 		while(q.size()>0) {
 			Point b = q.remove();
 			if(b.x==playerX && b.y==playerY) {
@@ -38,27 +39,27 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
 			}
 			if(visited[b.x][b.y]) continue;
 			visited[b.x][b.y]= true;
-			if(!isObstacle(b.x + 1, b.y,dungeon) && !visited[b.x + 1][b.y]) {
+			if(isWithinBounds(b.x + 1, b.y,dungeon) && !isObstacle(b.x + 1, b.y,dungeon) && !visited[b.x + 1][b.y]) {
 				q.add(new Point(b.x + 1,b.y,b.signature));
 			}
-			if(!isObstacle(b.x - 1, b.y,dungeon) && !visited[b.x - 1][b.y]) {
+			if(isWithinBounds(b.x - 1, b.y,dungeon) && !isObstacle(b.x - 1, b.y,dungeon) && !visited[b.x - 1][b.y]) {
 				q.add(new Point(b.x - 1,b.y,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y + 1,dungeon) && !visited[b.x][b.y + 1]) {
+			if(isWithinBounds(b.x, b.y + 1,dungeon) && !isObstacle(b.x, b.y + 1,dungeon) && !visited[b.x][b.y + 1]) {
 				q.add(new Point(b.x,b.y + 1,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y - 1,dungeon) && !visited[b.x][b.y - 1]) {
+			if(isWithinBounds(b.x, b.y - 1,dungeon) && !isObstacle(b.x, b.y - 1,dungeon) && !visited[b.x][b.y - 1]) {
 				q.add(new Point(b.x,b.y - 1,b.signature));
 			}
 		}
 		if(moveDirection == LEFT) {
-			if(!isObstacle(enemyX-1, enemyY,dungeon)) {
+			if(isWithinBounds(enemyX-1, enemyY,dungeon) && !isObstacle(enemyX-1, enemyY,dungeon)) {
 				moveDirection=LEFT;
 			}
-			else if(!isObstacle(enemyX, enemyY-1,dungeon)) {
+			else if(isWithinBounds(enemyX, enemyY-1,dungeon) && !isObstacle(enemyX, enemyY-1,dungeon)) {
 				moveDirection=UP;
 			}
-			else if(!isObstacle(enemyX, enemyY+1,dungeon)) {
+			else if(isWithinBounds(enemyX, enemyY+1,dungeon) && !isObstacle(enemyX, enemyY+1,dungeon)) {
 				moveDirection=DOWN;
 			}
 			else {
@@ -66,13 +67,13 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
 			}
 		}
 		if(moveDirection == RIGHT) {
-			if(!isObstacle(enemyX+1, enemyY,dungeon)) {
+			if(isWithinBounds(enemyX+1, enemyY,dungeon) && !isObstacle(enemyX+1, enemyY,dungeon)) {
 				moveDirection=RIGHT;
 			}
-			else if(!isObstacle(enemyX, enemyY+1,dungeon)) {
+			else if(isWithinBounds(enemyX, enemyY+1,dungeon) && !isObstacle(enemyX, enemyY+1,dungeon)) {
 				moveDirection=DOWN;
 			}
-			else if(!isObstacle(enemyX, enemyY-1,dungeon)) {
+			else if(isWithinBounds(enemyX, enemyY-1,dungeon) && !isObstacle(enemyX, enemyY-1,dungeon)) {
 				moveDirection=UP;
 			}
 			else {
@@ -80,13 +81,13 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
 			}
 		}
 		if(moveDirection == UP) {
-			if(!isObstacle(enemyX, enemyY-1,dungeon)) {
+			if(isWithinBounds(enemyX, enemyY-1,dungeon) && !isObstacle(enemyX, enemyY-1,dungeon)) {
 				moveDirection=UP;
 			}
-			else if(!isObstacle(enemyX+1, enemyY,dungeon)) {
+			else if(isWithinBounds(enemyX+1, enemyY,dungeon) && !isObstacle(enemyX+1, enemyY,dungeon)) {
 				moveDirection=RIGHT;
 			}
-			else if(!isObstacle(enemyX-1, enemyY,dungeon)) {
+			else if(isWithinBounds(enemyX-1, enemyY,dungeon) && !isObstacle(enemyX-1, enemyY,dungeon)) {
 				moveDirection=LEFT;
 			}
 			else {
@@ -94,13 +95,13 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
 			}
 		}
 		if(moveDirection == DOWN) {
-			if(!isObstacle(enemyX, enemyY+1,dungeon)) {
+			if(isWithinBounds(enemyX, enemyY+1,dungeon) && !isObstacle(enemyX, enemyY+1,dungeon)) {
 				moveDirection=DOWN;
 			}
-			else if(!isObstacle(enemyX-1, enemyY,dungeon)) {
+			else if(isWithinBounds(enemyX-1, enemyY,dungeon) && !isObstacle(enemyX-1, enemyY,dungeon)) {
 				moveDirection=LEFT;
 			}
-			else if(!isObstacle(enemyX+1, enemyY,dungeon)) {
+			else if(isWithinBounds(enemyX+1, enemyY,dungeon) && !isObstacle(enemyX+1, enemyY,dungeon)) {
 				moveDirection=RIGHT;
 			}
 			else {

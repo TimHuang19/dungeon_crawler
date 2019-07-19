@@ -39,8 +39,6 @@ public class Bomb extends Entity {
 		for (Entity e : targets) {
 			if (e instanceof Player) {
 				if (!((Player) e).isInvincible()) {
-					dungeon.setPlayer(null);
-					dungeon.removeEntity(e);
 					dungeon.gameOver();
 				}
 			} else if (e instanceof Boulder) {
@@ -49,7 +47,7 @@ public class Bomb extends Entity {
 					b.destroy();
 				}
 			} else if (e instanceof Enemy) {
-				dungeon.removeEntity(e);
+				dungeon.killEnemy((Enemy) e);
 			}
 		}
 		dungeon.removeEntity(this);

@@ -58,9 +58,14 @@ public class Player extends Entity implements Subject {
     
     @Override
 	public void notifyObservers() {
-		for( Observer obs : observers) {
-			obs.update(this);
-		}
+    	int n = observers.size();
+    	for (int i = 0; i < n; i++) {
+    		observers.get(i).update(this);
+    		if (observers.size() < n) {
+    			i--;
+    			n--;
+    		}
+    	}
 	}
     
     public void moveUp() {
@@ -70,9 +75,9 @@ public class Player extends Entity implements Subject {
         if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
             direction = UP;
-            notifyObservers();
             updateInvincibility();
             updateExitGoal();
+            notifyObservers();
         }
     }
 
@@ -83,9 +88,9 @@ public class Player extends Entity implements Subject {
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
             direction = DOWN;
-            notifyObservers();
             updateInvincibility();
             updateExitGoal();
+            notifyObservers();
         }
     }
 
@@ -96,9 +101,9 @@ public class Player extends Entity implements Subject {
         if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
             direction = LEFT;
-            notifyObservers();
             updateInvincibility();
             updateExitGoal();
+            notifyObservers();
         }
     }
 
@@ -108,9 +113,9 @@ public class Player extends Entity implements Subject {
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
             direction = RIGHT;
-            notifyObservers();
             updateInvincibility();
             updateExitGoal();
+            notifyObservers();
         }
     }
     
@@ -182,8 +187,7 @@ public class Player extends Entity implements Subject {
     	ArrayList<Entity> entities = dungeon.getEntities(x, y);
     	for (Entity e : entities) {
     		if (e instanceof Enemy) {
-    			dungeon.removeEntity(e);
-    			this.removeObserver((Observer) e);
+    			dungeon.killEnemy((Enemy) e);
     		}
     	}
 

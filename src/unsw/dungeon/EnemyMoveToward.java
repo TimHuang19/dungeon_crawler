@@ -13,8 +13,8 @@ public class EnemyMoveToward implements EnemyMovementStrategy {
     
 	//More complex movement Pattern
 	public int enemyMovement(int playerX, int playerY, int enemyX, int enemyY, Dungeon dungeon) {
-		int width = dungeon.getWidth()-1;
-		int height = dungeon.getHeight()-1;
+		int width = dungeon.getWidth();
+		int height = dungeon.getHeight();
 		int moveDirection=UNABLE;
 		boolean[][] visited = new boolean[width][height];
 		
@@ -39,24 +39,22 @@ public class EnemyMoveToward implements EnemyMovementStrategy {
 		while(q.size()>0) {
 			Point b = q.remove();
 
-
 			if(b.x==playerX && b.y==playerY) {
-				System.out.println("HELSEIF");
 				moveDirection = b.signature;
 				break;
 			}
 			if(visited[b.x][b.y]) continue;
 			visited[b.x][b.y]= true;
-			if(!isObstacle(b.x + 1, b.y,dungeon) && !visited[b.x + 1][b.y]) {
+			if(isWithinBounds(b.x + 1, b.y,dungeon) && !isObstacle(b.x + 1, b.y,dungeon) && !visited[b.x + 1][b.y]) {
 				q.add(new Point(b.x + 1,b.y,b.signature));
 			}
-			if(!isObstacle(b.x - 1, b.y,dungeon) && !visited[b.x - 1][b.y]) {
+			if(isWithinBounds(b.x - 1, b.y,dungeon) && !isObstacle(b.x - 1, b.y,dungeon) && !visited[b.x - 1][b.y]) {
 				q.add(new Point(b.x - 1,b.y,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y + 1,dungeon) && !visited[b.x][b.y + 1]) {
+			if(isWithinBounds(b.x, b.y + 1,dungeon) && !isObstacle(b.x, b.y + 1,dungeon) && !visited[b.x][b.y + 1]) {
 				q.add(new Point(b.x,b.y + 1,b.signature));
 			}			
-			if(!isObstacle(b.x, b.y - 1,dungeon) && !visited[b.x][b.y - 1]) {
+			if(isWithinBounds(b.x, b.y - 1,dungeon) && !isObstacle(b.x, b.y - 1,dungeon) && !visited[b.x][b.y - 1]) {
 				q.add(new Point(b.x,b.y - 1,b.signature));
 			}
 		}
@@ -80,8 +78,9 @@ public class EnemyMoveToward implements EnemyMovementStrategy {
     	}
     	return false;
     }
+    
     private boolean isWithinBounds(int targetX, int targetY, Dungeon dungeon) {
-    	if(targetX<0 || targetX > dungeon.getWidth()-1 || targetY < 0 || targetY > dungeon.getHeight()) {
+    	if(targetX<0 || targetX > dungeon.getWidth()-1 || targetY < 0 || targetY > dungeon.getHeight()-1) {
     		return false;
     	}
     	return true;

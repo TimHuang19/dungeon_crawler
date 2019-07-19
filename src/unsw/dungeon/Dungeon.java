@@ -37,8 +37,6 @@ public class Dungeon implements Observer {
         this.entities = new ArrayList<>();
         this.player = null;
         this.goals = new ComplexGoal(Goal.OR);
-        this.goals.addSubGoal(new BasicGoal(Goal.BOULDERS));
-        this.goals.addSubGoal(new BasicGoal(Goal.EXIT));
         this.complete = false;
         this.gameOver = false;
         this.pressedSwitches = 0;
@@ -85,6 +83,14 @@ public class Dungeon implements Observer {
     	this.treasureCount--;
     	if (treasureCount == 0) {
     		setComplete(Goal.TREASURE, true);
+    	}
+    }
+    public void killEnemy(Enemy e) {
+    	removeEntity(e);
+    	player.removeObserver((Observer) e);
+    	this.enemyCount--;
+    	if(enemyCount == 0) {
+    		setComplete(Goal.ENEMIES, true);
     	}
     }
 
@@ -138,7 +144,7 @@ public class Dungeon implements Observer {
     	}
     	return entities;
     }
-
+    
 	@Override
 	public void update(Subject obj) {
 		if (obj instanceof Boulder) {
