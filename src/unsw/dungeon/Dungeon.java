@@ -29,6 +29,7 @@ public class Dungeon implements Observer {
     
     private int pressedSwitches;
     private int treasureCount;
+    private int enemyCount;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -42,6 +43,7 @@ public class Dungeon implements Observer {
         this.gameOver = false;
         this.pressedSwitches = 0;
         this.treasureCount = 0;
+        this.enemyCount = 0;
     }
 
     public int getWidth() {
@@ -63,6 +65,18 @@ public class Dungeon implements Observer {
     public void setGoals(GoalExpression goals) {
     	this.goals = goals;
     }
+    
+    public void gameOver() {
+    	this.gameOver = true;
+    	System.out.println("GAME OVER");
+    }
+    
+    public void reduceTreasures() {
+    	this.treasureCount--;
+    	if (treasureCount == 0) {
+    		setComplete(Goal.TREASURE, true);
+    	}
+    }
 
     public void addEntity(Entity entity) {
         entities.add(entity);
@@ -70,6 +84,8 @@ public class Dungeon implements Observer {
         	this.pressedSwitches++;
         } else if (entity instanceof Treasure) {
         	this.treasureCount++;
+        } else if (entity instanceof Enemy) {
+        	this.enemyCount++;
         }
     }
     
@@ -118,6 +134,16 @@ public class Dungeon implements Observer {
 		if (obj instanceof Boulder) {
 			boolean onSwitch = false;
 			Boulder b = (Boulder) obj;
+			
+			if (b.getDestroyed()) {
+				this.pressedSwitches++;
+				if (this.pressedSwitches == 1) {
+					setComplete(Goal.BOULDERS, false);
+				}
+				removeEntity(b);
+				return;
+			}
+			
 			for (Entity e : entities) {
 				if (e instanceof Switch && b.getX() == e.getX() && b.getY() == e.getY()) {
 					onSwitch = true;

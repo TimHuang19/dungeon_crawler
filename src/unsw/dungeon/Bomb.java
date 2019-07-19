@@ -41,10 +41,14 @@ public class Bomb extends Entity {
 				if (!((Player) e).isInvincible()) {
 					dungeon.setPlayer(null);
 					dungeon.removeEntity(e);
-					System.out.println("GAME OVER");
+					dungeon.gameOver();
 				}
-			}
-			if (e instanceof Boulder || e instanceof Enemy) {
+			} else if (e instanceof Boulder) {
+				Boulder b = (Boulder) e;
+				if (b.getOnSwitch()) {
+					b.destroy();
+				}
+			} else if (e instanceof Enemy) {
 				dungeon.removeEntity(e);
 			}
 		}
