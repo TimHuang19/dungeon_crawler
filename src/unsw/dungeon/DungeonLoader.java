@@ -19,9 +19,13 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+    private int keyId;
+    private int doorId;
 
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+        keyId = 0;
+        doorId = 0;
     }
 
     /**
@@ -102,6 +106,18 @@ public abstract class DungeonLoader {
         	onLoad(treasure);
         	entity = treasure;
         	break;
+        case "key":
+        	Key key = new Key(x, y, keyId);
+        	onLoad(key);
+        	entity = key;
+        	keyId++;
+        	break;
+        case "door":
+        	Door door = new Door(x, y, doorId);
+        	onLoad(door);
+        	entity = door;
+        	doorId++;
+        	break;
         }
         dungeon.addEntity(entity);
     }
@@ -126,4 +142,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Bomb bomb);
     
     public abstract void onLoad(Treasure treasure);
+    
+    public abstract void onLoad(Key key);
+    
+    public abstract void onLoad(Door door);
 }

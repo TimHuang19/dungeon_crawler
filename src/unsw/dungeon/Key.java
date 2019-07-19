@@ -11,19 +11,5 @@ public class Key extends Entity {
 	public int getId() {
 		return this.id;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		
-		if(obj instanceof Key) {
-			Key k = (Key) obj;
-			
-			return id == k.getId(); 
-		}
-		return false;
-	}
 
 }

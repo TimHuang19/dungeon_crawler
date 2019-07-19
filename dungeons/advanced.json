@@ -3,6 +3,26 @@
   "height": 16,
   "entities": [
     {
+        "x": 5,
+        "y": 4,
+        "type": "key"
+    },
+    {
+        "x": 10,
+        "y": 4,
+        "type": "key"
+    },
+    {
+        "x": 2,
+        "y": 7,
+        "type": "door"
+    },
+    {
+        "x": 11,
+        "y": 6,
+        "type": "door"
+    },
+    {
       "x": 0,
       "y": 0,
       "type": "wall"

@@ -5,15 +5,15 @@ public class Door extends Entity {
 	DoorState openState;
 	
 	private DoorState state;
-	private Key key;
+	private int id;
 
-    public Door(int x, int y, Key key) {
+    public Door(int x, int y, int id) {
         super(x, y);
         
         closedState = new ClosedState(this);
         openState = new OpenState(this);
         
-        this.key = key;
+        this.id = id;
         state = closedState;
     }
     
@@ -29,7 +29,7 @@ public class Door extends Entity {
     }
     
     public boolean matchingKey(Key key) {
-    	if (key.equals(this.key)) {
+    	if (key.getId() == id) {
     		openDoor();
     		return true;
     	}

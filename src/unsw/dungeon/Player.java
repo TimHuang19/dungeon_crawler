@@ -212,7 +212,7 @@ public class Player extends Entity implements Subject {
 	    		return true;
 	    	} else if (e instanceof Door) {
 	    		Door d = (Door) e;
-	    		if (d.matchingKey(key) && d.isClosed()) {
+	    		if (key != null && d.matchingKey(key) && d.isClosed()) {
 	    			key = null;
 	    			return false;
 	    		} else if (d.isClosed()) {
@@ -260,7 +260,12 @@ public class Player extends Entity implements Subject {
 		
 		boolean canMove = true;
 		for (Entity e : entities) {
-			if (!(e instanceof Switch)) {
+			if (e instanceof Door) {
+				Door d = (Door) e;
+				if (d.isClosed()) {
+					canMove = false;
+				}
+			} else if (!(e instanceof Switch)) {
 				canMove = false;
 			}
 		}
