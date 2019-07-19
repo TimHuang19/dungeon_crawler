@@ -39,6 +39,7 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
         return dungeon;
     }
 
@@ -72,7 +73,7 @@ public abstract class DungeonLoader {
     		entity = enemy;
     		break;
         case "boulder":
-        	Boulder boulder = new Boulder(x, y);
+        	Boulder boulder = new Boulder(dungeon, x, y);
         	onLoad(boulder);
         	entity = boulder;
         	break;

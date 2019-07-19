@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class ComplexGoal implements GoalExpression {
 
-	private Operator operator;
 	private Goal goal;
 	ArrayList<GoalExpression> subGoals;
 	
-	public ComplexGoal(Operator operator) {
-		this.operator = operator;
-		this.goal = Goal.COMPLEX;
+	public ComplexGoal(Goal goal) {
+		this.goal = goal;
 		subGoals = new ArrayList<>();
 	}
 
@@ -18,7 +16,7 @@ public class ComplexGoal implements GoalExpression {
 	public boolean isComplete() {
 		Boolean completed;
 		
-		switch (operator) {
+		switch (goal) {
 		case AND:
 			completed = true;
 			for (GoalExpression g : subGoals) {
@@ -38,7 +36,7 @@ public class ComplexGoal implements GoalExpression {
 	@Override
 	public void setComplete(Goal goal, Boolean completed) {
 		Boolean nonExitCompleted = true;
-		if (goal == Goal.EXIT && operator == Operator.AND) {
+		if (goal == Goal.EXIT && this.goal == Goal.AND) {
 			if (containsExit()) {
 				GoalExpression exit = null;
 				for (GoalExpression g : subGoals) {
@@ -63,10 +61,6 @@ public class ComplexGoal implements GoalExpression {
 	@Override
 	public Goal getGoal() {
 		return this.goal;
-	}
-
-	public Operator getOperator() {
-		return this.operator;
 	}
 	
 	public void addSubGoal(GoalExpression subGoal) {

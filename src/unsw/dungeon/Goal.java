@@ -5,5 +5,6 @@ public enum Goal {
 	ENEMIES,
 	BOULDERS,
 	TREASURE,
-	COMPLEX
+	AND,
+	OR
 }
