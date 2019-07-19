@@ -34,7 +34,7 @@ public class Boulder extends Entity implements Subject {
 		notifyObservers();
 	}
 	
-	public boolean getDestroyed() {
+	public boolean gotDestroyed() {
 		return destroyed;
 	}
 	

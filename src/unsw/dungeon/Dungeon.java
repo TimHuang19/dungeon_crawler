@@ -36,7 +36,7 @@ public class Dungeon implements Observer {
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
-        this.goals = new ComplexGoal(Goal.OR);
+        this.goals = new BasicGoal(Goal.TREASURE);
         this.complete = false;
         this.gameOver = false;
         this.pressedSwitches = 0;
@@ -151,7 +151,7 @@ public class Dungeon implements Observer {
 			boolean onSwitch = false;
 			Boulder b = (Boulder) obj;
 			
-			if (b.getDestroyed()) {
+			if (b.gotDestroyed()) {
 				this.pressedSwitches++;
 				if (this.pressedSwitches == 1) {
 					setComplete(Goal.BOULDERS, false);
