@@ -31,4 +31,9 @@ public class BasicGoal implements GoalExpression {
 		return this.goal;
 	}
 
+	@Override
+	public void addSubGoal(GoalExpression goal) {
+		// do nothing
+	}
+
 }

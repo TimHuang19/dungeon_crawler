@@ -63,6 +63,7 @@ public class ComplexGoal implements GoalExpression {
 		return this.goal;
 	}
 	
+	@Override
 	public void addSubGoal(GoalExpression subGoal) {
 		subGoals.add(subGoal);
 	}

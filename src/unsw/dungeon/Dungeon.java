@@ -26,17 +26,22 @@ public class Dungeon implements Observer {
     
     private boolean complete;
     private boolean gameOver;
+    
     private int pressedSwitches;
+    private int treasureCount;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
-        this.goals = new BasicGoal(Goal.BOULDERS);
+        this.goals = new ComplexGoal(Goal.OR);
+        this.goals.addSubGoal(new BasicGoal(Goal.BOULDERS));
+        this.goals.addSubGoal(new BasicGoal(Goal.EXIT));
         this.complete = false;
         this.gameOver = false;
         this.pressedSwitches = 0;
+        this.treasureCount = 0;
     }
 
     public int getWidth() {
@@ -63,6 +68,8 @@ public class Dungeon implements Observer {
         entities.add(entity);
         if (entity instanceof Switch) {
         	this.pressedSwitches++;
+        } else if (entity instanceof Treasure) {
+        	this.treasureCount++;
         }
     }
     

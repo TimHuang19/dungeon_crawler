@@ -8,4 +8,6 @@ public interface GoalExpression {
 	
 	public Goal getGoal();
 	
+	public void addSubGoal(GoalExpression goal);
+	
 }
