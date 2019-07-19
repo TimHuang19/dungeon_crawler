@@ -65,10 +65,10 @@ public class Player extends Entity implements Subject {
 
         if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
-            updateInvincibility();
             direction = UP;
             notifyObservers();
-            
+            updateInvincibility();
+            updateExitGoal();
         }
     }
 
@@ -77,9 +77,10 @@ public class Player extends Entity implements Subject {
 
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
-            updateInvincibility();
             direction = DOWN;
             notifyObservers();
+            updateInvincibility();
+            updateExitGoal();
         }
     }
 
@@ -88,9 +89,10 @@ public class Player extends Entity implements Subject {
 
         if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
-            updateInvincibility();
             direction = LEFT;
             notifyObservers();
+            updateInvincibility();
+            updateExitGoal();
         }
     }
 
@@ -99,9 +101,10 @@ public class Player extends Entity implements Subject {
     	
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
-            updateInvincibility();
             direction = RIGHT;
             notifyObservers();
+            updateInvincibility();
+            updateExitGoal();
         }
     }
     
@@ -258,7 +261,6 @@ public class Player extends Entity implements Subject {
     }
     
     private void updateInvincibility() {
-    	System.out.println(invincibleSteps);
     	if (!invincible) {
     		return;
     	}
@@ -270,4 +272,13 @@ public class Player extends Entity implements Subject {
     	}
     }
     
+    private void updateExitGoal() {
+    	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
+    	
+    	for (Entity e : entities) {
+    		if (e instanceof Exit) {
+    			dungeon.setComplete(Goal.EXIT, true);
+    		}
+    	}
+    }
 }

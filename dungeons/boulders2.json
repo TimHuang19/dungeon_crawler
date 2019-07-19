@@ -86,6 +86,11 @@
       "x": 5,
       "y": 6,
       "type": "boulder"
+    },
+    {
+        "x": 7,
+        "y": 8,
+        "type": "exit"
     }
   ],
   "goal-condition": {
