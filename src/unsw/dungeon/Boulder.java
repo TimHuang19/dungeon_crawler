@@ -5,13 +5,14 @@ import java.util.ArrayList;
 public class Boulder extends Entity implements Subject {
 	ArrayList<Observer> observers;
 	private boolean onSwitch;
+	private boolean destroyed;
 
 	public Boulder(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		observers = new ArrayList<Observer>();
 		this.registerObserver(dungeon);
 		onSwitch = false;
-		
+		destroyed = false;
 		ArrayList<Entity> entities = dungeon.getEntities(x, y);
 		for (Entity e : entities) {
 			if (e instanceof Switch) {
@@ -26,6 +27,15 @@ public class Boulder extends Entity implements Subject {
 		x().set(x);
 		y().set(y);
 		notifyObservers();
+	}
+	
+	public void destroy() {
+		destroyed = true;
+		notifyObservers();
+	}
+	
+	public boolean getDestroyed() {
+		return destroyed;
 	}
 	
 	public boolean getOnSwitch() {

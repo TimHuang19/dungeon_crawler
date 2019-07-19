@@ -120,7 +120,6 @@ public class Player extends Entity implements Subject {
     	for (Entity e : entities) {
     		if (e instanceof Key) {
     			Key newKey = (Key) e;
-    			dungeon.removeEntity(e);
     			if (this.key == null) {
     				this.key = newKey;
     			} else {
@@ -129,6 +128,7 @@ public class Player extends Entity implements Subject {
     				dungeon.addEntity(this.key);
     				this.key = newKey;
     			}
+    			dungeon.removeEntity(e);
     		} else if (e instanceof Sword) {
     			if (this.sword == false) {
     				this.sword = true;
@@ -137,6 +137,7 @@ public class Player extends Entity implements Subject {
     		} else if (e instanceof Potion) {
     			this.invincibleSteps = 20;
     			this.invincible = true;
+    			dungeon.removeEntity(e);
     		} else if (e instanceof Bomb) {
     			if (bombs.size() == 3) {
     				return;
@@ -144,6 +145,7 @@ public class Player extends Entity implements Subject {
     			bombs.add((Bomb) e);
     			dungeon.removeEntity(e);
     		} else if (e instanceof Treasure) {
+    			dungeon.reduceTreasures();
     			dungeon.removeEntity(e);
     		}
     	}

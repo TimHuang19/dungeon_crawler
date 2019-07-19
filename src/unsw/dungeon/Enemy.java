@@ -55,7 +55,7 @@ public class Enemy extends Entity implements Observer, Subject {
 		this.playerY = obj.getY();
 		this.invincible = obj.isInvincible();
 		enemyMovement();
-		if(hasCollided()) System.out.println("Game Over!");
+		if(hasCollided()) dungeon.gameOver();
 	}
 	
 	public Boolean hasCollided() {
