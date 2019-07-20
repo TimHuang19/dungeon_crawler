@@ -10,6 +10,7 @@ import unsw.dungeon.BasicGoal;
 import unsw.dungeon.Bomb;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Enemy;
+import unsw.dungeon.Entity;
 import unsw.dungeon.Goal;
 import unsw.dungeon.Player;
 import unsw.dungeon.Potion;
@@ -45,11 +46,27 @@ public class PlayerPickUpPotionTest {
 		assertEquals("Potion X starting position is 5", 5, pot.getX());
 		assertEquals("Potion Y starting position is 5", 5, pot.getY());
 		
-		assertTrue("Two entities in square (5, 5)", d.getEntities(5, 5).size() == 2);
-				
+		boolean potionAtSquare = false;
+		
+		for (Entity e : d.getEntities(5, 5)) {
+			if (e instanceof Potion) {
+				potionAtSquare = true;
+			}
+		}
+		
+		assertTrue("Potion in square (5, 5)", potionAtSquare);			
+		
 		p.pickUp();
 		
-		assertTrue("One entity in square (5, 5) since potion is consumed", d.getEntities(5, 5).size() == 1);
+		boolean potionInDungeon = false;
+		
+		for (Entity e : d.getAllEntities()) {
+			if (e instanceof Potion) {
+				potionInDungeon = true;
+			}
+		}
+		
+		assertTrue("Potion no longer in dungeon", !potionInDungeon);		
 	}
 	
 	@Test

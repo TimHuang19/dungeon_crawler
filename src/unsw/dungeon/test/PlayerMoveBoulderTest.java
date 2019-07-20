@@ -28,7 +28,6 @@ public class PlayerMoveBoulderTest {
 		d.addEntity(p);
 		d.addEntity(b);
 		d.addEntity(s);
-		//d.addEntity(new Boulder(d, 5, 3));
 	}
 
 	@After

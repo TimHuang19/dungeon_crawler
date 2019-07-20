@@ -41,6 +41,14 @@ public class Player extends Entity implements Subject {
         this.initialisedObservers = false;
     }
     
+    public Key getKey() {
+    	return key;
+    }
+    
+    public Sword getSword() {
+    	return sword;
+    }
+    
     public boolean isInvincible() {
     	return invincible;
     }
@@ -166,11 +174,7 @@ public class Player extends Entity implements Subject {
     		}
     	}
     }
-    
-    public Sword getSword() {
-    	return sword;
-    }
-    
+
     public void swingSword() {
     	
     	if (sword == null) {
