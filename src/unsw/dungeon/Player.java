@@ -331,5 +331,8 @@ public class Player extends Entity implements Subject {
 	public void setInvincible(boolean invincible) {
 		this.invincible = invincible;
 	}
-    
+
+	public void setInvincibleSteps(int invincibleSteps) {
+		this.invincibleSteps = invincibleSteps;
+	}
 }

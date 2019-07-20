@@ -135,7 +135,7 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
     }
     
     private boolean isWithinBounds(int targetX, int targetY, Dungeon dungeon) {
-    	if(targetX<0 || targetX > dungeon.getWidth()-1 || targetY < 0 || targetY > dungeon.getHeight()) {
+    	if(targetX<0 || targetX > dungeon.getWidth()-1 || targetY < 0 || targetY > dungeon.getHeight()-1) {
     		return false;
     	}
     	return true;
