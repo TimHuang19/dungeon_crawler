@@ -308,4 +308,9 @@ public class Player extends Entity implements Subject {
     		initialisedObservers = true;
     	}
     }
+
+	public void setInvincible(boolean invincible) {
+		this.invincible = invincible;
+	}
+    
 }

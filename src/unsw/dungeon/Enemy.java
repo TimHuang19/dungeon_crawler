@@ -47,14 +47,6 @@ public class Enemy extends Entity implements Observer {
 		} else {
 			canMove = true;
 		}
-		
-		if (collided() && !invincible) {
-			dungeon.gameOver();
-			return;
-		} else if (collided() && invincible) {
-			dungeon.killEnemy(this);
-			return;
-		}
 	}
 	
 	public boolean collided() {
@@ -122,6 +114,14 @@ public class Enemy extends Entity implements Observer {
     	case UNABLE:
     		break;
     	}
+    	
+		if (collided() && !invincible) {
+			dungeon.gameOver();
+			return;
+		} else if (collided() && invincible) {
+			dungeon.killEnemy(this);
+			return;
+		}
     }
     
     private boolean isObstacle(ArrayList<Entity> entities) {
@@ -141,4 +141,17 @@ public class Enemy extends Entity implements Observer {
     	}
     	return false;
     }
+    
+	public void setPlayerX(int playerX) {
+		this.playerX = playerX;
+	}
+
+	public void setPlayerY(int playerY) {
+		this.playerY = playerY;
+	}
+
+	public void setInvincible(boolean invincible) {
+		this.invincible = invincible;
+	}
+
 }

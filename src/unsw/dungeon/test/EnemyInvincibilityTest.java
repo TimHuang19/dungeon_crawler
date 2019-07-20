@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import unsw.dungeon.*;
 
-public class EnemyCollisionTest {
+public class EnemyInvincibilityTest {
 	private Dungeon d;
 	private Player p;
 	private Enemy e;
@@ -32,33 +32,34 @@ public class EnemyCollisionTest {
 		d = null;
 	}
 	@Test
-	public void playerShouldDieWhenMovedIntoSquareWithEnemy() {
-		assertEquals("Player X start position is 6", 6, p.getX());
-		assertEquals("Player Y start position is 5", 5, p.getY());
-		assertEquals("Enemy X start position is 7", 7, e.getX());
-		assertEquals("Enemy Y start position is 5", 5, e.getY());
-		assertFalse("Game should not be over before anything happens", d.isGameOver());
-		p.moveRight();
-		assertEquals("Player X should increase by 1", 7, p.getX());
-		assertEquals("Player Y should stay the same", 5, p.getY());
-		assertTrue("Enemy and player should be registered as collided", e.collided());
-		assertTrue("Game should end when player moves into enemy", d.isGameOver());
-	}
-	
-	@Test
-	public void playerShouldDieWhenEnemyMovesIntoSquareWithPlayer() {
+	public void enemyShouldDieWhenInvinciblePlayerMovesIntoIt() {
+		p.setInvincible(true);
 		assertEquals("Player X start position is 6", 6, p.getX());
 		assertEquals("Player Y start position is 5", 5, p.getY());
 		e.setPlayerX(6);
 		e.setPlayerY(5);
-		e.setInvincible(false);
+		e.setInvincible(true);
 		assertEquals("Enemy X start position is 7", 7, e.getX());
 		assertEquals("Enemy Y start position is 5", 5, e.getY());
-		assertFalse("Game should not be over before anything happens", d.isGameOver());
-		e.enemyMovement();
-		assertEquals("Enemy X start should decrease by 1 to chase player", 6, e.getX());
+		p.moveRight();
+		assertEquals("Player X should increase by 1", 7, p.getX());
+		assertEquals("Player Y should stay the same", 5, p.getY());
+		
+		assertFalse("Game should not end when invicible player moves into enemy", d.isGameOver());
+	}
+	
+	@Test
+	public void enemyShouldRunAwayFromInvinciblePlayer() {
+		p.setInvincible(true);
+		assertEquals("Player X start position is 6", 6, p.getX());
+		assertEquals("Player Y start position is 5", 5, p.getY());
+		e.setPlayerX(6);
+		e.setPlayerY(5);
+		e.setInvincible(true);
+		assertEquals("Enemy X start position is 7", 7, e.getX());
 		assertEquals("Enemy Y start position is 5", 5, e.getY());
-		assertTrue("Enemy and player should be registered as collided", e.collided());
-		assertTrue("Game should end when enemy moves into player", d.isGameOver());
+		e.enemyMovement();
+		assertEquals("Enemy X start should increase by 1 to run away from player", 8, e.getX());
+		assertEquals("Enemy Y start position is 5", 5, e.getY());
 	}
 }
