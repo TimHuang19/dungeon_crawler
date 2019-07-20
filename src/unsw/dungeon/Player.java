@@ -45,6 +45,10 @@ public class Player extends Entity implements Subject {
     	return invincible;
     }
     
+    public int getInvincibleSteps() {
+    	return invincibleSteps;
+    }
+    
     @Override
     public void registerObserver(Observer o){
     	observers.add(o);

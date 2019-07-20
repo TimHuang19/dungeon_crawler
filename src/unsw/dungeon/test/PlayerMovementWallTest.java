@@ -19,6 +19,7 @@ public class PlayerMovementWallTest {
 		d = new Dungeon(10, 10);
 		p = new Player(d, 5, 5);
 		
+		d.setPlayer(p);
 		d.addEntity(p);
 		d.addEntity(new Wall(6, 5));
 		d.addEntity(new Wall(4, 5));

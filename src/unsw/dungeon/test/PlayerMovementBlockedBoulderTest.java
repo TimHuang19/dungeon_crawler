@@ -21,6 +21,7 @@ public class PlayerMovementBlockedBoulderTest {
 		p = new Player(d, 5, 5);
 		b = new Boulder(d, 5, 4);
 		
+		d.setPlayer(p);
 		d.addEntity(p);
 		d.addEntity(b);
 		d.addEntity(new Boulder(d, 5, 3));

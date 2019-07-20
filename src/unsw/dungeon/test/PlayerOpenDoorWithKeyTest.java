@@ -25,6 +25,7 @@ public class PlayerOpenDoorWithKeyTest {
 		door = new Door(7, 5, 0);
 		b = new Boulder(d, 7, 4);
 		
+		d.setPlayer(p);
 		d.addEntity(p);
 		d.addEntity(door);
 		d.addEntity(new Key(6, 5, 0));
