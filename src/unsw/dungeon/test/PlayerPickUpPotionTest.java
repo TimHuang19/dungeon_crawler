@@ -34,6 +34,7 @@ public class PlayerPickUpPotionTest {
 	public void tearDown() throws Exception {
 		d = null;
 		p = null;
+		pot = null;
 	}
 
 	@Test
@@ -75,10 +76,13 @@ public class PlayerPickUpPotionTest {
 		assertEquals("Potion Y starting position is 5", 5, pot.getY());
 		
 		assertTrue("Player is not invincible", !p.isInvincible());
+		assertEquals("Number of invincible steps should be 0", 0, p.getInvincibleSteps());
 		
 		p.pickUp();
 		
 		assertTrue("Player is invincible", p.isInvincible());
+		
+		assertEquals("Number of invincible steps should be 20", 20, p.getInvincibleSteps());
 		
 		int stepCounter = 0;
 		while (p.isInvincible()) {
@@ -95,6 +99,8 @@ public class PlayerPickUpPotionTest {
 		}
 		
 		assertEquals("Invincibility status expires after 20 steps", 20, stepCounter);
+		assertEquals("Number of invincible steps should be 0", 0, p.getInvincibleSteps());
+		assertTrue("Player is not invincible", !p.isInvincible());
 	}
 	
 	@Test
@@ -177,5 +183,35 @@ public class PlayerPickUpPotionTest {
 		assertTrue("Game is over", d.isGameOver());
 	}
 
+	@Test
+	public void pickingUpNewPotionShouldRefresh20StepCounter() {
+		Potion pot2 = new Potion(6, 5);
+		d.addEntity(pot2);
+		
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
+		
+		assertEquals("First Potion X starting position is 5", 5, pot.getX());
+		assertEquals("First Potion Y starting position is 5", 5, pot.getY());
+		
+		assertEquals("Second Potion X starting position is 6", 6, pot2.getX());
+		assertEquals("Second Potion Y starting position is 5", 5, pot2.getY());
+		
+		assertTrue("Player is not invincible", !p.isInvincible());
+		
+		p.pickUp();
+		
+		assertTrue("Player is invincible", p.isInvincible());
+		
+		p.moveRight();
+		
+		assertTrue("Player is invincible", p.isInvincible());
+		assertEquals("Number of invincible steps should be reduced by 1 to 19", 19, p.getInvincibleSteps());
+		
+		p.pickUp();
+		
+		assertTrue("Player is invincible", p.isInvincible());
+		assertEquals("Number of invincible steps should be refreshed to 20", 20, p.getInvincibleSteps());
+	}
 
 }

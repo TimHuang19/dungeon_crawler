@@ -17,7 +17,7 @@ public class Player extends Entity implements Subject {
     private boolean initialisedObservers;
     private Dungeon dungeon;
     private Key key;
-    private boolean sword;
+    private Sword sword;
     private int direction;
     private boolean invincible;
     private int invincibleSteps;
@@ -32,7 +32,7 @@ public class Player extends Entity implements Subject {
         super(x, y);
         this.dungeon = dungeon;
         this.key = null;
-        this.sword = false;
+        this.sword = null;
         this.direction = RIGHT;
         this.invincible = false;
         this.invincibleSteps = 0;
@@ -45,6 +45,17 @@ public class Player extends Entity implements Subject {
     	return invincible;
     }
     
+    public int getInvincibleSteps() {
+    	return invincibleSteps;
+    }
+    
+    public int getDirection() {
+    	return direction;
+    }
+    
+    public void setDirection(int direction) {
+    	this.direction = direction;
+    }
     @Override
     public void registerObserver(Observer o){
     	observers.add(o);
@@ -135,8 +146,8 @@ public class Player extends Entity implements Subject {
     			}
     			dungeon.removeEntity(e);
     		} else if (e instanceof Sword) {
-    			if (this.sword == false) {
-    				this.sword = true;
+    			if (this.sword == null) {
+    				this.sword = (Sword) e;
     				dungeon.removeEntity(e);
     			}
     		} else if (e instanceof Potion) {
@@ -156,11 +167,15 @@ public class Player extends Entity implements Subject {
     	}
     }
     
+    public Sword getSword() {
+    	return sword;
+    }
+    
     public void swingSword() {
-
-    	if (sword == false) {
+    	
+    	if (sword == null) {
     		return;
-    	}
+    	} 
     	
     	int x, y;
     	
@@ -188,6 +203,10 @@ public class Player extends Entity implements Subject {
     		if (e instanceof Enemy) {
     			dungeon.killEnemy((Enemy) e);
     		}
+    	}
+    	
+    	if (!sword.swing()) {
+    		this.sword = null;
     	}
 
     }

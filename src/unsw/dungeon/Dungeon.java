@@ -4,7 +4,6 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -18,7 +17,7 @@ import java.util.List;
 public class Dungeon implements Observer {
 
     private int width, height;
-    private List<Entity> entities;
+    private ArrayList<Entity> entities;
     private Player player;
     private GoalExpression goals;
     
@@ -57,7 +56,15 @@ public class Dungeon implements Observer {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
+    
+    public int getTreasureCount() {
+    	return this.treasureCount;
+    }
+    
+    public ArrayList<Entity> getAllEntities() {
+    	return entities;
+    }
+    
     public ArrayList<Entity> getEnemies(){
     	ArrayList<Entity> enemies = new ArrayList<>();
     	for (Entity e: entities) {

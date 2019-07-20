@@ -20,6 +20,7 @@ public class PlayerMovementDoorTest {
 		d = new Dungeon(10, 10);
 		p = new Player(d, 5, 5);
 		
+		d.setPlayer(p);
 		d.addEntity(p);
 		d.addEntity(new Door(7, 5, 0));
 		d.addEntity(new Key(6, 5, 0));
