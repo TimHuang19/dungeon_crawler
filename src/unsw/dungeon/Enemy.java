@@ -131,6 +131,8 @@ public class Enemy extends Entity implements Observer {
 	    		}
 	    	} else if (e instanceof Boulder) {
 	    		return true;
+	    	}else if (e instanceof Enemy) {
+	    		return true;
 	    	}
     	}
     	return false;

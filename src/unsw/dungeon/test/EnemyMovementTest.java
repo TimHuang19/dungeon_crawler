@@ -19,6 +19,7 @@ public class EnemyMovementTest {
 		p = new Player(d,3,5);
 		e = new Enemy(d,7,5);
 		d.addEntity(p);
+		d.setPlayer(p);
 		d.addEntity(e);
 	}
 
@@ -185,5 +186,18 @@ public class EnemyMovementTest {
 		e.enemyMovement();
 		assertEquals("Enemy X position must be the same", 7, e.getX());
 		assertEquals("Enemy Y position must be the same", 5, e.getY());
+	}
+	
+	@Test
+	public void enemyShouldChasePlayerAroundBlock() {
+		d.addEntity(new Wall(5,5));
+		assertEquals("Enemy X start position is 7", 7, e.getX());
+		assertEquals("Enemy Y start position is 5", 5, e.getY());
+		e.enemyMovement();
+		assertEquals("Enemy X position must decrease by 1 to chase player", 6, e.getX());
+		assertEquals("Enemy Y position must be the same", 5, e.getY());
+		e.enemyMovement();
+		assertEquals("Enemy X position must stay same to move around block", 6, e.getX());
+		assertNotEquals("Enemy Y position must not be the same to move around block", 5, e.getY());
 	}
 }
