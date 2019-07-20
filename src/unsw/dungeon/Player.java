@@ -1,7 +1,6 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
 
 /**
  * The player entity
