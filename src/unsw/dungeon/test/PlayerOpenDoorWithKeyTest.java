@@ -6,9 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import unsw.dungeon.BasicGoal;
 import unsw.dungeon.Boulder;
 import unsw.dungeon.Door;
 import unsw.dungeon.Dungeon;
+import unsw.dungeon.Goal;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 
@@ -26,6 +28,7 @@ public class PlayerOpenDoorWithKeyTest {
 		b = new Boulder(d, 7, 4);
 		
 		d.setPlayer(p);
+		d.setGoals(new BasicGoal(Goal.TREASURE));
 		d.addEntity(p);
 		d.addEntity(door);
 		d.addEntity(new Key(6, 5, 0));

@@ -27,6 +27,7 @@ public class PlayerPickUpPotionTest {
 		pot = new Potion(5, 5);
 		
 		d.setPlayer(p);
+		d.setGoals(new BasicGoal(Goal.TREASURE));
 		d.addEntity(p);
 		d.addEntity(pot);
 	}
