@@ -79,6 +79,13 @@ public class Dungeon implements Observer {
     	System.out.println("GAME OVER");
     }
     
+    public boolean isGameOver() {
+    	return this.gameOver;
+    }
+    
+    public boolean isGameComplete() {
+    	return this.complete;
+    }
     public void reduceTreasures() {
     	this.treasureCount--;
     	if (treasureCount == 0) {
