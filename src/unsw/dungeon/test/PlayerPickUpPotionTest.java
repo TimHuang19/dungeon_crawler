@@ -34,6 +34,7 @@ public class PlayerPickUpPotionTest {
 	public void tearDown() throws Exception {
 		d = null;
 		p = null;
+		pot = null;
 	}
 
 	@Test

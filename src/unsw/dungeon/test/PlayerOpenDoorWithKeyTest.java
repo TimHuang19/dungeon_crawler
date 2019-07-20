@@ -38,6 +38,7 @@ public class PlayerOpenDoorWithKeyTest {
 		d = null;
 		p = null;
 		door = null;
+		b = null;
 	}
 
 	@Test
