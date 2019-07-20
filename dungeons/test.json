@@ -1,0 +1,24 @@
+{
+  "width": 20,
+  "height": 20,
+  "entities": [
+    {
+        "x": 5,
+        "y": 5,
+        "type": "invincibility"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "type": "player"
+    },
+    {
+        "x": 6,
+        "y": 5,
+        "type": "enemy"
+    }
+  ],
+  "goal-condition": {
+    "goal": "boulders"
+  }
+}

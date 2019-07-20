@@ -30,6 +30,7 @@ public class PlayerMovementBlockedBoulderTest {
 	public void tearDown() throws Exception {
 		d = null;
 		p = null;
+		b = null;
 	}
 
 	@Test

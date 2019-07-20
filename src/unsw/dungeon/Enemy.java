@@ -9,7 +9,6 @@ public class Enemy extends Entity implements Observer {
     private static final int RIGHT = 3;
     private static final int UNABLE = 4;
 	
-	private ArrayList<Observer> listObservers = new ArrayList<Observer>();
 	private EnemyMovementStrategy strategy = new EnemyMoveToward();
 	private Dungeon dungeon;
 	private int playerX, playerY;
@@ -36,8 +35,10 @@ public class Enemy extends Entity implements Observer {
 		
 		if (collided() && !invincible) {
 			dungeon.gameOver();
+			return;
 		} else if (collided() && invincible) {
 			dungeon.killEnemy(this);
+			return;
 		}
 		
 		if (canMove) {
@@ -49,8 +50,10 @@ public class Enemy extends Entity implements Observer {
 		
 		if (collided() && !invincible) {
 			dungeon.gameOver();
+			return;
 		} else if (collided() && invincible) {
 			dungeon.killEnemy(this);
+			return;
 		}
 	}
 	
@@ -115,6 +118,8 @@ public class Enemy extends Entity implements Observer {
     		break;
     	case DOWN:
     		moveDown();
+    		break;
+    	case UNABLE:
     		break;
     	}
     }
