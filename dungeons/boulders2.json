@@ -53,9 +53,9 @@
       "type": "player"
     },
     {
-      "x": 3,
-      "y": 2,
-      "type": "boulder"
+        "x": 3,
+        "y": 2,
+        "type": "enemy"
     },
     {
       "x": 4,

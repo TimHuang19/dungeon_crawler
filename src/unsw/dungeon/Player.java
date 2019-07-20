@@ -107,6 +107,7 @@ public class Player extends Entity implements Subject {
     }
 
     public void moveRight() {
+    	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX() + 1, getY());
     	
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
@@ -175,7 +176,6 @@ public class Player extends Entity implements Subject {
     		break;
     	case LEFT:
     		x = getX() - 1;
-
     		y = getY();
     		break;
     	default:

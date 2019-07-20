@@ -17,6 +17,8 @@ public class PlayerMovementTest {
 	public void setUp() throws Exception {
 		d = new Dungeon(10, 10);
 		p = new Player(d, 5, 5);
+		
+		d.addEntity(p);
 	}
 
 	@After
@@ -27,6 +29,8 @@ public class PlayerMovementTest {
 
 	@Test
 	public void playerShouldMoveUpWhenMoveUpIsCalled() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveUp();
 		assertEquals("Player X position must be the same", 5, p.getX());
 		assertEquals("Player Y position must decrease by 1", 4, p.getY());
@@ -34,6 +38,8 @@ public class PlayerMovementTest {
 	
 	@Test
 	public void playerShouldMoveDownWhenMoveDownIsCalled() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveDown();
 		assertEquals("Player X position must be the same", 5, p.getX());
 		assertEquals("Player Y position must increase by 1", 6, p.getY());
@@ -41,6 +47,8 @@ public class PlayerMovementTest {
 	
 	@Test
 	public void playerShouldMoveRightWhenMoveRightIsCalled() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveRight();
 		assertEquals("Player X position must increase by 1", 6, p.getX());
 		assertEquals("Player Y position must remain the same", 5, p.getY());
@@ -48,6 +56,8 @@ public class PlayerMovementTest {
 	
 	@Test
 	public void playerShouldMoveLeftWhenMoveLeftIsCalled() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveLeft();
 		assertEquals("Player X position must decrease by 1", 4, p.getX());
 		assertEquals("Player Y position must remain the same", 5, p.getY());
@@ -58,6 +68,9 @@ public class PlayerMovementTest {
 		// Move player to top left square
 		p.x().set(0);
 		p.y().set(0);
+		
+		assertEquals("Player X starting position is 0", 0, p.getX());
+		assertEquals("Player Y starting position is 0", 0, p.getY());
 		
 		p.moveUp();
 		assertEquals("Player X position must be the same", 0, p.getX());
@@ -70,6 +83,9 @@ public class PlayerMovementTest {
 		// Move player to bottom right square
 		p.x().set(9);
 		p.y().set(9);
+		
+		assertEquals("Player X starting position is 9", 9, p.getX());
+		assertEquals("Player Y starting position is 9", 9, p.getY());
 		
 		p.moveRight();
 		assertEquals("Player X position must be the same", 9, p.getX());
