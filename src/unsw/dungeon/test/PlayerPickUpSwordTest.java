@@ -6,8 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import unsw.dungeon.BasicGoal;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Entity;
+import unsw.dungeon.Goal;
 import unsw.dungeon.Player;
 import unsw.dungeon.Sword;
 
@@ -15,19 +17,17 @@ public class PlayerPickUpSwordTest {
 	private Dungeon d;
 	private Player p;
 	private Sword s1;
-	private Sword s2;
 
 	@Before
 	public void setUp() throws Exception {
 		d = new Dungeon(10, 10);
 		p = new Player(d, 5, 5);
 		s1 = new Sword(5, 5);
-		s2 = new Sword(4, 5);
 		
 		d.setPlayer(p);
+		d.setGoals(new BasicGoal(Goal.TREASURE));
 		d.addEntity(p);
 		d.addEntity(s1);
-		d.addEntity(s2);
 	}
 	
 	@After
@@ -35,7 +35,6 @@ public class PlayerPickUpSwordTest {
 		d = null;
 		p = null;
 		s1 = null;
-		s2 = null;
 	}
 
 	@Test
@@ -45,20 +44,39 @@ public class PlayerPickUpSwordTest {
 		
 		assertEquals("Sword X starting position is 5", 5, s1.getX());
 		assertEquals("Sword Y starting position is 5", 5, s1.getY());
-		
-		assertTrue("Two entities in square (5, 5)", d.getEntities(5, 5).size() == 2);
-		
+				
 		assertTrue("Player not holding sword", p.getSword() == null);
+		
+		boolean swordAtSquare = false;
+		
+		for (Entity e : d.getEntities(5, 5)) {
+			if (e instanceof Sword) {
+				swordAtSquare = true;
+			}
+		}
+		
+		assertTrue("Sword in square (5, 5)", swordAtSquare);			
 				
 		p.pickUp();
-		
-		assertTrue("One entity in square (5, 5) since sword is picked up", d.getEntities(5, 5).size() == 1);
-		
+				
 		assertSame("Player holding sword", s1, p.getSword());
+		
+		boolean swordInDungeon = false;
+		
+		for (Entity e : d.getAllEntities()) {
+			if (e instanceof Sword) {
+				swordInDungeon = true;
+			}
+		}
+		
+		assertTrue("Sword no longer in dungeon", !swordInDungeon);	
 	}
 	
 	@Test
 	public void playerHoldingSwordShouldNotBeAbleToPickUpAnotherSword() {
+		Sword s2 = new Sword(4, 5);
+		d.addEntity(s2);
+
 		assertEquals("Player X starting position is 5", 5, p.getX());
 		assertEquals("Player Y starting position is 5", 5, p.getY());
 		

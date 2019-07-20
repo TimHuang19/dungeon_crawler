@@ -6,7 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import unsw.dungeon.BasicGoal;
 import unsw.dungeon.Dungeon;
+import unsw.dungeon.Goal;
 import unsw.dungeon.Player;
 import unsw.dungeon.Wall;
 
@@ -20,6 +22,7 @@ public class PlayerMovementWallTest {
 		p = new Player(d, 5, 5);
 		
 		d.setPlayer(p);
+		d.setGoals(new BasicGoal(Goal.TREASURE));
 		d.addEntity(p);
 		d.addEntity(new Wall(6, 5));
 		d.addEntity(new Wall(4, 5));

@@ -41,6 +41,18 @@ public class Player extends Entity implements Subject {
         this.initialisedObservers = false;
     }
     
+    public Key getKey() {
+    	return key;
+    }
+    
+    public Sword getSword() {
+    	return sword;
+    }
+    
+    public ArrayList<Bomb> getBombs() {
+    	return bombs;
+    }
+    
     public boolean isInvincible() {
     	return invincible;
     }
@@ -155,9 +167,12 @@ public class Player extends Entity implements Subject {
     			this.invincible = true;
     			dungeon.removeEntity(e);
     		} else if (e instanceof Bomb) {
-    			if (bombs.size() == 3) {
+    			if (((Bomb) e).getState() instanceof LitState) {
     				return;
     			}
+    			if (bombs.size() == 3) {
+    				return;
+    			}    			
     			bombs.add((Bomb) e);
     			dungeon.removeEntity(e);
     		} else if (e instanceof Treasure) {
@@ -166,11 +181,7 @@ public class Player extends Entity implements Subject {
     		}
     	}
     }
-    
-    public Sword getSword() {
-    	return sword;
-    }
-    
+
     public void swingSword() {
     	
     	if (sword == null) {

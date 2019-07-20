@@ -40,6 +40,7 @@ public class Bomb extends Entity {
 			if (e instanceof Player) {
 				if (!((Player) e).isInvincible()) {
 					dungeon.gameOver();
+					dungeon.removeEntity(this);
 					return;
 				}
 			} else if (e instanceof Boulder) {
@@ -58,6 +59,10 @@ public class Bomb extends Entity {
     
     public BombState getLitState() {
     	return litState;
+    }
+    
+    public BombState getState() {
+    	return state;
     }
     
 }

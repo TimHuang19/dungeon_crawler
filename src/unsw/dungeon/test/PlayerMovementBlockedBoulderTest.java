@@ -6,9 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import unsw.dungeon.BasicGoal;
 import unsw.dungeon.Boulder;
 import unsw.dungeon.Dungeon;
-import unsw.dungeon.Entity;
+import unsw.dungeon.Goal;
 import unsw.dungeon.Player;
 import unsw.dungeon.Switch;
 
@@ -24,6 +25,7 @@ public class PlayerMovementBlockedBoulderTest {
 		b = new Boulder(d, 5, 4);
 		
 		d.setPlayer(p);
+		d.setGoals(new BasicGoal(Goal.TREASURE));
 		d.addEntity(p);
 		d.addEntity(b);
 		d.addEntity(new Boulder(d, 5, 3));
