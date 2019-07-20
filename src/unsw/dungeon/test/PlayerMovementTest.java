@@ -17,6 +17,8 @@ public class PlayerMovementTest {
 	public void setUp() throws Exception {
 		d = new Dungeon(10, 10);
 		p = new Player(d, 5, 5);
+		
+		d.addEntity(p);
 	}
 
 	@After
