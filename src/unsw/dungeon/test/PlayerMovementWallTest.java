@@ -35,6 +35,8 @@ public class PlayerMovementWallTest {
 
 	@Test
 	public void wallAbovePlayerShouldBlockMoveUp() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveUp();
 		assertEquals("Player X must be the same", 5, p.getX());
 		assertEquals("Player Y must be the same", 5, p.getY());
@@ -42,6 +44,8 @@ public class PlayerMovementWallTest {
 	
 	@Test
 	public void wallBelowPlayerShouldBlockMoveDown() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveDown();
 		assertEquals("Player X must be the same", 5, p.getX());
 		assertEquals("Player Y must be the same", 5, p.getY());
@@ -49,6 +53,8 @@ public class PlayerMovementWallTest {
 	
 	@Test
 	public void wallRightOfPlayerShouldBlockMoveRight() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveRight();
 		assertEquals("Player X must be the same", 5, p.getX());
 		assertEquals("Player Y must be the same", 5, p.getY());
@@ -56,6 +62,8 @@ public class PlayerMovementWallTest {
 	
 	@Test
 	public void wallLeftOfPlayerShouldBlockMoveLeft() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
 		p.moveLeft();
 		assertEquals("Player X must be the same", 5, p.getX());
 		assertEquals("Player Y must be the same", 5, p.getY());

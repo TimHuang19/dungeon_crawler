@@ -34,7 +34,14 @@ public class PlayerMovementDoorTest {
 
 	@Test
 	public void playerWithoutKeyShouldBeBlockedByClosedDoor() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
+		
 		p.moveRight();
+		
+		assertEquals("Player X new position is 6", 6, p.getX());
+		assertEquals("Player Y must be the same", 5, p.getY());
+		
 		p.moveRight();
 		
 		assertEquals("Player X must be the same", 6, p.getX());
@@ -43,8 +50,15 @@ public class PlayerMovementDoorTest {
 	
 	@Test
 	public void playerWithWrongKeyShouldBeBlockedByClosedDoor() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
+		
 		p.pickUp();
 		p.moveRight();
+		
+		assertEquals("Player X new position is 6", 6, p.getX());
+		assertEquals("Player Y must be the same", 5, p.getY());
+		
 		p.moveRight();
 		
 		assertEquals("Player X must be the same", 6, p.getX());
@@ -53,8 +67,15 @@ public class PlayerMovementDoorTest {
 	
 	@Test
 	public void playerWithMatchingKeyShouldNotBeBlockedByClosedDoor() {
+		assertEquals("Player X starting position is 5", 5, p.getX());
+		assertEquals("Player Y starting position is 5", 5, p.getY());
+		
 		p.moveRight();
 		p.pickUp();
+		
+		assertEquals("Player X new position is 6", 6, p.getX());
+		assertEquals("Player Y must be the same", 5, p.getY());
+		
 		p.moveRight();
 		
 		assertEquals("Player X must increase by 1", 7, p.getX());
