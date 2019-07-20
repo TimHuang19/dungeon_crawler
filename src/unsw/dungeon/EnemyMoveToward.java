@@ -74,6 +74,8 @@ public class EnemyMoveToward implements EnemyMovementStrategy {
 	    		}
 	    	} else if (e instanceof Boulder) {
 	    		return true;
+	    	}else if (e instanceof Enemy) {
+	    		return true;
 	    	}
     	}
     	return false;
