@@ -1,8 +1,8 @@
 package unsw.dungeon;
 
 public class Door extends Entity {
-	DoorState closedState;
-	DoorState openState;
+	private DoorState closedState;
+	private DoorState openState;
 	
 	private DoorState state;
 	private int id;

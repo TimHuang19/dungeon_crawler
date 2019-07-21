@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 public class UnlitState implements BombState {
-	Bomb bomb;
+	private Bomb bomb;
 	
 	public UnlitState(Bomb bomb) {
 		this.bomb = bomb;

@@ -3,8 +3,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public class Bomb extends Entity {
-	BombState unlitState;
-	BombState litState;
+	private BombState unlitState;
+	private BombState litState;
 	
 	private BombState state;
 	private Dungeon dungeon;

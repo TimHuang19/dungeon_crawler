@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import unsw.dungeon.BasicGoal;
+import unsw.dungeon.Direction;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Enemy;
 import unsw.dungeon.Goal;
@@ -99,8 +100,8 @@ public class PlayerUseSwordTest {
 		
 		p.moveDown();
 		
-		p.setDirection(0);
-		assertEquals("Player facing upwards", 0, p.getDirection());
+		p.setDirection(Direction.UP);
+		assertEquals("Player facing upwards", Direction.UP, p.getDirection());
 		assertEquals("Enemy X position is 5", 5, e.getX());
 		assertEquals("Enemy Y position is 7", 7, e.getY());
 		
@@ -112,8 +113,8 @@ public class PlayerUseSwordTest {
 		
 		assertEquals("Still one enemy in dungeon", 1, d.getEnemies().size());
 		
-		p.setDirection(2);
-		assertEquals("Player facing left", 2, p.getDirection());
+		p.setDirection(Direction.LEFT);
+		assertEquals("Player facing left", Direction.LEFT, p.getDirection());
 		
 		assertEquals("Enemy X position is 5", 5, e.getX());
 		assertEquals("Enemy Y position is 7", 7, e.getY());
@@ -122,8 +123,8 @@ public class PlayerUseSwordTest {
 		
 		assertEquals("Still one enemy in dungeon", 1, d.getEnemies().size());
 		
-		p.setDirection(3);
-		assertEquals("Player facing right", 3, p.getDirection());
+		p.setDirection(Direction.RIGHT);
+		assertEquals("Player facing right", Direction.RIGHT, p.getDirection());
 		
 		assertEquals("Enemy X position is 5", 5, e.getX());
 		assertEquals("Enemy Y position is 7", 7, e.getY());
@@ -132,8 +133,8 @@ public class PlayerUseSwordTest {
 		
 		assertEquals("Still one enemy in dungeon", 1, d.getEnemies().size());
 		
-		p.setDirection(1);
-		assertEquals("Player facing down", 1, p.getDirection());
+		p.setDirection(Direction.DOWN);
+		assertEquals("Player facing down", Direction.DOWN, p.getDirection());
 		
 		p.swingSword();
 
@@ -151,9 +152,9 @@ public class PlayerUseSwordTest {
 		assertEquals("Enemy X starting position is 5", 5, e.getX());
 		assertEquals("Enemy Y starting position is 7", 7, e.getY());
 		
-		p.setDirection(1);
+		p.setDirection(Direction.DOWN);
 		
-		assertEquals("Player facing downwards", 1, p.getDirection());
+		assertEquals("Player facing downwards", Direction.DOWN, p.getDirection());
 
 		p.pickUp();
 		
@@ -170,7 +171,7 @@ public class PlayerUseSwordTest {
 
 		p.moveDown();
 		
-		assertEquals("Player facing downwards", 1, p.getDirection());
+		assertEquals("Player facing downwards", Direction.DOWN, p.getDirection());
 		
 		assertEquals("Enemy is 1 square away", 1, (e.getY()) - p.getY());
 		

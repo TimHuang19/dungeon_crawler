@@ -3,13 +3,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public class Enemy extends Entity implements Observer {
-    private static final int UP = 0;
-    private static final int DOWN = 1;
-    private static final int LEFT = 2;
-    private static final int RIGHT = 3;
-    private static final int UNABLE = 4;
-	
-	private EnemyMovementStrategy strategy = new EnemyMoveToward();
+
+	private EnemyMovementStrategy strategy;
 	private Dungeon dungeon;
 	private int playerX, playerY;
 	private boolean invincible;
@@ -17,6 +12,7 @@ public class Enemy extends Entity implements Observer {
 	
 	public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
+        strategy = new EnemyMoveToward();
         invincible = false;
         this.dungeon = dungeon;
         this.canMove = false;
@@ -96,7 +92,7 @@ public class Enemy extends Entity implements Observer {
     	else {
     		strategy = new EnemyMoveToward();
     	}
-    	int direction = strategy.enemyMovement(playerX, playerY, getX(), getY(), dungeon);
+    	Direction direction = strategy.enemyMovement(playerX, playerY, getX(), getY(), dungeon);
     	
     	switch(direction) {
     	case LEFT:

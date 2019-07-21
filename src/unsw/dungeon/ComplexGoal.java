@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ComplexGoal implements GoalExpression {
 
 	private Goal goal;
-	ArrayList<GoalExpression> subGoals;
+	private ArrayList<GoalExpression> subGoals;
 	
 	public ComplexGoal(Goal goal) {
 		this.goal = goal;

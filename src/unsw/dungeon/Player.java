@@ -8,17 +8,13 @@ import java.util.ArrayList;
  *
  */
 public class Player extends Entity implements Subject {
-	ArrayList<Observer> observers;
-    private static final int UP = 0;
-    private static final int DOWN = 1;
-    private static final int LEFT = 2;
-    private static final int RIGHT = 3;
+	private ArrayList<Observer> observers;
     
     private boolean initialisedObservers;
     private Dungeon dungeon;
     private Key key;
     private Sword sword;
-    private int direction;
+    private Direction direction;
     private boolean invincible;
     private int invincibleSteps;
     private ArrayList<Bomb> bombs;
@@ -33,7 +29,7 @@ public class Player extends Entity implements Subject {
         this.dungeon = dungeon;
         this.key = null;
         this.sword = null;
-        this.direction = RIGHT;
+        this.direction = Direction.RIGHT;
         this.invincible = false;
         this.invincibleSteps = 0;
         this.bombs = new ArrayList<Bomb>();
@@ -61,13 +57,14 @@ public class Player extends Entity implements Subject {
     	return invincibleSteps;
     }
     
-    public int getDirection() {
+    public Direction getDirection() {
     	return direction;
     }
     
-    public void setDirection(int direction) {
+    public void setDirection(Direction direction) {
     	this.direction = direction;
     }
+    
     @Override
     public void registerObserver(Observer o){
     	observers.add(o);
@@ -96,7 +93,7 @@ public class Player extends Entity implements Subject {
 
         if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
-            direction = UP;
+            direction = Direction.UP;
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
@@ -109,7 +106,7 @@ public class Player extends Entity implements Subject {
 
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
-            direction = DOWN;
+            direction = Direction.DOWN;
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
@@ -122,7 +119,7 @@ public class Player extends Entity implements Subject {
 
         if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
-            direction = LEFT;
+            direction = Direction.LEFT;
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
@@ -135,7 +132,7 @@ public class Player extends Entity implements Subject {
     	
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
-            direction = RIGHT;
+            direction = Direction.RIGHT;
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
@@ -234,6 +231,15 @@ public class Player extends Entity implements Subject {
     	dungeon.addEntity(b);
     	
     }
+    
+
+	public void setInvincible(boolean invincible) {
+		this.invincible = invincible;
+	}
+
+	public void setInvincibleSteps(int invincibleSteps) {
+		this.invincibleSteps = invincibleSteps;
+	}
     
     private boolean isObstacle(ArrayList<Entity> entities) {
     	for (Entity e : entities) {
@@ -339,11 +345,4 @@ public class Player extends Entity implements Subject {
     	}
     }
 
-	public void setInvincible(boolean invincible) {
-		this.invincible = invincible;
-	}
-
-	public void setInvincibleSteps(int invincibleSteps) {
-		this.invincibleSteps = invincibleSteps;
-	}
 }

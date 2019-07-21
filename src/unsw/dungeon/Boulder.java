@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public class Boulder extends Entity implements Subject {
-	ArrayList<Observer> observers;
+	private ArrayList<Observer> observers;
 	private boolean onSwitch;
 	private boolean destroyed;
 
@@ -42,7 +42,7 @@ public class Boulder extends Entity implements Subject {
 		return onSwitch;
 	}
 	
-	public void setOnSwitch(Boolean onSwitch) {
+	public void setOnSwitch(boolean onSwitch) {
 		this.onSwitch = onSwitch;
 	}
 	
