@@ -4,7 +4,7 @@ public interface GoalExpression {
 
 	public boolean isComplete();
 	
-	public void setComplete(Goal goal, Boolean completed);
+	public void setComplete(Goal goal, boolean completed);
 	
 	public Goal getGoal();
 	

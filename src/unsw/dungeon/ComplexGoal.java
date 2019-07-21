@@ -14,7 +14,7 @@ public class ComplexGoal implements GoalExpression {
 
 	@Override
 	public boolean isComplete() {
-		Boolean completed;
+		boolean completed;
 		
 		switch (goal) {
 		case AND:
@@ -34,8 +34,8 @@ public class ComplexGoal implements GoalExpression {
 	}
 	
 	@Override
-	public void setComplete(Goal goal, Boolean completed) {
-		Boolean nonExitCompleted = true;
+	public void setComplete(Goal goal, boolean completed) {
+		boolean nonExitCompleted = true;
 		if (goal == Goal.EXIT && this.goal == Goal.AND) {
 			if (containsExit()) {
 				GoalExpression exit = null;

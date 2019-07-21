@@ -10,7 +10,7 @@ public class BasicGoal implements GoalExpression {
 		this.completed = false;
 	}
 	
-	public void setCompleted(Boolean completed) {
+	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
 
@@ -20,7 +20,7 @@ public class BasicGoal implements GoalExpression {
 	}
 
 	@Override
-	public void setComplete(Goal goal, Boolean completed) {
+	public void setComplete(Goal goal, boolean completed) {
 		if (this.goal == goal) {
 			this.completed = completed;
 		}
