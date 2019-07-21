@@ -31,7 +31,7 @@ public class GoalsExitTest {
 		d = null;
 	}
 	@Test
-	public void DungeonShouldCompleteIfPlayerMovesIntoExitAndExitIsOnlyGoal() {
+	public void dungeonShouldCompleteIfPlayerMovesIntoExitAndExitIsOnlyGoal() {
 		d.setGoals(new BasicGoal(Goal.EXIT));
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
@@ -39,7 +39,7 @@ public class GoalsExitTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteIfPlayerMovesIntoExitAndExitIsLastGoal() {
+	public void dungeonShouldCompleteIfPlayerMovesIntoExitAndExitIsLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.EXIT);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -53,7 +53,7 @@ public class GoalsExitTest {
 	}
 	
 	@Test
-	public void DungeonShouldNotCompleteIfPlayerMovesIntoExitAndExitIsNotLastGoal() {
+	public void dungeonShouldNotCompleteIfPlayerMovesIntoExitAndExitIsNotLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.EXIT);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);

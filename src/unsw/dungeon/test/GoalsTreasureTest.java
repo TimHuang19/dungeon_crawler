@@ -32,7 +32,7 @@ public class GoalsTreasureTest {
 		d = null;
 	}
 	@Test
-	public void DungeonShouldCompleteIfPlayerPicksUpTreasureAndTreasureIsOnlyGoal() {
+	public void dungeonShouldCompleteIfPlayerPicksUpTreasureAndTreasureIsOnlyGoal() {
 		d.setGoals(new BasicGoal(Goal.TREASURE));
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
@@ -41,7 +41,7 @@ public class GoalsTreasureTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteIfPlayerPicksUpTreasureAndTreasureIsLastGoal() {
+	public void dungeonShouldCompleteIfPlayerPicksUpTreasureAndTreasureIsLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.TREASURE);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -56,7 +56,7 @@ public class GoalsTreasureTest {
 	}
 	
 	@Test
-	public void DungeonShouldNotCompleteIfPlayerPicksUpTreasureAndTreasureIsNotLastGoal() {
+	public void dungeonShouldNotCompleteIfPlayerPicksUpTreasureAndTreasureIsNotLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.TREASURE);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -69,7 +69,7 @@ public class GoalsTreasureTest {
 		assertFalse("Game should complete when player picks up only treasure if there are other goals to complete",d.isGameComplete());
 	}
 	@Test
-	public void DungeonShouldCompleteOnlyWhenPlayerPicksUpAllTreasuresInsteadOfOnlyOne() {
+	public void dungeonShouldCompleteOnlyWhenPlayerPicksUpAllTreasuresInsteadOfOnlyOne() {
 		d.addEntity(new Treasure(5,5));
 		d.setGoals(new BasicGoal(Goal.TREASURE));
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());

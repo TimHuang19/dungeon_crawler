@@ -33,7 +33,7 @@ public class GoalsSwitchTest {
 		d = null;
 	}
 	@Test
-	public void DungeonShouldCompleteIfPlayerMovesBoulderOntoSwitchAndIsOnlyGoal() {
+	public void dungeonShouldCompleteIfPlayerMovesBoulderOntoSwitchAndIsOnlyGoal() {
 		d.setGoals(new BasicGoal(Goal.BOULDERS));
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
@@ -41,7 +41,7 @@ public class GoalsSwitchTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteIfPlayerMovesBoulderOntoSwitchAndIsLastGoal() {
+	public void dungeonShouldCompleteIfPlayerMovesBoulderOntoSwitchAndIsLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -55,7 +55,7 @@ public class GoalsSwitchTest {
 	}
 	
 	@Test
-	public void DungeonShouldNotCompleteIfPlayerBoulderOntoSwitchAndIsNotLastGoal() {
+	public void dungeonShouldNotCompleteIfPlayerBoulderOntoSwitchAndIsNotLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -67,7 +67,7 @@ public class GoalsSwitchTest {
 		assertFalse("Game should complete when player moves boulder onto only switch if there are other goals to complete",d.isGameComplete());
 	}
 	@Test
-	public void DungeonShouldCompleteOnlyWhenPlayerHasMovedLastBoulderOntoSwitchInsteadOfOnlyOne() {
+	public void dungeonShouldCompleteOnlyWhenPlayerHasMovedLastBoulderOntoSwitchInsteadOfOnlyOne() {
 		d.addEntity(new Boulder(d,4,4));
 		d.addEntity(new Switch(4,3));
 		d.setGoals(new BasicGoal(Goal.BOULDERS));

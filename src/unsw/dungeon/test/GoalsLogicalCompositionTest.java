@@ -31,7 +31,7 @@ public class GoalsLogicalCompositionTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteIfPlayerCompletesEitherGoalsInORComposition() {
+	public void dungeonShouldCompleteIfPlayerCompletesEitherGoalsInORComposition() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.EXIT);
 		ComplexGoal c1 = new ComplexGoal(Goal.OR);
@@ -44,7 +44,7 @@ public class GoalsLogicalCompositionTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteIfPlayerBothGoalsInAndComposition() {
+	public void dungeonShouldCompleteIfPlayerBothGoalsInAndComposition() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.EXIT);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -60,7 +60,7 @@ public class GoalsLogicalCompositionTest {
 	}
 	
 	@Test
-	public void DungeonShouldNotCompleteIfExitIsNotCompletedLast() {
+	public void dungeonShouldNotCompleteIfExitIsNotCompletedLast() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.EXIT);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -75,7 +75,7 @@ public class GoalsLogicalCompositionTest {
 		assertFalse("Game should not complete when exit is not reached last",d.isGameComplete());
 	}
 	@Test
-	public void DungeonShouldCompleteInAnORCompoisitionFollowedByTopLevelAND() {
+	public void dungeonShouldCompleteInAnORCompoisitionFollowedByTopLevelAND() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.EXIT);
 		BasicGoal b3 = new BasicGoal(Goal.TREASURE);
@@ -96,7 +96,7 @@ public class GoalsLogicalCompositionTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteInAnANDCompoisitionFollowedByTopLevelOR() {
+	public void dungeonShouldCompleteInAnANDCompoisitionFollowedByTopLevelOR() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.EXIT);
 		BasicGoal b3 = new BasicGoal(Goal.TREASURE);
@@ -116,7 +116,7 @@ public class GoalsLogicalCompositionTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteInAnyTopLevelORGoal() {
+	public void dungeonShouldCompleteInAnyTopLevelORGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.BOULDERS);
 		BasicGoal b2 = new BasicGoal(Goal.EXIT);
 		BasicGoal b3 = new BasicGoal(Goal.TREASURE);

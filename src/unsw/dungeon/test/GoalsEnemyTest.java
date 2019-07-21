@@ -31,7 +31,7 @@ public class GoalsEnemyTest {
 		d = null;
 	}
 	@Test
-	public void DungeonShouldCompleteIfPlayerKillsEnemyAndEnemyIsOnlyGoal() {
+	public void dungeonShouldCompleteIfPlayerKillsEnemyAndEnemyIsOnlyGoal() {
 		d.setGoals(new BasicGoal(Goal.ENEMIES));
 		p.setInvincible(true);
 		p.setInvincibleSteps(20);
@@ -41,7 +41,7 @@ public class GoalsEnemyTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteIfPlayerKillsEnemyAndEnemyIsLastGoal() {
+	public void dungeonShouldCompleteIfPlayerKillsEnemyAndEnemyIsLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.TREASURE);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -57,7 +57,7 @@ public class GoalsEnemyTest {
 	}
 	
 	@Test
-	public void DungeonShouldNotCompleteIfPlayerKillsEnemyAndEnemyIsLastGoal() {
+	public void dungeonShouldNotCompleteIfPlayerKillsEnemyAndEnemyIsLastGoal() {
 		BasicGoal b1 = new BasicGoal(Goal.EXIT);
 		BasicGoal b2 = new BasicGoal(Goal.ENEMIES);
 		ComplexGoal c1 = new ComplexGoal(Goal.AND);
@@ -72,7 +72,7 @@ public class GoalsEnemyTest {
 	}
 	
 	@Test
-	public void DungeonShouldCompleteOnlyWhenPlayerHasKilledAllEnemies() {
+	public void dungeonShouldCompleteOnlyWhenPlayerHasKilledAllEnemies() {
 		e = new Enemy(d,5,5);
 		d.addEntity(e);
 		p.setInvincible(true);
