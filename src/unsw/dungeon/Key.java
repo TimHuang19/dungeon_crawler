@@ -12,4 +12,33 @@ public class Key extends Entity {
 		return this.id;
 	}
 
+	@Override
+	public boolean isObstacle(Player p) {
+		return false;
+	}
+
+	@Override
+	public boolean isObstacle(Enemy e) {
+		return false;
+	}
+
+	@Override
+	public boolean blocksBoulder() {
+		return true;
+	}
+
+	@Override
+	public boolean pickUp(Player p) {
+		Key oldKey = p.getKey();
+		if (oldKey == null) {
+			p.setKey(this);
+		} else {
+			oldKey.x().set(p.getX());
+			oldKey.y().set(p.getY());
+			p.addEntity(oldKey);
+			p.setKey(this);
+		}
+		return true;
+	}
+
 }

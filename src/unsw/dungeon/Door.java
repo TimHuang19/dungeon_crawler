@@ -43,4 +43,40 @@ public class Door extends Entity {
     public DoorState getOpenState() {
     	return openState;
     }
+
+	@Override
+	public boolean isObstacle(Player p) {
+		Key key = p.getKey();
+		if (key != null && matchingKey(key) && isClosed()) {
+			p.setKey(null);
+			return false;
+		}
+		if (isClosed()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isObstacle(Enemy e) {
+		if (isClosed()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean blocksBoulder() {
+		if (isClosed()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean pickUp(Player p) {
+		return false;
+	}
+
 }

@@ -41,12 +41,24 @@ public class Player extends Entity implements Subject {
     	return key;
     }
     
+    public void setKey(Key key) {
+    	this.key = key;
+    }
+    
     public Sword getSword() {
     	return sword;
     }
     
+    public void setSword(Sword sword) {
+    	this.sword = sword;
+    }
+    
     public ArrayList<Bomb> getBombs() {
     	return bombs;
+    }
+    
+    public void addBomb(Bomb bomb) {
+    	bombs.add(bomb);
     }
     
     public boolean isInvincible() {
@@ -143,42 +155,15 @@ public class Player extends Entity implements Subject {
     	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
     	
     	for (Entity e : entities) {
-    		if (e instanceof Key) {
-    			Key newKey = (Key) e;
-    			if (this.key == null) {
-    				this.key = newKey;
-    			} else {
-    				this.key.x().set(getX());
-    				this.key.y().set(getY());
-    				dungeon.addEntity(this.key);
-    				this.key = newKey;
-    			}
-    			dungeon.removeEntity(e);
-    		} else if (e instanceof Sword) {
-    			if (this.sword == null) {
-    				this.sword = (Sword) e;
-    				dungeon.removeEntity(e);
-    			}
-    		} else if (e instanceof Potion) {
-    			this.invincibleSteps = 20;
-    			this.invincible = true;
-    			dungeon.removeEntity(e);
-    		} else if (e instanceof Bomb) {
-    			if (((Bomb) e).getState() instanceof LitState) {
-    				return;
-    			}
-    			if (bombs.size() == 3) {
-    				return;
-    			}    			
-    			bombs.add((Bomb) e);
-    			dungeon.removeEntity(e);
-    		} else if (e instanceof Treasure) {
-    			dungeon.reduceTreasures();
+    		if (e.pickUp(this)) {
     			dungeon.removeEntity(e);
     		}
     	}
     }
-
+	
+	public void reduceTreasures() {
+		dungeon.reduceTreasures();
+	}
     public void swingSword() {
     	
     	if (sword == null) {
@@ -232,7 +217,6 @@ public class Player extends Entity implements Subject {
     	
     }
     
-
 	public void setInvincible(boolean invincible) {
 		this.invincible = invincible;
 	}
@@ -241,76 +225,16 @@ public class Player extends Entity implements Subject {
 		this.invincibleSteps = invincibleSteps;
 	}
     
+	public void addEntity(Entity e) {
+		dungeon.addEntity(e);
+	}
+	
     private boolean isObstacle(ArrayList<Entity> entities) {
+    	boolean obstacle = false;
     	for (Entity e : entities) {
-	    	if (e instanceof Wall) {
-	    		return true;
-	    	} else if (e instanceof Door) {
-	    		Door d = (Door) e;
-	    		if (key != null && d.matchingKey(key) && d.isClosed()) {
-	    			key = null;
-	    			return false;
-	    		} else if (d.isClosed()) {
-	    			return true;
-	    		}
-	    	} else if (e instanceof Boulder) {
-	    		Boulder b = (Boulder) e;
-	    		
-	    		if (!blockedBoulder(b)) {
-	    			return false;
-	    		}
-	    		
-	    		return true;
-	    	}
+    		obstacle = obstacle || e.isObstacle(this);
     	}
-    	return false;
-    }
-    
-    private boolean blockedBoulder(Boulder b) {
-		int playerX = getX();
-		int playerY = getY();
-		
-		int boulderX = b.getX();
-		int boulderY = b.getY();
-		
-		int targetX;
-		int targetY;
-		
-		if (playerX == boulderX) {
-			targetX = playerX;
-			targetY = (boulderY > playerY) ? boulderY + 1 : boulderY - 1;
-			if (targetY == -1 || targetY == dungeon.getHeight()) {
-				return true;
-			}
-			
-		} else {
-			targetY = playerY;
-			targetX = (boulderX > playerX) ? boulderX + 1 : boulderX - 1;
-			if (targetX == -1 || targetX == dungeon.getWidth()) {
-				return true;
-			}
-		}
-				
-		ArrayList<Entity> entities = dungeon.getEntities(targetX, targetY);
-		
-		boolean canMove = true;
-		for (Entity e : entities) {
-			if (e instanceof Door) {
-				Door d = (Door) e;
-				if (d.isClosed()) {
-					canMove = false;
-				}
-			} else if (!(e instanceof Switch)) {
-				canMove = false;
-			}
-		}
-
-		if (canMove) {
-			b.moveBoulder(targetX, targetY);
-			return false;
-		}
-		
-		return true;
+    	return obstacle;
     }
     
     private void updateInvincibility() {
@@ -344,5 +268,25 @@ public class Player extends Entity implements Subject {
     		initialisedObservers = true;
     	}
     }
+    
+	@Override
+	public boolean isObstacle(Player p) {
+		return false;
+	}
+
+	@Override
+	public boolean isObstacle(Enemy e) {
+		return false;
+	}
+	
+	@Override
+	public boolean blocksBoulder() {
+		return true;
+	}
+
+	@Override
+	public boolean pickUp(Player p) {
+		return false;
+	}
 
 }

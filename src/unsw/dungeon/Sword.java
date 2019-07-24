@@ -15,4 +15,28 @@ public class Sword extends Entity {
 		}
 		return true;
 	}
+
+	@Override
+	public boolean isObstacle(Player p) {
+		return false;
+	}
+
+	@Override
+	public boolean isObstacle(Enemy e) {
+		return false;
+	}
+
+	@Override
+	public boolean blocksBoulder() {
+		return true;
+	}
+
+	@Override
+	public boolean pickUp(Player p) {
+		if (p.getSword() == null) {
+			p.setSword(this);
+			return true;
+		}
+		return false;
+	}
 }

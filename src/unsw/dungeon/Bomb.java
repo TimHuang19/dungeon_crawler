@@ -57,12 +57,38 @@ public class Bomb extends Entity {
     	this.state = state;
     }
     
+    public BombState getState() {
+    	return state;
+    }
+    
     public BombState getLitState() {
     	return litState;
     }
     
-    public BombState getState() {
-    	return state;
-    }
+	@Override
+	public boolean isObstacle(Player p) {
+		return false;
+	}
+
+	@Override
+	public boolean isObstacle(Enemy e) {
+		return false;
+	}
+
+	@Override
+	public boolean blocksBoulder() {
+		return true;
+	}
+
+	@Override
+	public boolean pickUp(Player p) {
+		if (state instanceof LitState) {
+			return false;
+		} else if (p.getBombs().size() == 3) {
+			return false;
+		}
+		p.addBomb(this);
+		return true;
+	}
     
 }

@@ -121,21 +121,11 @@ public class Enemy extends Entity implements Observer {
     }
     
     private boolean isObstacle(ArrayList<Entity> entities) {
+    	boolean obstacle = false;
     	for (Entity e : entities) {
-	    	if (e instanceof Wall) {
-	    		return true;
-	    	} else if (e instanceof Door) {
-	    		Door d = (Door) e;
-	    		if (d.isClosed()) {
-	    			return true;
-	    		}
-	    	} else if (e instanceof Boulder) {
-	    		return true;
-	    	}else if (e instanceof Enemy) {
-	    		return true;
-	    	}
+    		obstacle = obstacle || e.isObstacle(this);
     	}
-    	return false;
+    	return obstacle;
     }
     
 	public void setPlayerX(int playerX) {
@@ -148,6 +138,26 @@ public class Enemy extends Entity implements Observer {
 
 	public void setInvincible(boolean invincible) {
 		this.invincible = invincible;
+	}
+
+	@Override
+	public boolean isObstacle(Player p) {
+		return false;
+	}
+
+	@Override
+	public boolean isObstacle(Enemy e) {
+		return true;
+	}
+	
+	@Override
+	public boolean blocksBoulder() {
+		return true;
+	}
+
+	@Override
+	public boolean pickUp(Player p) {
+		return false;
 	}
 
 }
