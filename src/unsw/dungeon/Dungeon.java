@@ -33,7 +33,7 @@ public class Dungeon implements Observer {
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
-        this.goals = null;
+        this.goals = new BasicGoal(Goal.EXIT);
         this.complete = false;
         this.gameOver = false;
         this.pressedSwitches = 0;
@@ -98,6 +98,7 @@ public class Dungeon implements Observer {
     	}
     }
     public void killEnemy(Enemy e) {
+    	e.notifyDungeonObservers();
     	removeEntity(e);
     	player.removeObserver((Observer) e);
     	this.enemyCount--;
@@ -189,6 +190,12 @@ public class Dungeon implements Observer {
 				}
 			}
 			b.setOnSwitch(onSwitch);
+		}
+	}
+
+	public void setController(DungeonController dungeonController) {		
+		for (Entity e : this.entities) {
+			e.registerDungeonObserver(dungeonController);
 		}
 	}
 }

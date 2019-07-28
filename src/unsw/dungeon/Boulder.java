@@ -33,6 +33,7 @@ public class Boulder extends Entity implements Subject {
 	
 	public void destroy() {
 		destroyed = true;
+		notifyDungeonObservers();
 		notifyObservers();
 	}
 	

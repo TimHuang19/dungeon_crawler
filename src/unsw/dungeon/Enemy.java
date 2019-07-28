@@ -2,20 +2,30 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.util.Duration;
+
 public class Enemy extends Entity implements Observer {
 
 	private EnemyMovementStrategy strategy;
 	private Dungeon dungeon;
 	private int playerX, playerY;
 	private boolean invincible;
-	private boolean canMove;
+	private Timeline timeline;
 	
 	public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
         strategy = new EnemyMoveToward();
         invincible = false;
         this.dungeon = dungeon;
-        this.canMove = false;
+        
+		timeline = new Timeline();
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame kf = new KeyFrame(Duration.seconds(1), (ActionEvent event) -> enemyMovement());
+		timeline.getKeyFrames().add(kf);
+		timeline.play();
     }
 	
 	public void update(Subject obj) {
@@ -31,22 +41,14 @@ public class Enemy extends Entity implements Observer {
 		
 		if (collided() && !invincible) {
 			dungeon.gameOver();
-			return;
 		} else if (collided() && invincible) {
 			dungeon.killEnemy(this);
-			return;
-		}
-		
-		if (canMove) {
-			enemyMovement();
-			canMove = false;
-		} else {
-			canMove = true;
 		}
 	}
 	
 	public boolean collided() {
 		if (playerX == getX() && playerY == getY()) {
+			timeline.stop();
 			return true;
 		}
 		return false;
@@ -113,10 +115,8 @@ public class Enemy extends Entity implements Observer {
     	
 		if (collided() && !invincible) {
 			dungeon.gameOver();
-			return;
 		} else if (collided() && invincible) {
 			dungeon.killEnemy(this);
-			return;
 		}
     }
     

@@ -30,12 +30,14 @@ public class Key extends Entity {
 	@Override
 	public boolean pickUp(Player p) {
 		Key oldKey = p.getKey();
+		notifyDungeonObservers();
 		if (oldKey == null) {
 			p.setKey(this);
 		} else {
 			oldKey.x().set(p.getX());
 			oldKey.y().set(p.getY());
 			p.addEntity(oldKey);
+			oldKey.notifyDungeonObservers();
 			p.setKey(this);
 		}
 		return true;

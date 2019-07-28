@@ -23,6 +23,7 @@ public class Treasure extends Entity {
 
 	@Override
 	public boolean pickUp(Player p) {
+		notifyDungeonObservers();
 		p.reduceTreasures();
 		return true;
 	}

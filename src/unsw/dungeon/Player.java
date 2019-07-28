@@ -42,6 +42,9 @@ public class Player extends Entity implements Subject {
     }
     
     public void setKey(Key key) {
+    	if (key == null) {
+    		dungeon.removeEntity(this.key);
+    	}
     	this.key = key;
     }
     
@@ -156,6 +159,7 @@ public class Player extends Entity implements Subject {
     	
     	for (Entity e : entities) {
     		if (e.pickUp(this)) {
+                notifyObservers();
     			dungeon.removeEntity(e);
     		}
     	}

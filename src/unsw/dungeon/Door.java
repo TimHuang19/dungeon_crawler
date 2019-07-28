@@ -1,11 +1,14 @@
 package unsw.dungeon;
 
+import javafx.scene.image.ImageView;
+
 public class Door extends Entity {
 	private DoorState closedState;
 	private DoorState openState;
 	
 	private DoorState state;
 	private int id;
+	private ImageView openDoorView;
 
     public Door(int x, int y, int id) {
         super(x, y);
@@ -31,6 +34,7 @@ public class Door extends Entity {
     public boolean matchingKey(Key key) {
     	if (key.getId() == id) {
     		openDoor();
+    		notifyDungeonObservers();
     		return true;
     	}
     	return false;
@@ -43,7 +47,14 @@ public class Door extends Entity {
     public DoorState getOpenState() {
     	return openState;
     }
-
+    
+    public void addOpenDoorView(ImageView openDoorView) {
+    	this.openDoorView = openDoorView;
+    }
+    
+    public ImageView getOpenDoorView() {
+    	return openDoorView;
+    }
 	@Override
 	public boolean isObstacle(Player p) {
 		Key key = p.getKey();

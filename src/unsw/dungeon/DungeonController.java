@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public class DungeonController implements DungeonObserver{
 
     @FXML
     private GridPane squares;
@@ -29,6 +29,7 @@ public class DungeonController {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
+        this.dungeon.setController(this);
     }
 
     @FXML
@@ -44,7 +45,6 @@ public class DungeonController {
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
-
     }
 
     @FXML
@@ -75,6 +75,28 @@ public class DungeonController {
             break;
         }
     }
+
+	@Override
+	public void update(DungeonSubject obj) {
+		// TODO Auto-generated method stub
+		if (obj instanceof Key) {
+			Entity e = (Entity) obj;
+			if (squares.getChildren().contains(e.getImageView())) {
+				squares.getChildren().remove(e.getImageView());
+			} else {
+				squares.getChildren().add(e.getImageView());
+			}
+		} else if (obj instanceof Door) {
+			Door door = (Door) obj;
+			if (!door.isClosed()) {
+				squares.getChildren().remove(door.getImageView());
+				squares.getChildren().add(door.getOpenDoorView());
+			}
+		} else {
+			squares.getChildren().remove(((Entity) obj).getImageView());
+		}
+		
+	}
 
 }
 

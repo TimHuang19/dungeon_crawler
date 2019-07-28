@@ -2,6 +2,11 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.util.Duration;
+
 public class Bomb extends Entity {
 	private BombState unlitState;
 	private BombState litState;
@@ -22,20 +27,17 @@ public class Bomb extends Entity {
 	public void dropBomb() {
 		state.dropBomb();
 		
-        new java.util.Timer().schedule( 
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                    	explode();
-                    }
-                }, 
-                3000 
-        );
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(1);
+		KeyFrame kf = new KeyFrame(Duration.seconds(3), (ActionEvent event) -> explode());
+		timeline.getKeyFrames().add(kf);
+		timeline.play();
 	}
 	
 	public void explode() {
 		ArrayList<Entity> targets;
 		targets = dungeon.getExplosionTargets(getX(), getY());
+		notifyDungeonObservers();
 		for (Entity e : targets) {
 			if (e instanceof Player) {
 				if (!((Player) e).isInvincible()) {
