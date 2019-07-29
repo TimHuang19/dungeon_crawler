@@ -34,7 +34,6 @@ public class Sword extends Entity {
 	@Override
 	public boolean pickUp(Player p) {
 		if (p.getSword() == null) {
-			notifyDungeonObservers();
 			p.setSword(this);
 			return true;
 		}

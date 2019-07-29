@@ -23,7 +23,6 @@ public class Potion extends Entity {
 
 	@Override
 	public boolean pickUp(Player p) {
-		notifyDungeonObservers();
 		p.setInvincible(true);
 		p.setInvincibleSteps(20);
 		return true;

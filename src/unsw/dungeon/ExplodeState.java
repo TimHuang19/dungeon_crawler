@@ -1,18 +1,18 @@
 package unsw.dungeon;
 
-public class UnlitState implements BombState {
+public class ExplodeState implements BombState {
 	private Bomb bomb;
 	
-	public UnlitState(Bomb bomb) {
+	public ExplodeState (Bomb bomb) {
 		this.bomb = bomb;
 	}
-
+	
 	@Override
 	public void dropBomb() {
-		bomb.setState(bomb.getLitState());
 	}
 
 	@Override
 	public void explode() {		
 	}
+
 }

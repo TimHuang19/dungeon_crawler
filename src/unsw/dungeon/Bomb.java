@@ -10,6 +10,7 @@ import javafx.util.Duration;
 public class Bomb extends Entity {
 	private BombState unlitState;
 	private BombState litState;
+	private BombState explodeState;
 	
 	private BombState state;
 	private Dungeon dungeon;
@@ -20,13 +21,14 @@ public class Bomb extends Entity {
 		
 		unlitState = new UnlitState(this);
 		litState = new LitState(this);
+		explodeState = new ExplodeState(this);
 		
 		state = unlitState;
 	}
 	
 	public void dropBomb() {
 		state.dropBomb();
-		
+		notifyDungeonObservers();
 		Timeline timeline = new Timeline();
 		timeline.setCycleCount(1);
 		KeyFrame kf = new KeyFrame(Duration.seconds(3), (ActionEvent event) -> explode());
@@ -37,6 +39,7 @@ public class Bomb extends Entity {
 	public void explode() {
 		ArrayList<Entity> targets;
 		targets = dungeon.getExplosionTargets(getX(), getY());
+		state.explode();
 		notifyDungeonObservers();
 		for (Entity e : targets) {
 			if (e instanceof Player) {
@@ -54,7 +57,15 @@ public class Bomb extends Entity {
 		}
 		dungeon.removeEntity(this);
 	}
-
+	
+	public boolean isLit() {
+		return (state instanceof LitState) ? true : false;
+	}
+	
+	public boolean isExplode() {
+		return (state instanceof ExplodeState) ? true : false;
+	}
+	
     public void setState(BombState state) {
     	this.state = state;
     }
@@ -65,6 +76,10 @@ public class Bomb extends Entity {
     
     public BombState getLitState() {
     	return litState;
+    }
+    
+    public BombState getExplodeState() {
+    	return explodeState;
     }
     
 	@Override

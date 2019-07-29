@@ -45,7 +45,7 @@ public class PlayerPickUpKeyTest {
 		assertEquals("Key X starting position is 5", 5, k.getX());
 		assertEquals("Key Y starting position is 5", 5, k.getY());
 				
-		assertTrue("Player not holding key", p.getKey() == null);
+		assertTrue("Player not holding key", p.getKeyId() == -1);
 		
 		boolean keyAtSquare = false;
 		
@@ -59,7 +59,7 @@ public class PlayerPickUpKeyTest {
 				
 		p.pickUp();
 				
-		assertSame("Player holding key", k, p.getKey());
+		assertSame("Player holding key", k, p.getKeyId());
 		
 		boolean keyInDungeon = false;
 		
@@ -86,12 +86,12 @@ public class PlayerPickUpKeyTest {
 		assertEquals("Second Key X starting position is 6", 6, k2.getX());
 		assertEquals("Second Key Y starting position is 5", 5, k2.getY());
 				
-		assertTrue("Player not holding key", p.getKey() == null);
+		assertTrue("Player not holding key", p.getKeyId() == -1);
 		
 		p.pickUp();
 		p.moveRight();
 		
-		assertSame("Player holding first key", k, p.getKey());
+		assertSame("Player holding first key", k, p.getKeyId());
 		
 		Key temp = null;
 		for (Entity e : d.getEntities(6, 5)) {
@@ -104,7 +104,7 @@ public class PlayerPickUpKeyTest {
 		
 		p.pickUp();
 		
-		assertSame("Player holding second key", k2, p.getKey());
+		assertSame("Player holding second key", k2, p.getKeyId());
 		
 		temp = null;
 		for (Entity e : d.getEntities(6, 5)) {

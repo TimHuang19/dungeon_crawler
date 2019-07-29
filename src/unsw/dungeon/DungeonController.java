@@ -78,13 +78,12 @@ public class DungeonController implements DungeonObserver{
 
 	@Override
 	public void update(DungeonSubject obj) {
-		// TODO Auto-generated method stub
-		if (obj instanceof Key) {
-			Entity e = (Entity) obj;
-			if (squares.getChildren().contains(e.getImageView())) {
-				squares.getChildren().remove(e.getImageView());
+		if (obj instanceof Bomb) {
+			Bomb bomb = (Bomb) obj;
+			if (bomb.isLit()) {
+				squares.getChildren().add(bomb.getImageView());
 			} else {
-				squares.getChildren().add(e.getImageView());
+				squares.getChildren().remove(bomb.getImageView());
 			}
 		} else if (obj instanceof Door) {
 			Door door = (Door) obj;

@@ -31,10 +31,9 @@ public class Door extends Entity {
     	return false;
     }
     
-    public boolean matchingKey(Key key) {
-    	if (key.getId() == id) {
+    public boolean matchingKey(int keyId) {
+    	if (keyId == id) {
     		openDoor();
-    		notifyDungeonObservers();
     		return true;
     	}
     	return false;
@@ -57,9 +56,10 @@ public class Door extends Entity {
     }
 	@Override
 	public boolean isObstacle(Player p) {
-		Key key = p.getKey();
-		if (key != null && matchingKey(key) && isClosed()) {
-			p.setKey(null);
+		int keyId = p.getKeyId();
+		if (keyId != -1 && isClosed() && matchingKey(keyId)) {
+			p.setKeyId(-1);
+			notifyDungeonObservers();
 			return false;
 		}
 		if (isClosed()) {

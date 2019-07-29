@@ -12,7 +12,7 @@ public class Player extends Entity implements Subject {
     
     private boolean initialisedObservers;
     private Dungeon dungeon;
-    private Key key;
+    private int keyId;
     private Sword sword;
     private Direction direction;
     private boolean invincible;
@@ -27,7 +27,7 @@ public class Player extends Entity implements Subject {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
-        this.key = null;
+        this.keyId = -1;
         this.sword = null;
         this.direction = Direction.RIGHT;
         this.invincible = false;
@@ -37,15 +37,17 @@ public class Player extends Entity implements Subject {
         this.initialisedObservers = false;
     }
     
-    public Key getKey() {
-    	return key;
+    
+    public int getKeyId() {
+    	return keyId;
     }
     
-    public void setKey(Key key) {
-    	if (key == null) {
-    		dungeon.removeEntity(this.key);
-    	}
-    	this.key = key;
+    public void setKeyId(int keyId) {
+    	this.keyId = keyId;
+    }
+    
+    public void removeFromDungeon(Entity e) {
+    	dungeon.removeEntity(e);
     }
     
     public Sword getSword() {
@@ -160,6 +162,7 @@ public class Player extends Entity implements Subject {
     	for (Entity e : entities) {
     		if (e.pickUp(this)) {
                 notifyObservers();
+                e.notifyDungeonObservers();
     			dungeon.removeEntity(e);
     		}
     	}
@@ -168,6 +171,7 @@ public class Player extends Entity implements Subject {
 	public void reduceTreasures() {
 		dungeon.reduceTreasures();
 	}
+	
     public void swingSword() {
     	
     	if (sword == null) {

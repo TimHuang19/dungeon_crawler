@@ -11,4 +11,9 @@ public class LitState implements BombState {
 	public void dropBomb() {
 		// do nothing
 	}
+
+	@Override
+	public void explode() {
+		bomb.setState(bomb.getExplodeState());
+	}
 }
