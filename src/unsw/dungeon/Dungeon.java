@@ -14,12 +14,13 @@ import java.util.ArrayList;
  * @author Robert Clifton-Everest
  *
  */
-public class Dungeon implements Observer {
+public class Dungeon implements DungeonSubject, Observer {
 
     private int width, height;
     private ArrayList<Entity> entities;
     private Player player;
     private GoalExpression goals;
+    private ArrayList<DungeonObserver> dungeonObservers;
     
     private boolean complete;
     private boolean gameOver;
@@ -34,6 +35,7 @@ public class Dungeon implements Observer {
         this.entities = new ArrayList<>();
         this.player = null;
         this.goals = new BasicGoal(Goal.EXIT);
+        this.dungeonObservers = new ArrayList<>();
         this.complete = false;
         this.gameOver = false;
         this.pressedSwitches = 0;
@@ -81,7 +83,7 @@ public class Dungeon implements Observer {
     
     public void gameOver() {
     	this.gameOver = true;
-    	System.out.println("GAME OVER");
+    	notifyDungeonObservers();
     }
     
     public boolean isGameOver() {
@@ -127,6 +129,7 @@ public class Dungeon implements Observer {
     	
     	if (goals.isComplete()) {
     		this.complete = true;
+    		notifyDungeonObservers();
     		System.out.println("DUNGEON COMPLETE");
     	} else {
     		this.complete = false;
@@ -196,6 +199,23 @@ public class Dungeon implements Observer {
 	public void setController(DungeonController dungeonController) {		
 		for (Entity e : this.entities) {
 			e.registerDungeonObserver(dungeonController);
+		}
+	}
+
+	@Override
+	public void registerDungeonObserver(DungeonObserver o) {
+		dungeonObservers.add(o);
+	}
+
+	@Override
+	public void removeDungeonObserver(DungeonObserver o) {
+		dungeonObservers.remove(o);
+	}
+
+	@Override
+	public void notifyDungeonObservers() {
+		for (DungeonObserver o : dungeonObservers) {
+			o.update(this);
 		}
 	}
 }

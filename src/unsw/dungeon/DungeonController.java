@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -28,14 +30,17 @@ public class DungeonController implements DungeonObserver{
     private Player player;
     
     private Dungeon dungeon;
-
+        
+    private Stage stage;
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
+        this.dungeon.registerDungeonObserver(this);
         this.initialEntities = new ArrayList<>(initialEntities);
         this.dungeon.setController(this);
     }
-
+	
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
@@ -79,10 +84,33 @@ public class DungeonController implements DungeonObserver{
             break;
         }
     }
+    
+    public void addStage(Stage stage) {
+    	this.stage = stage;
+    }
+    
+    public void setGameOverScreen() throws IOException {
+    	(new GameOverScreen(stage)).start();
+    }
 
 	@Override
 	public void update(DungeonSubject obj) {
-		if (obj instanceof Player) {
+		if (obj instanceof Dungeon) {
+			Dungeon dungeon = (Dungeon) obj;
+			if (dungeon.isGameOver()) {
+				Timeline timeline = new Timeline();
+				timeline.setCycleCount(1);
+				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
+					try {
+						(new GameOverScreen(stage)).start();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
+				timeline.getKeyFrames().add(kf);
+				timeline.play();
+			}
+		} else if (obj instanceof Player) {
 			Player player = (Player) obj;
 			if (player.isInvincible() && player.getSword() != null) {
 				squares.getChildren().remove(player.getInvincibleView());
@@ -153,5 +181,6 @@ public class DungeonController implements DungeonObserver{
 		squares.getChildren().remove(bomb.getTwoImage());
 		squares.getChildren().add(bomb.getExplodeImage());
 	}
+
 }
 
