@@ -7,19 +7,21 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
 
-public class Enemy extends Entity implements Observer {
+public class Enemy extends Entity implements Subject, Observer {
 
 	private EnemyMovementStrategy strategy;
 	private Dungeon dungeon;
 	private int playerX, playerY;
 	private boolean invincible;
 	private Timeline timeline;
+	private ArrayList<Observer> observers;
 	
 	public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);
         strategy = new EnemyMoveToward();
         invincible = false;
         this.dungeon = dungeon;
+        this.observers = new ArrayList<>();
         
 		timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
@@ -39,15 +41,17 @@ public class Enemy extends Entity implements Observer {
 		this.playerY = p.getY();
 		this.invincible = p.isInvincible();
 		
-		if (collided() && !invincible) {
-			dungeon.gameOver();
-		} else if (collided() && invincible) {
-			dungeon.killEnemy(this);
-		}
+		if (collided(p)) {
+			if (!invincible) {
+				dungeon.gameOver();
+			} else {
+				dungeon.killEnemy(this);
+			}
+		} 
 	}
 	
-	public boolean collided() {
-		if (playerX == getX() && playerY == getY()) {
+	public boolean collided(Player p) {
+		if (p.getX() == getX() && p.getY() == getY()) {
 			timeline.stop();
 			return true;
 		}
@@ -94,6 +98,7 @@ public class Enemy extends Entity implements Observer {
     	else {
     		strategy = new EnemyMoveToward();
     	}
+    	
     	Direction direction = strategy.enemyMovement(playerX, playerY, getX(), getY(), dungeon);
     	
     	switch(direction) {
@@ -113,11 +118,7 @@ public class Enemy extends Entity implements Observer {
     		break;
     	}
     	
-		if (collided() && !invincible) {
-			dungeon.gameOver();
-		} else if (collided() && invincible) {
-			dungeon.killEnemy(this);
-		}
+		notifyObservers();
     }
     
     private boolean isObstacle(ArrayList<Entity> entities) {
@@ -158,6 +159,23 @@ public class Enemy extends Entity implements Observer {
 	@Override
 	public boolean pickUp(Player p) {
 		return false;
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (Observer o : observers) {
+			o.update(this);;
+		}
 	}
 
 }

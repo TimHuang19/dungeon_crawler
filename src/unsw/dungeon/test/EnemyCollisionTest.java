@@ -41,7 +41,7 @@ public class EnemyCollisionTest {
 		p.moveRight();
 		assertEquals("Player X should increase by 1", 7, p.getX());
 		assertEquals("Player Y should stay the same", 5, p.getY());
-		assertTrue("Enemy and player should be registered as collided", e.collided());
+		assertTrue("Enemy and player should be registered as collided", e.collided(p));
 		assertTrue("Game should end when player moves into enemy", d.isGameOver());
 	}
 	
@@ -58,7 +58,7 @@ public class EnemyCollisionTest {
 		e.enemyMovement();
 		assertEquals("Enemy X start should decrease by 1 to chase player", 6, e.getX());
 		assertEquals("Enemy Y start position is 5", 5, e.getY());
-		assertTrue("Enemy and player should be registered as collided", e.collided());
+		assertTrue("Enemy and player should be registered as collided", e.collided(p));
 		assertTrue("Game should end when enemy moves into player", d.isGameOver());
 	}
 }

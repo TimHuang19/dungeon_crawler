@@ -2,12 +2,14 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.scene.image.ImageView;
+
 /**
  * The player entity
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements Subject {
+public class Player extends Entity implements Subject, Observer {
 	private ArrayList<Observer> observers;
     
     private boolean initialisedObservers;
@@ -18,6 +20,10 @@ public class Player extends Entity implements Subject {
     private boolean invincible;
     private int invincibleSteps;
     private ArrayList<Bomb> bombs;
+    
+    private ImageView invincibleView;
+    private ImageView swordView;
+    private ImageView invincibleSwordView;
 
     /**
      * Create a player positioned in square (x,y)
@@ -37,7 +43,6 @@ public class Player extends Entity implements Subject {
         this.initialisedObservers = false;
     }
     
-    
     public int getKeyId() {
     	return keyId;
     }
@@ -56,6 +61,7 @@ public class Player extends Entity implements Subject {
     
     public void setSword(Sword sword) {
     	this.sword = sword;
+    	notifyDungeonObservers();
     }
     
     public ArrayList<Bomb> getBombs() {
@@ -66,13 +72,41 @@ public class Player extends Entity implements Subject {
     	bombs.add(bomb);
     }
     
+    public void addInvincibleView(ImageView view) {
+    	this.invincibleView = view;
+    }
+    
+    public ImageView getInvincibleView() {
+    	return invincibleView;
+    }
+    
+    public void addSwordView(ImageView view) {
+    	this.swordView = view;
+    }
+    
+    public ImageView getSwordView() {
+    	return swordView;
+    }
+    
+    public void addInvincibleSwordView(ImageView view) {
+    	this.invincibleSwordView = view;
+    }
+    
+    public ImageView getInvincibleSwordView() {
+    	return invincibleSwordView;
+    }
+    
     public boolean isInvincible() {
     	return invincible;
     }
     
 	public void setInvincible(boolean invincible) {
+		if (this.invincible && invincible) {
+			return;
+		}
 		this.invincible = invincible;
 		notifyObservers();
+		notifyDungeonObservers();
 	}
     
     public int getInvincibleSteps() {
@@ -122,7 +156,7 @@ public class Player extends Entity implements Subject {
     		invincibleSteps--;
     	}
     	if (invincibleSteps == 0) {
-    		invincible = false;
+    		setInvincible(false);
     	}
     }
 
@@ -134,7 +168,6 @@ public class Player extends Entity implements Subject {
             y().set(getY() - 1);
             direction = Direction.UP;
             updateInvincibility();
-    		notifyDungeonObservers();
             updateExitGoal();
             notifyObservers();
         }
@@ -148,7 +181,6 @@ public class Player extends Entity implements Subject {
             y().set(getY() + 1);
             direction = Direction.DOWN;
             updateInvincibility();
-    		notifyDungeonObservers();
             updateExitGoal();
             notifyObservers();
         }
@@ -162,7 +194,6 @@ public class Player extends Entity implements Subject {
             x().set(getX() - 1);
             direction = Direction.LEFT;
             updateInvincibility();
-    		notifyDungeonObservers();
             updateExitGoal();
             notifyObservers();
         }
@@ -176,7 +207,6 @@ public class Player extends Entity implements Subject {
             x().set(getX() + 1);
             direction = Direction.RIGHT;
             updateInvincibility();
-    		notifyDungeonObservers();
             updateExitGoal();
             notifyObservers();
         }
@@ -232,7 +262,7 @@ public class Player extends Entity implements Subject {
     	}
     	
     	if (!sword.swing()) {
-    		this.sword = null;
+    		setSword(null);    	
     	}
 
     }
@@ -277,6 +307,7 @@ public class Player extends Entity implements Subject {
     		ArrayList<Entity> enemies = dungeon.getEnemies();
     		for (Entity e: enemies) {
     			registerObserver((Observer) e);
+    			((Enemy) e).registerObserver(this);
     		}
     		initialisedObservers = true;
     	}
@@ -300,6 +331,21 @@ public class Player extends Entity implements Subject {
 	@Override
 	public boolean pickUp(Player p) {
 		return false;
+	}
+
+	@Override
+	public void update(Subject obj) {
+		if (obj instanceof Enemy) {
+			Enemy enemy = (Enemy) obj;
+			
+			if (enemy.collided(this)) {
+				if (!invincible) {
+					dungeon.gameOver();
+				} else {
+					dungeon.killEnemy(enemy);
+				}
+			}
+		}
 	}
 
 }

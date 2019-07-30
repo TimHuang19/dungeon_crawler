@@ -84,6 +84,23 @@ public class DungeonController implements DungeonObserver{
 	public void update(DungeonSubject obj) {
 		if (obj instanceof Player) {
 			Player player = (Player) obj;
+			if (player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().remove(player.getInvincibleView());
+				squares.getChildren().remove(player.getSwordView());
+				squares.getChildren().add(player.getInvincibleSwordView());
+			} else if (player.isInvincible() && player.getSword() == null) {
+				squares.getChildren().remove(player.getInvincibleSwordView());
+				squares.getChildren().remove(player.getImageView());
+				squares.getChildren().add(player.getInvincibleView());
+			} else if (!player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().remove(player.getInvincibleSwordView());
+				squares.getChildren().remove(player.getImageView());
+				squares.getChildren().add(player.getSwordView());
+			} else {
+				squares.getChildren().remove(player.getInvincibleView());
+				squares.getChildren().remove(player.getSwordView());
+				squares.getChildren().add(player.getImageView());
+			}
 		} else if (obj instanceof Bomb) {
 			Bomb bomb = (Bomb) obj;
 			if (bomb.isLit()) {

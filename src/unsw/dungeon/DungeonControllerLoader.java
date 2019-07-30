@@ -24,6 +24,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     //Images
     private Image playerImage;
     private Image playerInvincibleImage;
+    private Image playerSwordImage;
+    private Image playerInvincibleSwordImage;
     private Image wallImage;
     private Image exitImage;
     private Image enemyImage;
@@ -47,6 +49,8 @@ public class DungeonControllerLoader extends DungeonLoader {
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         playerInvincibleImage = new Image("/human_invincible.png");
+        playerSwordImage = new Image("/human_sword.png");
+        playerInvincibleSwordImage = new Image("/human_invincible_sword.png");
         wallImage = new Image("/brick_brown_0.png");
         exitImage = new Image("/exit.png");
         enemyImage = new Image("/deep_elf_master_archer.png");
@@ -66,10 +70,18 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Entity player) {
+    public void onLoad(Player player) {
         ImageView view = new ImageView(playerImage);
+        ImageView invincibleView = new ImageView(playerInvincibleImage);
+        ImageView swordView = new ImageView(playerSwordImage);
+        ImageView invincibleSwordView = new ImageView(playerInvincibleSwordImage);
         player.setImageView(view);
-        player.addInvincibleView(playerInvincibleImage);
+        player.addInvincibleView(invincibleView);
+        player.addSwordView(swordView);
+        player.addInvincibleSwordView(invincibleSwordView);
+        trackPosition(player, invincibleView);
+        trackPosition(player, swordView);
+        trackPosition(player, invincibleSwordView);
         addEntity(player, view);
     }
 
