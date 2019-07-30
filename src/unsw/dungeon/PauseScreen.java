@@ -7,31 +7,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class DungeonScreen {
+public class PauseScreen {
 
     private Stage stage;
     private String title;
-    private DungeonControllerLoader loader;
-    private DungeonController controller;
+    private PauseController controller;
     private Scene scene;
 
-    public DungeonScreen(Stage stage, String fileName) throws IOException {
+    public PauseScreen(Stage stage, String fileName, DungeonScreen dungeonScreen) throws IOException {
         this.stage = stage;
         title = "Dungeon Crawler";
-        
-        loader = new DungeonControllerLoader(fileName);
-        controller = loader.loadController();
-        controller.addStage(stage);
-        controller.addName(fileName);
-        controller.addPauseScreen(this);
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+
+        controller = new PauseController(stage, fileName, dungeonScreen);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseView.fxml"));
         loader.setController(controller);
 
         // load into a Parent node called root
         Parent root = loader.load();
         scene = new Scene(root);
-        root.requestFocus();
     }
 
     public void start() {

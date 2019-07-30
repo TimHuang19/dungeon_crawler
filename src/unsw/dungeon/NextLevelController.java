@@ -5,21 +5,22 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class NextLevelController {
 	
     @FXML
-    private Button startNextButton;
+    private Label completionName;
     
     @FXML
-    private Button restartPreviousButton;
+    private Button nextButton;
     
     @FXML
-    private Button mainMenuLvlButton;
+    private Button homeNextButton;
     
     @FXML
-    private Button quitLvlButton;
+    private Button quitNextButton;
     
     private Stage stage;
     
@@ -31,29 +32,31 @@ public class NextLevelController {
     }
     
     @FXML
-    public void handleStartNextButton(ActionEvent event) throws IOException {
+    public void initialize() {
     	switch (fileName) {
-    		case "maze.json":
-    	    	(new DungeonScreen(stage, "advanced.json")).start();
-    	    	break;
+		case "maze.json":
+	    	completionName.setText("Level 1 of 6 Clear");
+	    	break;
     	}
-    		
-    }
-
-    @FXML
-    public void handleRestartPreviousButton(ActionEvent event) throws IOException {
-    	System.out.println(fileName);
-    	(new DungeonScreen(stage, fileName)).start();
     }
     
     @FXML
-    public void handleMainMenuLvlButton(ActionEvent event) throws IOException {
+    public void handleContinueButton() throws IOException {
+    	switch (fileName) {
+		case "maze.json":
+	    	(new DungeonScreen(stage, "advanced.json")).start();
+	    	break;
+    	}
+    }
+    
+    @FXML
+    public void handleHomeNextButton() throws IOException {
     	(new StartScreen(stage)).start();
     }
     
     @FXML
-    public void handleQuitLvlButton(ActionEvent event) {
+    public void handleQuitNextButton() {
     	System.exit(0);
     }
-
+    
 }

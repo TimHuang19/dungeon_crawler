@@ -34,6 +34,8 @@ public class DungeonController implements DungeonObserver{
     private Stage stage;
     
     private String fileName;
+        
+    private PauseScreen pauseScreen;
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
@@ -82,6 +84,8 @@ public class DungeonController implements DungeonObserver{
         case SPACE:
         	player.dropBomb();
         	break;
+        case ESCAPE:
+        	pauseScreen.start();
         default:
             break;
         }
@@ -94,7 +98,11 @@ public class DungeonController implements DungeonObserver{
     public void addName(String fileName) {
     	this.fileName = fileName;
     }
-
+    
+    public void addPauseScreen(DungeonScreen dungeonScreen) throws IOException {
+    	this.pauseScreen = new PauseScreen(stage, fileName, dungeonScreen);
+    }
+    
 	@Override
 	public void update(DungeonSubject obj) {
 		if (obj instanceof Dungeon) {
@@ -114,15 +122,27 @@ public class DungeonController implements DungeonObserver{
 				timeline.getKeyFrames().add(kf);
 				timeline.play();
 			} else if (dungeon.isGameComplete()) {
-				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
-					try {
-						(new NextLevelScreen(stage, fileName)).start();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				});
-				timeline.getKeyFrames().add(kf);
-				timeline.play();
+				if (fileName.equals("advanced.json")) {
+					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
+						try {
+							(new CompletedDungeonScreen(stage)).start();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					});
+					timeline.getKeyFrames().add(kf);
+					timeline.play();
+				} else {
+					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
+						try {
+							(new NextLevelScreen(stage, fileName)).start();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					});
+					timeline.getKeyFrames().add(kf);
+					timeline.play();
+				}
 			}
 		} else if (obj instanceof Player) {
 			Player player = (Player) obj;

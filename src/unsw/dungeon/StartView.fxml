@@ -18,7 +18,12 @@
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="quitButton" layoutX="200.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="27.0" prefWidth="202.0" text="Quit Game">
+      <Button fx:id="quitButton" layoutX="199.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="27.0" prefWidth="202.0" text="Quit Game">
+         <font>
+            <Font name="Lucida Bright Regular" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="levelButton" layoutX="199.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleLevelButton" prefHeight="27.0" prefWidth="202.0" text="Select Level">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>

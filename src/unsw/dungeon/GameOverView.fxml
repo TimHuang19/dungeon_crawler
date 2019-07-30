@@ -13,7 +13,7 @@
             <Font name="Luminari" size="41.0" />
          </font>
       </Label>
-      <Button fx:id="mainMenuButton" layoutX="199.0" layoutY="258.0" mnemonicParsing="false" onAction="#handleMainMenuButton" prefHeight="27.0" prefWidth="202.0" text="Main Menu">
+      <Button fx:id="mainMenuButton" layoutX="199.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleMainMenuButton" prefHeight="27.0" prefWidth="202.0" text="Main Menu">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>

@@ -33,7 +33,4 @@ public class StartScreen {
         stage.show();
     }
 
-    public StartController getController() {
-        return controller;
-    }
 }

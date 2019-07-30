@@ -33,7 +33,4 @@ public class GameOverScreen {
         stage.show();
     }
 
-    public GameOverController getController() {
-        return controller;
-    }
 }

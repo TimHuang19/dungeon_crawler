@@ -28,7 +28,7 @@ public class Dungeon implements DungeonSubject, Observer {
     private int pressedSwitches;
     private int treasureCount;
     private int enemyCount;
-
+    
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;

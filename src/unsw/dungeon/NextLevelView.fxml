@@ -5,30 +5,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="143.0" layoutY="86.0" prefHeight="68.0" prefWidth="314.0" text="Level Completed">
+      <Label fx:id="completionName" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="63.0" prefHeight="68.0" prefWidth="477.0" text="Level 1 of 6 Clear" textAlignment="CENTER">
          <font>
             <Font name="Luminari" size="41.0" />
          </font>
       </Label>
-      <Button fx:id="startNextButton" layoutX="209.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleStartNextButton" prefHeight="27.0" prefWidth="202.0" text="Start Next Level">
+      <Button fx:id="homeNextButton" layoutX="85.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleHomeNextButton" prefHeight="27.0" prefWidth="97.0" text="Home">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="quitLvlButton" layoutX="209.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleQuitLvlButton" prefHeight="27.0" prefWidth="202.0" text="Quit Game">
+      <Button fx:id="quitNextButton" layoutX="440.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleQuitNextButton" prefHeight="27.0" prefWidth="97.0" text="Quit Game">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="mainMenuLvlButton" layoutX="209.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleMainMenuLvlButton" prefHeight="27.0" prefWidth="202.0" text="Main Menu">
-         <font>
-            <Font name="Lucida Bright Regular" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="restartPreviousButton" layoutX="209.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleRestartPreviousButton" prefHeight="27.0" prefWidth="202.0" text="Restart Previous Level">
+      <Button fx:id="continueButton" layoutX="209.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="27.0" prefWidth="202.0" text="Continue">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>

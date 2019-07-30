@@ -13,6 +13,9 @@ public class StartController {
     private Button startButton;
     
     @FXML
+    private Button levelButton;
+    
+    @FXML
     private Button quitButton;
     
     private Stage stage;
@@ -22,12 +25,17 @@ public class StartController {
     }
     
     @FXML
-    public void handleStartButton(ActionEvent event) throws IOException {
+    public void handleStartButton() throws IOException {
         (new DungeonScreen(stage, "maze.json")).start();
     }
     
     @FXML
-    public void handleQuitButton(ActionEvent event) {
+    public void handleLevelButton() {
+    	
+    }
+    
+    @FXML
+    public void handleQuitButton() {
     	System.exit(0);
     }
 

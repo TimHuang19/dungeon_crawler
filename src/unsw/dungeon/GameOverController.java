@@ -28,17 +28,17 @@ public class GameOverController {
     }
 
     @FXML
-    public void handleRestartButton(ActionEvent event) throws IOException {
+    public void handleRestartButton() throws IOException {
     	(new DungeonScreen(stage, fileName)).start();
     }
     
     @FXML
-    public void handleMainMenuButton(ActionEvent event) throws IOException {
+    public void handleMainMenuButton() throws IOException {
     	(new StartScreen(stage)).start();
     }
     
     @FXML
-    public void handleQuitOverButton(ActionEvent event) {
+    public void handleQuitOverButton() {
     	System.exit(0);
     }
 

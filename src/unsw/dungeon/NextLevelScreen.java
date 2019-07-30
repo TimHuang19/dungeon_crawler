@@ -33,7 +33,4 @@ public class NextLevelScreen {
         stage.show();
     }
 
-    public NextLevelController getController() {
-        return controller;
-    }
 }
