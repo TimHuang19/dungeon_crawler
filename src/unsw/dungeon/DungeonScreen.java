@@ -15,13 +15,14 @@ public class DungeonScreen {
     private DungeonController controller;
     private Scene scene;
 
-    public DungeonScreen(Stage stage) throws IOException {
+    public DungeonScreen(Stage stage, String fileName) throws IOException {
         this.stage = stage;
         title = "Dungeon Crawler";
         
-        loader = new DungeonControllerLoader("advanced.json");
+        loader = new DungeonControllerLoader(fileName);
         controller = loader.loadController();
         controller.addStage(stage);
+        controller.addName(fileName);
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(controller);

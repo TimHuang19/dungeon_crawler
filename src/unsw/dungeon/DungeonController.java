@@ -33,6 +33,8 @@ public class DungeonController implements DungeonObserver{
         
     private Stage stage;
     
+    private String fileName;
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
@@ -89,20 +91,32 @@ public class DungeonController implements DungeonObserver{
     	this.stage = stage;
     }
     
-    public void setGameOverScreen() throws IOException {
-    	(new GameOverScreen(stage)).start();
+    public void addName(String fileName) {
+    	this.fileName = fileName;
     }
 
 	@Override
 	public void update(DungeonSubject obj) {
 		if (obj instanceof Dungeon) {
 			Dungeon dungeon = (Dungeon) obj;
+			
+			Timeline timeline = new Timeline();
+			timeline.setCycleCount(1);
+			
 			if (dungeon.isGameOver()) {
-				Timeline timeline = new Timeline();
-				timeline.setCycleCount(1);
 				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
 					try {
-						(new GameOverScreen(stage)).start();
+						(new GameOverScreen(stage, fileName)).start();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
+				timeline.getKeyFrames().add(kf);
+				timeline.play();
+			} else if (dungeon.isGameComplete()) {
+				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
+					try {
+						(new NextLevelScreen(stage, fileName)).start();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

@@ -20,13 +20,16 @@ public class GameOverController {
     
     private Stage stage;
     
-    public GameOverController(Stage stage) {
+    private String fileName;
+    
+    public GameOverController(Stage stage, String fileName) {
     	this.stage = stage;
+    	this.fileName = fileName;
     }
 
     @FXML
     public void handleRestartButton(ActionEvent event) throws IOException {
-    	(new DungeonScreen(stage)).start();
+    	(new DungeonScreen(stage, fileName)).start();
     }
     
     @FXML

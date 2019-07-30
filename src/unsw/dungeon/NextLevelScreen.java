@@ -7,19 +7,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class GameOverScreen {
+public class NextLevelScreen {
 
     private Stage stage;
     private String title;
-    private GameOverController controller;
+    private NextLevelController controller;
     private Scene scene;
 
-    public GameOverScreen(Stage stage, String fileName) throws IOException {
+    public NextLevelScreen(Stage stage, String fileName) throws IOException {
         this.stage = stage;
         title = "Dungeon Crawler";
 
-        controller = new GameOverController(stage, fileName);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOverView.fxml"));
+        controller = new NextLevelController(stage, fileName);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("NextLevelView.fxml"));
         loader.setController(controller);
 
         // load into a Parent node called root
@@ -33,7 +33,7 @@ public class GameOverScreen {
         stage.show();
     }
 
-    public GameOverController getController() {
+    public NextLevelController getController() {
         return controller;
     }
 }

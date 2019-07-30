@@ -23,7 +23,7 @@ public class StartController {
     
     @FXML
     public void handleStartButton(ActionEvent event) throws IOException {
-        (new DungeonScreen(stage)).start();
+        (new DungeonScreen(stage, "maze.json")).start();
     }
     
     @FXML
