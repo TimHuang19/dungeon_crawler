@@ -23,6 +23,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     //Images
     private Image playerImage;
+    private Image playerInvincibleImage;
     private Image wallImage;
     private Image exitImage;
     private Image enemyImage;
@@ -31,6 +32,10 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image potionImage;
     private Image swordImage;
     private Image bombImage;
+    private Image bombLitZeroImage;
+    private Image bombLitOneImage;
+    private Image bombLitTwoImage;
+    private Image bombExplodeImage;
     private Image treasureImage;
     private Image keyImage;
     private Image doorImage;
@@ -41,6 +46,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         super(filename);
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
+        playerInvincibleImage = new Image("/human_invincible.png");
         wallImage = new Image("/brick_brown_0.png");
         exitImage = new Image("/exit.png");
         enemyImage = new Image("/deep_elf_master_archer.png");
@@ -49,6 +55,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         potionImage = new Image("/brilliant_blue_new.png");
         swordImage = new Image("/greatsword_1_new.png");
         bombImage = new Image("/bomb_unlit.png");
+        bombLitZeroImage = new Image("/bomb_lit_1.png");
+        bombLitOneImage = new Image("/bomb_lit_2.png");
+        bombLitTwoImage = new Image("/bomb_lit_3.png");
+        bombExplodeImage = new Image("/bomb_lit_4.png");
         treasureImage = new Image("/gold_pile.png");
         keyImage = new Image("/key.png");
         doorImage = new Image("/closed_door.png");
@@ -59,6 +69,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     public void onLoad(Entity player) {
         ImageView view = new ImageView(playerImage);
         player.setImageView(view);
+        player.addInvincibleView(playerInvincibleImage);
         addEntity(player, view);
     }
 
@@ -114,7 +125,19 @@ public class DungeonControllerLoader extends DungeonLoader {
 	@Override
 	public void onLoad(Bomb bomb) {
     	ImageView view = new ImageView(bombImage);
+    	ImageView litZero = new ImageView(bombLitZeroImage);
+    	ImageView litOne = new ImageView(bombLitOneImage);
+    	ImageView litTwo = new ImageView(bombLitTwoImage);
+    	ImageView litExplode = new ImageView(bombExplodeImage);
     	bomb.setImageView(view);
+    	bomb.addZeroImage(litZero);
+    	bomb.addOneImage(litOne);
+    	bomb.addTwoImage(litTwo);
+    	bomb.addExplodeImage(litExplode);
+    	trackPosition(bomb, litZero);
+    	trackPosition(bomb, litOne);
+    	trackPosition(bomb, litTwo);
+    	trackPosition(bomb, litExplode);
     	addEntity(bomb, view);		
 	}
 

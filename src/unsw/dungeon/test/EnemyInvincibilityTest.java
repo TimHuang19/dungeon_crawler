@@ -34,7 +34,7 @@ public class EnemyInvincibilityTest {
 	@Test
 	public void enemyShouldDieWhenInvinciblePlayerMovesIntoIt() {
 		p.setInvincible(true);
-		p.setInvincibleSteps(20);
+		//p.setInvincibleSteps(20);
 		assertEquals("Player X start position is 6", 6, p.getX());
 		assertEquals("Player Y start position is 5", 5, p.getY());
 		e.setPlayerX(6);
@@ -57,7 +57,7 @@ public class EnemyInvincibilityTest {
 	@Test
 	public void enemyShouldRunAwayFromInvinciblePlayer() {
 		p.setInvincible(true);
-		p.setInvincibleSteps(20);
+		//p.setInvincibleSteps(20);
 		assertEquals("Player X start position is 6", 6, p.getX());
 		assertEquals("Player Y start position is 5", 5, p.getY());
 		e.setPlayerX(6);
@@ -126,7 +126,7 @@ public class EnemyInvincibilityTest {
 		p.x().set(3);
 		p.y().set(5);
 		p.setInvincible(true);
-		p.setInvincibleSteps(20);
+		//p.setInvincibleSteps(20);
 		assertEquals("Player X start position is 3", 3, p.getX());
 		assertEquals("Player Y start position is 5", 5, p.getY());
 		e.setPlayerX(3);

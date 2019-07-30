@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Bomb extends Entity {
@@ -14,6 +15,11 @@ public class Bomb extends Entity {
 	
 	private BombState state;
 	private Dungeon dungeon;
+	
+	private ImageView zero;
+	private ImageView one;
+	private ImageView two;
+	private ImageView explode;
 	
 	public Bomb(Dungeon dungeon, int x, int y) {
 		super(x, y);
@@ -80,6 +86,38 @@ public class Bomb extends Entity {
     
     public BombState getExplodeState() {
     	return explodeState;
+    }
+    
+    public void addZeroImage(ImageView view) {
+    	this.zero = view;
+    }
+    
+    public ImageView getZeroImage() {
+    	return zero;
+    }
+    
+    public void addOneImage(ImageView view) {
+    	this.one = view;
+    }
+    
+    public ImageView getOneImage() {
+    	return one;
+    }
+    
+    public void addTwoImage(ImageView view) {
+    	this.two = view;
+    }
+    
+    public ImageView getTwoImage() {
+    	return two;
+    }
+    
+    public void addExplodeImage(ImageView view) {
+    	this.explode = view;
+    }
+    
+    public ImageView getExplodeImage() {
+    	return explode;
     }
     
 	@Override

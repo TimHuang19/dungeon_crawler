@@ -34,7 +34,7 @@ public class GoalsEnemyTest {
 	public void dungeonShouldCompleteIfPlayerKillsEnemyAndEnemyIsOnlyGoal() {
 		d.setGoals(new BasicGoal(Goal.ENEMIES));
 		p.setInvincible(true);
-		p.setInvincibleSteps(20);
+		//p.setInvincibleSteps(20);
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
 		assertTrue("Game should complete when invincible player moves into only enemy",d.isGameComplete());
@@ -50,7 +50,7 @@ public class GoalsEnemyTest {
 		d.setGoals(c1);
 		c1.setComplete(Goal.TREASURE, true);
 		p.setInvincible(true);
-		p.setInvincibleSteps(20);
+		//p.setInvincibleSteps(20);
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
 		assertTrue("Game should complete when player moves into only enemy",d.isGameComplete());
@@ -65,7 +65,7 @@ public class GoalsEnemyTest {
 		c1.addSubGoal(b2);
 		d.setGoals(c1);
 		p.setInvincible(true);
-		p.setInvincibleSteps(20);
+		//p.setInvincibleSteps(20);
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
 		assertFalse("Game should complete when player kills only enemy if there are other goals to complete",d.isGameComplete());
@@ -76,7 +76,7 @@ public class GoalsEnemyTest {
 		e = new Enemy(d,5,5);
 		d.addEntity(e);
 		p.setInvincible(true);
-		p.setInvincibleSteps(20);
+		//p.setInvincibleSteps(20);
 		d.setGoals(new BasicGoal(Goal.ENEMIES));
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();

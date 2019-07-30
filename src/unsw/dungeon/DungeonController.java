@@ -3,11 +3,15 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -78,10 +82,19 @@ public class DungeonController implements DungeonObserver{
 
 	@Override
 	public void update(DungeonSubject obj) {
-		if (obj instanceof Bomb) {
+		if (obj instanceof Player) {
+			Player player = (Player) obj;
+		} else if (obj instanceof Bomb) {
 			Bomb bomb = (Bomb) obj;
 			if (bomb.isLit()) {
-				squares.getChildren().add(bomb.getImageView());
+				squares.getChildren().add(bomb.getZeroImage());
+				Timeline timeline = new Timeline();
+				timeline.setCycleCount(1);
+				KeyFrame kf = new KeyFrame(Duration.seconds(1), (ActionEvent event) -> bombChangeFirst(bomb));
+				timeline.getKeyFrames().add(kf);
+				timeline.play();
+			} else if (bomb.isExplode()) {
+				squares.getChildren().remove(bomb.getExplodeImage());
 			} else {
 				squares.getChildren().remove(bomb.getImageView());
 			}
@@ -96,6 +109,32 @@ public class DungeonController implements DungeonObserver{
 		}
 		
 	}
-
+	
+	private void bombChangeFirst(Bomb bomb) {
+		squares.getChildren().remove(bomb.getZeroImage());
+		squares.getChildren().add(bomb.getOneImage());
+		
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(1);
+		KeyFrame kf = new KeyFrame(Duration.seconds(1), (ActionEvent event) -> bombChangeSecond(bomb));
+		timeline.getKeyFrames().add(kf);
+		timeline.play();
+	}
+	
+	private void bombChangeSecond(Bomb bomb) {
+		squares.getChildren().remove(bomb.getOneImage());
+		squares.getChildren().add(bomb.getTwoImage());
+		
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(1);
+		KeyFrame kf = new KeyFrame(Duration.seconds(0.8), (ActionEvent event) -> bombChangeLast(bomb));
+		timeline.getKeyFrames().add(kf);
+		timeline.play();
+	}
+	
+	private void bombChangeLast(Bomb bomb) {
+		squares.getChildren().remove(bomb.getTwoImage());
+		squares.getChildren().add(bomb.getExplodeImage());
+	}
 }
 

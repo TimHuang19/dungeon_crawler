@@ -13,6 +13,11 @@
         "type": "key"
     },
     {
+        "x": 12,
+        "y": 3,
+        "type": "sword"
+    },
+    {
         "x": 2,
         "y": 7,
         "type": "door"
@@ -21,6 +26,11 @@
         "x": 11,
         "y": 6,
         "type": "door"
+    },
+    {
+        "x": 11,
+        "y": 8,
+        "type": "invincibility"
     },
     {
       "x": 0,
