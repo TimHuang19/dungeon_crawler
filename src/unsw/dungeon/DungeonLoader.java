@@ -44,6 +44,9 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
+        JSONObject jsonGoals = json.getJSONObject("goal-condition");
+        loadGoals(dungeon, jsonGoals);
+        
         return dungeon;
     }
 
@@ -121,6 +124,86 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
 
+    private void loadGoals(Dungeon dungeon, JSONObject json) {
+    	JSONArray subgoals;
+    	BasicGoal b;
+    	ComplexGoal c;
+    	//top level goal
+    	String top = json.getString("goal");
+        switch (top) {
+        case "AND":
+        	c = new ComplexGoal(Goal.AND);
+        	subgoals = json.getJSONArray("subgoals");
+        	loadSubgoals(c,subgoals);
+        	dungeon.setGoals(c);
+        	break;
+        case "OR":
+        	c = new ComplexGoal(Goal.OR);
+        	subgoals = json.getJSONArray("subgoals");
+        	loadSubgoals(c,subgoals);
+        	dungeon.setGoals(c);
+        	break;
+        case "treasure":
+        	b = new BasicGoal(Goal.TREASURE);
+        	dungeon.setGoals(b);
+        	break;
+        case "enemies":
+        	b = new BasicGoal(Goal.ENEMIES);
+        	dungeon.setGoals(b);
+        	break;
+        case "exit":
+        	b = new BasicGoal(Goal.EXIT);
+        	dungeon.setGoals(b);
+        	break;
+        case "boulders":
+        	b = new BasicGoal(Goal.BOULDERS);
+        	dungeon.setGoals(b);
+        	break;
+        }
+    }
+    
+    private void loadSubgoals(ComplexGoal c, JSONArray subgoals) {
+    	JSONObject subgoal;
+    	JSONArray subgoals2;
+    	String goalType;
+    	BasicGoal b;
+    	ComplexGoal c1;
+    	for (int i = 0; i < subgoals.length(); i++) {
+            subgoal = subgoals.getJSONObject(i);
+            goalType = subgoal.getString("goal");
+            switch (goalType) {
+            case "AND":
+            	c1 = new ComplexGoal(Goal.AND);
+            	subgoals2 = subgoal.getJSONArray("subgoals");
+            	loadSubgoals(c1,subgoals2);
+            	c.addSubGoal(c1);
+            	break;
+            case "OR":
+            	c1 = new ComplexGoal(Goal.OR);
+            	subgoals2 = subgoal.getJSONArray("subgoals");
+            	loadSubgoals(c1,subgoals2);
+            	c.addSubGoal(c1);
+            	break;
+            case "treasure":
+            	b = new BasicGoal(Goal.TREASURE);
+            	c.addSubGoal(b);
+            	break;
+            case "enemies":
+            	b = new BasicGoal(Goal.ENEMIES);
+            	c.addSubGoal(b);
+            	break;
+            case "exit":
+            	b = new BasicGoal(Goal.EXIT);
+            	c.addSubGoal(b);
+            	break;
+            case "boulders":
+            	b = new BasicGoal(Goal.BOULDERS);
+            	c.addSubGoal(b);
+            	break;
+            }
+        }
+    }
+    
     public abstract void onLoad(Player player);
 
     public abstract void onLoad(Wall wall);

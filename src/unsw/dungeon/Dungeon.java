@@ -34,7 +34,6 @@ public class Dungeon implements DungeonSubject, Observer {
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
-        this.goals = new BasicGoal(Goal.EXIT);
         this.dungeonObservers = new ArrayList<>();
         this.complete = false;
         this.gameOver = false;
