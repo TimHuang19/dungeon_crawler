@@ -50,6 +50,10 @@ public class ComplexGoal implements GoalExpression {
 				if (exit != null) {
 					exit.setComplete(goal, nonExitCompleted);
 				}
+			} else {
+				for (GoalExpression g : subGoals) {
+					g.setComplete(goal, completed);
+				}
 			}
 		} else {
 			for (GoalExpression g : subGoals) {

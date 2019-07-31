@@ -30,8 +30,8 @@ public class StartController {
     }
     
     @FXML
-    public void handleLevelButton() {
-    	
+    public void handleLevelButton() throws IOException {
+    	(new DungeonScreen(stage, "advanced.json")).start();
     }
     
     @FXML

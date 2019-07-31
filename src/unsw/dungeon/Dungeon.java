@@ -145,6 +145,7 @@ public class Dungeon implements DungeonSubject, Observer {
     	
     	if (goals.isComplete()) {
     		this.complete = true;
+    		pause();
     		notifyDungeonObservers();
     		System.out.println("DUNGEON COMPLETE");
     	} else {
