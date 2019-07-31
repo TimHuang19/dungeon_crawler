@@ -85,10 +85,15 @@ public class DungeonController implements DungeonObserver{
         	player.dropBomb();
         	break;
         case ESCAPE:
+        	dungeon.pause();
         	pauseScreen.start();
         default:
             break;
         }
+    }
+    
+    public void unPause() {
+    	dungeon.unPause();
     }
     
     public void addStage(Stage stage) {
@@ -146,22 +151,50 @@ public class DungeonController implements DungeonObserver{
 			}
 		} else if (obj instanceof Player) {
 			Player player = (Player) obj;
-			if (player.isInvincible() && player.getSword() != null) {
-				squares.getChildren().remove(player.getInvincibleView());
-				squares.getChildren().remove(player.getSwordView());
-				squares.getChildren().add(player.getInvincibleSwordView());
-			} else if (player.isInvincible() && player.getSword() == null) {
-				squares.getChildren().remove(player.getInvincibleSwordView());
-				squares.getChildren().remove(player.getImageView());
-				squares.getChildren().add(player.getInvincibleView());
-			} else if (!player.isInvincible() && player.getSword() != null) {
-				squares.getChildren().remove(player.getInvincibleSwordView());
-				squares.getChildren().remove(player.getImageView());
-				squares.getChildren().add(player.getSwordView());
+			for (ImageView view : player.getViews()) {
+				squares.getChildren().remove(view);
+			}
+			
+			if (player.getDirection() == Direction.LEFT) {
+				if (player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getLeftSwordInvincibleView());
+				} else if (player.isInvincible() && player.getSword() == null) {
+					squares.getChildren().add(player.getLeftInvincibleView());
+				} else if (!player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getLeftSwordView());
+				} else {
+					squares.getChildren().add(player.getLeftView());
+				}
+			} else if (player.getDirection() == Direction.RIGHT) {
+				if (player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getRightSwordInvincibleView());
+				} else if (player.isInvincible() && player.getSword() == null) {
+					squares.getChildren().add(player.getRightInvincibleView());
+				} else if (!player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getRightSwordView());
+				} else {
+					squares.getChildren().add(player.getRightView());
+				}
+			} else if (player.getDirection() == Direction.UP) {
+				if (player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getUpSwordInvincibleView());
+				} else if (player.isInvincible() && player.getSword() == null) {
+					squares.getChildren().add(player.getUpInvincibleView());
+				} else if (!player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getUpSwordView());
+				} else {
+					squares.getChildren().add(player.getUpView());
+				}
 			} else {
-				squares.getChildren().remove(player.getInvincibleView());
-				squares.getChildren().remove(player.getSwordView());
-				squares.getChildren().add(player.getImageView());
+				if (player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getDownSwordInvincibleView());
+				} else if (player.isInvincible() && player.getSword() == null) {
+					squares.getChildren().add(player.getDownInvincibleView());
+				} else if (!player.isInvincible() && player.getSword() != null) {
+					squares.getChildren().add(player.getDownSwordView());
+				} else {
+					squares.getChildren().add(player.getDownView());
+				}
 			}
 		} else if (obj instanceof Bomb) {
 			Bomb bomb = (Bomb) obj;

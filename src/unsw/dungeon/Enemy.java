@@ -30,6 +30,14 @@ public class Enemy extends Entity implements Subject, Observer {
 		timeline.play();
     }
 	
+	public void pause() {
+		timeline.stop();
+	}
+	
+	public void unPause() {
+		timeline.play();
+	}
+	
 	public void update(Subject obj) {
 		if(obj instanceof Player) {
 			update((Player) obj);

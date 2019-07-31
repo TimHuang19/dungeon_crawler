@@ -21,11 +21,29 @@ public class Player extends Entity implements Subject, Observer {
     private int invincibleSteps;
     private ArrayList<Bomb> bombs;
     
-    private ImageView invincibleView;
-    private ImageView swordView;
-    private ImageView invincibleSwordView;
+    private ImageView downView;
+    private ImageView upView;
+    private ImageView leftView;
+    private ImageView rightView;
 
-    /**
+    private ImageView downSwordView;
+    private ImageView upSwordView;
+    private ImageView leftSwordView;
+    private ImageView rightSwordView;
+    
+    private ImageView downInvincibleView;
+    private ImageView upInvincibleView;
+    private ImageView leftInvincibleView;
+    private ImageView rightInvincibleView;
+    
+    private ImageView downSwordInvincibleView;
+    private ImageView upSwordInvincibleView;
+    private ImageView leftSwordInvincibleView;
+    private ImageView rightSwordInvincibleView;
+    
+    private ArrayList<ImageView> views;
+
+	/**
      * Create a player positioned in square (x,y)
      * @param x
      * @param y
@@ -35,12 +53,53 @@ public class Player extends Entity implements Subject, Observer {
         this.dungeon = dungeon;
         this.keyId = -1;
         this.sword = null;
-        this.direction = Direction.RIGHT;
+        this.direction = Direction.DOWN;
         this.invincible = false;
         this.invincibleSteps = 0;
+        this.views = new ArrayList<ImageView>();
         this.bombs = new ArrayList<Bomb>();
         this.observers = new ArrayList<Observer>();
         this.initialisedObservers = false;
+    }
+    
+    public void addView(ImageView view) {
+    	views.add(view);
+    }
+    
+    public ArrayList<ImageView> getViews() {
+    	return views;
+    }
+    
+    public void setDownView(ImageView downView) {
+    	this.downView = downView;
+    }
+    
+    public ImageView getDownView() {
+    	return downView;
+    }
+    
+    public void setUpView(ImageView upView) {
+    	this.upView = upView;
+    }
+    
+    public ImageView getUpView() {
+    	return upView;
+    }
+    
+    public void setLeftView(ImageView leftView) {
+    	this.leftView = leftView;
+    }
+    
+    public ImageView getLeftView() {
+    	return leftView;
+    }
+    
+    public void setRightView(ImageView rightView) {
+    	this.rightView = rightView;
+    }
+    
+    public ImageView getRightView() {
+    	return rightView;
     }
     
     public int getKeyId() {
@@ -72,30 +131,6 @@ public class Player extends Entity implements Subject, Observer {
     	bombs.add(bomb);
     }
     
-    public void addInvincibleView(ImageView view) {
-    	this.invincibleView = view;
-    }
-    
-    public ImageView getInvincibleView() {
-    	return invincibleView;
-    }
-    
-    public void addSwordView(ImageView view) {
-    	this.swordView = view;
-    }
-    
-    public ImageView getSwordView() {
-    	return swordView;
-    }
-    
-    public void addInvincibleSwordView(ImageView view) {
-    	this.invincibleSwordView = view;
-    }
-    
-    public ImageView getInvincibleSwordView() {
-    	return invincibleSwordView;
-    }
-    
     public boolean isInvincible() {
     	return invincible;
     }
@@ -105,8 +140,8 @@ public class Player extends Entity implements Subject, Observer {
 			return;
 		}
 		this.invincible = invincible;
-		notifyObservers();
 		notifyDungeonObservers();
+		notifyObservers();
 	}
     
     public int getInvincibleSteps() {
@@ -166,10 +201,11 @@ public class Player extends Entity implements Subject, Observer {
 
         if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
-            direction = Direction.UP;
+            setDirection(Direction.UP);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
 
@@ -179,10 +215,11 @@ public class Player extends Entity implements Subject, Observer {
 
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
-            direction = Direction.DOWN;
+            setDirection(Direction.DOWN);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
 
@@ -192,10 +229,11 @@ public class Player extends Entity implements Subject, Observer {
 
         if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
-            direction = Direction.LEFT;
+            setDirection(Direction.LEFT);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
 
@@ -205,10 +243,11 @@ public class Player extends Entity implements Subject, Observer {
     	
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
-            direction = Direction.RIGHT;
+            setDirection(Direction.RIGHT);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
     
@@ -346,6 +385,102 @@ public class Player extends Entity implements Subject, Observer {
 				}
 			}
 		}
+	}
+	
+    public ImageView getDownSwordView() {
+		return downSwordView;
+	}
+
+	public void setDownSwordView(ImageView downSwordView) {
+		this.downSwordView = downSwordView;
+	}
+
+	public ImageView getUpSwordView() {
+		return upSwordView;
+	}
+
+	public void setUpSwordView(ImageView upSwordView) {
+		this.upSwordView = upSwordView;
+	}
+
+	public ImageView getLeftSwordView() {
+		return leftSwordView;
+	}
+
+	public void setLeftSwordView(ImageView leftSwordView) {
+		this.leftSwordView = leftSwordView;
+	}
+
+	public ImageView getRightSwordView() {
+		return rightSwordView;
+	}
+
+	public void setRightSwordView(ImageView rightSwordView) {
+		this.rightSwordView = rightSwordView;
+	}
+
+	public ImageView getDownInvincibleView() {
+		return downInvincibleView;
+	}
+
+	public void setDownInvincibleView(ImageView downInvincibleView) {
+		this.downInvincibleView = downInvincibleView;
+	}
+
+	public ImageView getUpInvincibleView() {
+		return upInvincibleView;
+	}
+
+	public void setUpInvincibleView(ImageView upInvincibleView) {
+		this.upInvincibleView = upInvincibleView;
+	}
+
+	public ImageView getLeftInvincibleView() {
+		return leftInvincibleView;
+	}
+
+	public void setLeftInvincibleView(ImageView leftInvincibleView) {
+		this.leftInvincibleView = leftInvincibleView;
+	}
+
+	public ImageView getRightInvincibleView() {
+		return rightInvincibleView;
+	}
+
+	public void setRightInvincibleView(ImageView rightInvincibleView) {
+		this.rightInvincibleView = rightInvincibleView;
+	}
+
+	public ImageView getDownSwordInvincibleView() {
+		return downSwordInvincibleView;
+	}
+
+	public void setDownSwordInvincibleView(ImageView downSwordInvincibleView) {
+		this.downSwordInvincibleView = downSwordInvincibleView;
+	}
+
+	public ImageView getUpSwordInvincibleView() {
+		return upSwordInvincibleView;
+	}
+
+	public void setUpSwordInvincibleView(ImageView upSwordInvincibleView) {
+		this.upSwordInvincibleView = upSwordInvincibleView;
+	}
+
+	public ImageView getLeftSwordInvincibleView() {
+		return leftSwordInvincibleView;
+	}
+
+	public void setLeftSwordInvincibleView(ImageView leftSwordInvincibleView) {
+		this.leftSwordInvincibleView = leftSwordInvincibleView;
+	}
+
+	public ImageView getRightSwordInvincibleView() {
+		return rightSwordInvincibleView;
+	}
+
+	public void setRightSwordInvincibleView(ImageView rightSwordInvincibleView) {
+		this.rightSwordInvincibleView = rightSwordInvincibleView;
 	}
 
 }

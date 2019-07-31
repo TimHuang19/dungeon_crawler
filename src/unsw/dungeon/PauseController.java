@@ -51,6 +51,7 @@ public class PauseController {
     
     @FXML
     public void handleResumeButton() throws IOException {
+    	dungeonScreen.unPause();
     	dungeonScreen.start();
     }
     

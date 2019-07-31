@@ -428,6 +428,21 @@
       "type": "treasure"
     },
     {
+        "x": 7,
+        "y": 12,
+        "type": "bomb"
+    },
+    {
+        "x": 7,
+        "y": 13,
+        "type": "bomb"
+    },
+    {
+        "x": 8,
+        "y": 14,
+        "type": "bomb"
+    },
+    {
       "x": 11,
       "y": 10,
       "type": "invincibility"

@@ -34,6 +34,7 @@ public class Dungeon implements DungeonSubject, Observer {
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
+        this.goals = null;
         this.dungeonObservers = new ArrayList<>();
         this.complete = false;
         this.gameOver = false;
@@ -41,7 +42,22 @@ public class Dungeon implements DungeonSubject, Observer {
         this.treasureCount = 0;
         this.enemyCount = 0;
     }
-
+    
+    public void pause() {
+    	for (Entity e : entities) {
+    		if (e instanceof Enemy) {
+    			((Enemy) e).pause();
+    		}
+    	}
+    }
+    
+    public void unPause() {
+    	for (Entity e : entities) {
+    		if (e instanceof Enemy) {
+    			((Enemy) e).unPause();
+    		}
+    	}
+    }
     public int getWidth() {
         return width;
     }

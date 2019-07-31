@@ -39,5 +39,9 @@ public class DungeonScreen {
         stage.setScene(scene);
         stage.show();
     }
+    
+    public void unPause() {
+    	controller.unPause();
+    }
 
 }

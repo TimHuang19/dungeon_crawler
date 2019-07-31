@@ -21,9 +21,12 @@ public class Bomb extends Entity {
 	private ImageView two;
 	private ImageView explode;
 	
+	private Timeline timeline;
+	
 	public Bomb(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
+		this.timeline = new Timeline();
 		
 		unlitState = new UnlitState(this);
 		litState = new LitState(this);
@@ -35,7 +38,6 @@ public class Bomb extends Entity {
 	public void dropBomb() {
 		state.dropBomb();
 		notifyDungeonObservers();
-		Timeline timeline = new Timeline();
 		timeline.setCycleCount(1);
 		KeyFrame kf = new KeyFrame(Duration.seconds(3), (ActionEvent event) -> explode());
 		timeline.getKeyFrames().add(kf);

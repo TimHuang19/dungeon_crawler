@@ -123,6 +123,7 @@ public abstract class DungeonLoader {
         }
         dungeon.addEntity(entity);
     }
+    
 
     private void loadGoals(Dungeon dungeon, JSONObject json) {
     	JSONArray subgoals;
@@ -208,7 +209,6 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Wall wall);
 
-    // TODO Create additional abstract methods for the other entities
     public abstract void onLoad(Exit exit);
     
     public abstract void onLoad(Enemy enemy);

@@ -22,10 +22,22 @@ public class DungeonControllerLoader extends DungeonLoader {
     private List<ImageView> entities;
 
     //Images
-    private Image playerImage;
-    private Image playerInvincibleImage;
-    private Image playerSwordImage;
-    private Image playerInvincibleSwordImage;
+    private Image playerDownImage;
+    private Image playerUpImage;
+    private Image playerRightImage;
+    private Image playerLeftImage;
+    private Image playerDownSwordImage;
+    private Image playerUpSwordImage;
+    private Image playerRightSwordImage;
+    private Image playerLeftSwordImage;
+    private Image playerDownInvincibleImage;
+    private Image playerUpInvincibleImage;
+    private Image playerRightInvincibleImage;
+    private Image playerLeftInvincibleImage;
+    private Image playerDownSwordInvincibleImage;
+    private Image playerUpSwordInvincibleImage;
+    private Image playerRightSwordInvincibleImage;
+    private Image playerLeftSwordInvincibleImage;
     private Image wallImage;
     private Image exitImage;
     private Image enemyImage;
@@ -47,10 +59,22 @@ public class DungeonControllerLoader extends DungeonLoader {
             throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();
-        playerImage = new Image("/human_new.png");
-        playerInvincibleImage = new Image("/human_invincible.png");
-        playerSwordImage = new Image("/human_sword.png");
-        playerInvincibleSwordImage = new Image("/human_invincible_sword.png");
+        playerDownImage = new Image("/human_down.png");
+        playerUpImage = new Image("/human_up.png");
+        playerLeftImage = new Image("/human_left.png");
+        playerRightImage = new Image("/human_right.png");
+        playerDownSwordImage = new Image("/human_down_sword.png");
+        playerUpSwordImage = new Image("/human_up_sword.png");
+        playerLeftSwordImage = new Image("/human_left_sword.png");
+        playerRightSwordImage = new Image("/human_right_sword.png");
+        playerDownInvincibleImage = new Image("/human_down_invincible.png");
+        playerUpInvincibleImage = new Image("/human_up_invincible.png");
+        playerLeftInvincibleImage = new Image("/human_left_invincible.png");
+        playerRightInvincibleImage = new Image("/human_right_invincible.png");
+        playerDownSwordInvincibleImage = new Image("/human_down_sword_invincible.png");
+        playerUpSwordInvincibleImage = new Image("/human_up_sword_invincible.png");
+        playerLeftSwordInvincibleImage = new Image("/human_left_sword_invincible.png");
+        playerRightSwordInvincibleImage = new Image("/human_right_sword_invincible.png");
         wallImage = new Image("/brick_brown_0.png");
         exitImage = new Image("/exit.png");
         enemyImage = new Image("/deep_elf_master_archer.png");
@@ -71,18 +95,82 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Player player) {
-        ImageView view = new ImageView(playerImage);
-        ImageView invincibleView = new ImageView(playerInvincibleImage);
-        ImageView swordView = new ImageView(playerSwordImage);
-        ImageView invincibleSwordView = new ImageView(playerInvincibleSwordImage);
-        player.setImageView(view);
-        player.addInvincibleView(invincibleView);
-        player.addSwordView(swordView);
-        player.addInvincibleSwordView(invincibleSwordView);
-        trackPosition(player, invincibleView);
-        trackPosition(player, swordView);
-        trackPosition(player, invincibleSwordView);
-        addEntity(player, view);
+        ImageView down = new ImageView(playerDownImage);
+        ImageView right = new ImageView(playerRightImage);
+        ImageView left = new ImageView(playerLeftImage);
+        ImageView up = new ImageView(playerUpImage);
+        
+        ImageView downSword = new ImageView(playerDownSwordImage);
+        ImageView rightSword = new ImageView(playerRightSwordImage);
+        ImageView leftSword = new ImageView(playerLeftSwordImage);
+        ImageView upSword = new ImageView(playerUpSwordImage);
+        
+        ImageView downInvincible = new ImageView(playerDownInvincibleImage);
+        ImageView rightInvincible = new ImageView(playerRightInvincibleImage);
+        ImageView leftInvincible = new ImageView(playerLeftInvincibleImage);
+        ImageView upInvincible = new ImageView(playerUpInvincibleImage);
+        
+        ImageView downSwordInvincible = new ImageView(playerDownSwordInvincibleImage);
+        ImageView rightSwordInvincible = new ImageView(playerRightSwordInvincibleImage);
+        ImageView leftSwordInvincible = new ImageView(playerLeftSwordInvincibleImage);
+        ImageView upSwordInvincible = new ImageView(playerUpSwordInvincibleImage);
+        
+        player.setDownView(down);
+        player.addView(down);
+        player.setRightView(right);
+        player.addView(right);
+        player.setUpView(up);
+        player.addView(up);
+        player.setLeftView(left);
+        player.addView(left);
+
+        player.setDownSwordView(downSword);
+        player.addView(downSword);
+        player.setRightSwordView(rightSword);
+        player.addView(rightSword);
+        player.setUpSwordView(upSword);
+        player.addView(upSword);
+        player.setLeftSwordView(leftSword);
+        player.addView(leftSword);
+        
+        player.setDownInvincibleView(downInvincible);
+        player.addView(downInvincible);
+        player.setRightInvincibleView(rightInvincible);
+        player.addView(rightInvincible);
+        player.setUpInvincibleView(upInvincible);
+        player.addView(upInvincible);
+        player.setLeftInvincibleView(leftInvincible);
+        player.addView(leftInvincible);
+        
+        player.setDownSwordInvincibleView(downSwordInvincible);
+        player.addView(downSwordInvincible);
+        player.setRightSwordInvincibleView(rightSwordInvincible);
+        player.addView(rightSwordInvincible);
+        player.setUpSwordInvincibleView(upSwordInvincible);
+        player.addView(upSwordInvincible);
+        player.setLeftSwordInvincibleView(leftSwordInvincible);
+        player.addView(leftSwordInvincible);
+        
+        trackPosition(player, right);
+        trackPosition(player, up);
+        trackPosition(player, left);
+        
+        trackPosition(player, rightSword);
+        trackPosition(player, upSword);
+        trackPosition(player, leftSword);
+        trackPosition(player, downSword);
+        
+        trackPosition(player, rightInvincible);
+        trackPosition(player, upInvincible);
+        trackPosition(player, leftInvincible);
+        trackPosition(player, downInvincible);
+
+        trackPosition(player, rightSwordInvincible);
+        trackPosition(player, upSwordInvincible);
+        trackPosition(player, leftSwordInvincible);
+        trackPosition(player, downSwordInvincible);
+
+        addEntity(player, down);
     }
 
     @Override
