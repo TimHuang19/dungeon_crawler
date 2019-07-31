@@ -115,6 +115,7 @@ public class Dungeon implements DungeonSubject, Observer {
     	}
     }
     public void killEnemy(Enemy e) {
+    	e.pause();
     	e.notifyDungeonObservers();
     	removeEntity(e);
     	player.removeObserver((Observer) e);

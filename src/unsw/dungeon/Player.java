@@ -198,56 +198,56 @@ public class Player extends Entity implements Subject, Observer {
     public void moveUp() {
     	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY() - 1);
+        setDirection(Direction.UP);
+    	notifyDungeonObservers();
 
         if (getY() > 0 && !isObstacle(entities)) {
             y().set(getY() - 1);
-            setDirection(Direction.UP);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
-        	notifyDungeonObservers();
         }
     }
 
     public void moveDown() {
     	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY() + 1);
+        setDirection(Direction.DOWN);
+    	notifyDungeonObservers();
 
         if (getY() < dungeon.getHeight() - 1 && !isObstacle(entities)) {
             y().set(getY() + 1);
-            setDirection(Direction.DOWN);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
-        	notifyDungeonObservers();
         }
     }
 
     public void moveLeft() {
     	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX() - 1, getY());
+        setDirection(Direction.LEFT);
+    	notifyDungeonObservers();
 
         if (getX() > 0 && !isObstacle(entities)) {
             x().set(getX() - 1);
-            setDirection(Direction.LEFT);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
-        	notifyDungeonObservers();
         }
     }
 
     public void moveRight() {
     	initialiseObs();
     	ArrayList<Entity> entities = dungeon.getEntities(getX() + 1, getY());
-    	
+        setDirection(Direction.RIGHT);
+    	notifyDungeonObservers();
+
         if (getX() < dungeon.getWidth() - 1 && !isObstacle(entities)) {
             x().set(getX() + 1);
-            setDirection(Direction.RIGHT);
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
-        	notifyDungeonObservers();
         }
     }
     

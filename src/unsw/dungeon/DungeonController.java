@@ -112,7 +112,6 @@ public class DungeonController implements DungeonObserver{
 	public void update(DungeonSubject obj) {
 		if (obj instanceof Dungeon) {
 			Dungeon dungeon = (Dungeon) obj;
-			
 			Timeline timeline = new Timeline();
 			timeline.setCycleCount(1);
 			
