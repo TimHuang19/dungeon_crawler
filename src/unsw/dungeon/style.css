@@ -26,7 +26,7 @@
         linear-gradient(from 0% 93% to 0% 100%, #a88c27 0%, #c9a830 100%),
         #a88c27,
         #d6b22f,
-        radial-gradient(center 50% 50%, radius 100%, #f7d24f, #e6b919);
+        radial-gradient(center 50% 50%, radius 100%, #e0bd41, #e6b919);
 }
 .button:pressed {
     -fx-padding: 10 15 13 15;

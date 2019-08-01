@@ -34,7 +34,7 @@ public class PauseScreen {
      */
     public PauseScreen(Stage stage, String fileName, DungeonScreen dungeonScreen) throws IOException {
         this.stage = stage;
-        title = "Dungeon Crawler";
+        title = "Hide In Darkness";
 
         controller = new PauseController(stage, fileName, dungeonScreen);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseView.fxml"));

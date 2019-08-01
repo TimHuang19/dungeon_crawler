@@ -33,7 +33,7 @@ public class GameOverScreen {
      */
     public GameOverScreen(Stage stage, String fileName) throws IOException {
         this.stage = stage;
-        title = "Dungeon Crawler";
+        title = "Hide In Darkness";
 
         controller = new GameOverController(stage, fileName);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOverView.fxml"));

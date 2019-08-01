@@ -32,7 +32,7 @@ public class StartScreen {
      */
     public StartScreen(Stage stage) throws IOException {
         this.stage = stage;
-        title = "Dungeon Crawler";
+        title = "Hide In Darkness";
 
         controller = new StartController(stage);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("StartView.fxml"));

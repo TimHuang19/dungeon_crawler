@@ -36,7 +36,7 @@ public class DungeonScreen {
      */
     public DungeonScreen(Stage stage, String fileName) throws IOException {
         this.stage = stage;
-        title = "Dungeon Crawler";
+        title = "Hide In Darkness";
         
         loader = new DungeonControllerLoader(fileName);
         controller = loader.loadController();

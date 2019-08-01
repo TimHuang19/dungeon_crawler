@@ -33,7 +33,7 @@ public class CompletedDungeonScreen {
      */
     public CompletedDungeonScreen(Stage stage) throws IOException {
         this.stage = stage;
-        title = "Dungeon Crawler";
+        title = "Hide In Darkness";
 
         controller = new CompletedDungeonController(stage);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CompletedDungeonView.fxml"));
