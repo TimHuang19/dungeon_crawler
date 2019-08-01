@@ -2,7 +2,11 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 /**
  * The player entity.
@@ -88,6 +92,16 @@ public class Player extends Entity implements Subject, Observer {
     
     /** The views. */
     private ArrayList<ImageView> views;
+    
+    private ImageView leftSlashView;
+    
+    private ImageView rightSlashView;
+    
+    private ImageView upSlashView;
+    
+    private ImageView downSlashView;
+    
+    private boolean swinging;
 
 	/**
 	 * Create a player positioned in square (x,y).
@@ -108,96 +122,7 @@ public class Player extends Entity implements Subject, Observer {
         this.bombs = new ArrayList<Bomb>();
         this.observers = new ArrayList<Observer>();
         this.initialisedObservers = false;
-    }
-    
-    /**
-     * Adds the view.
-     *
-     * @param view 	The view
-     */
-    public void addView(ImageView view) {
-    	views.add(view);
-    }
-    
-    /**
-     * Gets the views.
-     *
-     * @return the views
-     */
-    public ArrayList<ImageView> getViews() {
-    	return views;
-    }
-    
-    /**
-     * Sets the down view.
-     *
-     * @param downView 	The new down view
-     */
-    public void setDownView(ImageView downView) {
-    	this.downView = downView;
-    }
-    
-    /**
-     * Gets the down view.
-     *
-     * @return the down view
-     */
-    public ImageView getDownView() {
-    	return downView;
-    }
-    
-    /**
-     * Sets the up view.
-     *
-     * @param upView 	The new up view
-     */
-    public void setUpView(ImageView upView) {
-    	this.upView = upView;
-    }
-    
-    /**
-     * Gets the up view.
-     *
-     * @return the up view
-     */
-    public ImageView getUpView() {
-    	return upView;
-    }
-    
-    /**
-     * Sets the left view.
-     *
-     * @param leftView 		The new left view
-     */
-    public void setLeftView(ImageView leftView) {
-    	this.leftView = leftView;
-    }
-    
-    /**
-     * Gets the left view.
-     *
-     * @return 	The left view
-     */
-    public ImageView getLeftView() {
-    	return leftView;
-    }
-    
-    /**
-     * Sets the right view.
-     *
-     * @param rightView		The new right view
-     */
-    public void setRightView(ImageView rightView) {
-    	this.rightView = rightView;
-    }
-    
-    /**
-     * Gets the right view.
-     *
-     * @return The right view
-     */
-    public ImageView getRightView() {
-    	return rightView;
+        this.swinging = false;
     }
     
     /**
@@ -470,7 +395,9 @@ public class Player extends Entity implements Subject, Observer {
     	
     	if (sword == null) {
     		return;
-    	} 
+    	} else if (isSwinging()) {
+    		return;
+    	}
     	
     	int x, y;
     	
@@ -500,10 +427,42 @@ public class Player extends Entity implements Subject, Observer {
     		}
     	}
     	
+    	setSwinging(true);
+    	notifyDungeonObservers();
+    	
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(1);
+		KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> setSwinging(false));
+		timeline.getKeyFrames().add(kf);
+		timeline.play();
+    	
     	if (!sword.swing()) {
-    		setSword(null);    	
+    		Timeline timeline2 = new Timeline();
+    		timeline2.setCycleCount(1);
+    		KeyFrame kf2 = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> setSword(null));
+    		timeline2.getKeyFrames().add(kf2);
+    		timeline2.play();
+
     	}
 
+    }
+    
+    /**
+     * Check if player is swinging sword.
+     *
+     * @return the swinging
+     */
+    public boolean isSwinging() {
+    	return this.swinging;
+    }
+    
+    /**
+     * Sets the swinging.
+     *
+     * @param swinging 	The new swinging
+     */
+    public void setSwinging(boolean swinging) {
+    	this.swinging = swinging;
     }
     
     /**
@@ -647,6 +606,96 @@ public class Player extends Entity implements Subject, Observer {
 		}
 	}
 	
+	/**
+     * Adds the view.
+     *
+     * @param view 	The view
+     */
+    public void addView(ImageView view) {
+    	views.add(view);
+    }
+    
+    /**
+     * Gets the views.
+     *
+     * @return the views
+     */
+    public ArrayList<ImageView> getViews() {
+    	return views;
+    }
+    
+    /**
+     * Sets the down view.
+     *
+     * @param downView 	The new down view
+     */
+    public void setDownView(ImageView downView) {
+    	this.downView = downView;
+    }
+    
+    /**
+     * Gets the down view.
+     *
+     * @return the down view
+     */
+    public ImageView getDownView() {
+    	return downView;
+    }
+    
+    /**
+     * Sets the up view.
+     *
+     * @param upView 	The new up view
+     */
+    public void setUpView(ImageView upView) {
+    	this.upView = upView;
+    }
+    
+    /**
+     * Gets the up view.
+     *
+     * @return the up view
+     */
+    public ImageView getUpView() {
+    	return upView;
+    }
+    
+    /**
+     * Sets the left view.
+     *
+     * @param leftView 		The new left view
+     */
+    public void setLeftView(ImageView leftView) {
+    	this.leftView = leftView;
+    }
+    
+    /**
+     * Gets the left view.
+     *
+     * @return 	The left view
+     */
+    public ImageView getLeftView() {
+    	return leftView;
+    }
+    
+    /**
+     * Sets the right view.
+     *
+     * @param rightView		The new right view
+     */
+    public void setRightView(ImageView rightView) {
+    	this.rightView = rightView;
+    }
+    
+    /**
+     * Gets the right view.
+     *
+     * @return The right view
+     */
+    public ImageView getRightView() {
+    	return rightView;
+    }
+    
     /**
      * Gets the down sword view.
      *
@@ -861,6 +910,78 @@ public class Player extends Entity implements Subject, Observer {
 	 */
 	public void setRightSwordInvincibleView(ImageView rightSwordInvincibleView) {
 		this.rightSwordInvincibleView = rightSwordInvincibleView;
+	}
+	
+	/**
+     * Gets the left slash view.
+     *
+     * @return the left slash view
+     */
+    public ImageView getLeftSlashView() {
+		return leftSlashView;
+	}
+
+    /**
+     * Sets the left slash view.
+     *
+     * @param leftSlashView 	The new left slash view
+     */
+	public void setLeftSlashView(ImageView leftSlashView) {
+		this.leftSlashView = leftSlashView;
+	}
+
+    /**
+     * Gets the right slash view.
+     *
+     * @return the right slash view
+     */
+	public ImageView getRightSlashView() {
+		return rightSlashView;
+	}
+
+    /**
+     * Sets the right slash view.
+     *
+     * @param rightSlashView 	The new right slash view
+     */
+	public void setRightSlashView(ImageView rightSlashView) {
+		this.rightSlashView = rightSlashView;
+	}
+
+    /**
+     * Gets the up slash view.
+     *
+     * @return the up slash view
+     */
+	public ImageView getUpSlashView() {
+		return upSlashView;
+	}
+
+    /**
+     * Sets the up slash view.
+     *
+     * @param upSlashView 	The new up slash view
+     */
+	public void setUpSlashView(ImageView upSlashView) {
+		this.upSlashView = upSlashView;
+	}
+
+    /**
+     * Gets the down slash view.
+     *
+     * @return the down slash view
+     */
+	public ImageView getDownSlashView() {
+		return downSlashView;
+	}
+
+    /**
+     * Sets the down slash view.
+     *
+     * @param downSlashView 	The new down slash view
+     */
+	public void setDownSlashView(ImageView downSlashView) {
+		this.downSlashView = downSlashView;
 	}
 
 }

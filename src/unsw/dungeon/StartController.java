@@ -1,12 +1,9 @@
 package unsw.dungeon;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**

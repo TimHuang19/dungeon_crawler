@@ -23,7 +23,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     private List<ImageView> entities;
 
     /** The player down image. */
-    //Images
     private Image playerDownImage;
     
     /** The player facing up image. */
@@ -92,6 +91,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     /** The sword image. */
     private Image swordImage;
     
+    private Image leftSlashImage;
+    
+    private Image rightSlashImage;
+    
+    private Image upSlashImage;
+    
+    private Image downSlashImage;
+    
     /** The bomb image. */
     private Image bombImage;
     
@@ -152,6 +159,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         switchImage = new Image("/pressure_plate.png");
         potionImage = new Image("/brilliant_blue_new.png");
         swordImage = new Image("/greatsword_1_new.png");
+        leftSlashImage = new Image("/slash_left.png");
+        rightSlashImage = new Image("/slash_right.png");
+        downSlashImage = new Image("/slash_down.png");
+        upSlashImage = new Image("/slash_up.png");
         bombImage = new Image("/bomb_unlit.png");
         bombLitZeroImage = new Image("/bomb_lit_1.png");
         bombLitOneImage = new Image("/bomb_lit_2.png");
@@ -190,6 +201,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         ImageView leftSwordInvincible = new ImageView(playerLeftSwordInvincibleImage);
         ImageView upSwordInvincible = new ImageView(playerUpSwordInvincibleImage);
         
+        ImageView leftSlash = new ImageView(leftSlashImage);
+        ImageView rightSlash = new ImageView(rightSlashImage);
+        ImageView upSlash = new ImageView(upSlashImage);
+        ImageView downSlash = new ImageView(downSlashImage);
+
         player.setDownView(down);
         player.addView(down);
         player.setRightView(right);
@@ -226,6 +242,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         player.setLeftSwordInvincibleView(leftSwordInvincible);
         player.addView(leftSwordInvincible);
         
+        player.setLeftSlashView(leftSlash);
+        player.setRightSlashView(rightSlash);
+        player.setUpSlashView(upSlash);
+        player.setDownSlashView(downSlash);
+        
         trackPosition(player, right);
         trackPosition(player, up);
         trackPosition(player, left);
@@ -244,6 +265,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         trackPosition(player, upSwordInvincible);
         trackPosition(player, leftSwordInvincible);
         trackPosition(player, downSwordInvincible);
+        
+        trackLeftPosition(player, leftSlash);
+        trackRightPosition(player, rightSlash);
+        trackUpPosition(player, upSlash);
+        trackDownPosition(player, downSlash);
 
         addEntity(player, down);
     }
@@ -436,6 +462,82 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
+    private void trackLeftPosition(Entity entity, Node node) {
+        GridPane.setColumnIndex(node, entity.getX()-1);
+        GridPane.setRowIndex(node, entity.getY());
+        entity.x().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setColumnIndex(node, newValue.intValue()-1);
+            }
+        });
+        entity.y().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setRowIndex(node, newValue.intValue());
+            }
+        });
+    }
+    
+    private void trackRightPosition(Entity entity, Node node) {
+        GridPane.setColumnIndex(node, entity.getX()+1);
+        GridPane.setRowIndex(node, entity.getY());
+        entity.x().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setColumnIndex(node, newValue.intValue()+1);
+            }
+        });
+        entity.y().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setRowIndex(node, newValue.intValue());
+            }
+        });
+    }
+    
+    private void trackUpPosition(Entity entity, Node node) {
+        GridPane.setColumnIndex(node, entity.getX());
+        GridPane.setRowIndex(node, entity.getY()-1);
+        entity.x().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setColumnIndex(node, newValue.intValue());
+            }
+        });
+        entity.y().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setRowIndex(node, newValue.intValue()-1);
+            }
+        });
+    }
+    
+    private void trackDownPosition(Entity entity, Node node) {
+        GridPane.setColumnIndex(node, entity.getX());
+        GridPane.setRowIndex(node, entity.getY()+1);
+        entity.x().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setColumnIndex(node, newValue.intValue());
+            }
+        });
+        entity.y().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setRowIndex(node, newValue.intValue()+1);
+            }
+        });
+    }
+    
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.

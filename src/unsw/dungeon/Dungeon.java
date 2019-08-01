@@ -168,6 +168,7 @@ public class Dungeon implements DungeonSubject, Observer {
      */
     public void gameOver() {
     	this.gameOver = true;
+    	pause();
     	notifyDungeonObservers();
     }
     
@@ -253,10 +254,8 @@ public class Dungeon implements DungeonSubject, Observer {
     		this.complete = true;
     		pause();
     		notifyDungeonObservers();
-    		System.out.println("DUNGEON COMPLETE");
     	} else {
     		this.complete = false;
-    		System.out.println("DUNGEON NOT COMPLETE");
     	}
     }
     

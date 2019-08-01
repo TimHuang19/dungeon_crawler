@@ -5,16 +5,12 @@ package unsw.dungeon;
  */
 public class OpenState implements DoorState {
 	
-	/** The door. */
-	private Door door;
-	
 	/**
 	 * Instantiates a new open state.
 	 *
 	 * @param door the door
 	 */
 	public OpenState(Door door) {
-		this.door = door;
 	}
 
 	/**

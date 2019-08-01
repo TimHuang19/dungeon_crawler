@@ -195,6 +195,44 @@ public class DungeonController implements DungeonObserver{
 			}
 		} else if (obj instanceof Player) {
 			Player player = (Player) obj;
+			
+			if (player.isSwinging()) {
+				squares.getChildren().remove(player.getLeftSlashView());
+				squares.getChildren().remove(player.getRightSlashView());
+				squares.getChildren().remove(player.getUpSlashView());
+				squares.getChildren().remove(player.getDownSlashView());
+				if (player.getDirection() == Direction.LEFT) {
+					squares.getChildren().add(player.getLeftSlashView());
+					Timeline timeline = new Timeline();
+					timeline.setCycleCount(1);
+					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getLeftSlashView()));
+					timeline.getKeyFrames().add(kf);
+					timeline.play();
+				} else if (player.getDirection() == Direction.RIGHT) {
+					squares.getChildren().add(player.getRightSlashView());
+					Timeline timeline = new Timeline();
+					timeline.setCycleCount(1);
+					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getRightSlashView()));
+					timeline.getKeyFrames().add(kf);
+					timeline.play();
+				} else if (player.getDirection() == Direction.UP) {
+					squares.getChildren().add(player.getUpSlashView());
+					Timeline timeline = new Timeline();
+					timeline.setCycleCount(1);
+					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getUpSlashView()));
+					timeline.getKeyFrames().add(kf);
+					timeline.play();
+				} else {
+					squares.getChildren().add(player.getDownSlashView());
+					Timeline timeline = new Timeline();
+					timeline.setCycleCount(1);
+					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getDownSlashView()));
+					timeline.getKeyFrames().add(kf);
+					timeline.play();
+				}
+				return;
+			}
+			
 			for (ImageView view : player.getViews()) {
 				squares.getChildren().remove(view);
 			}

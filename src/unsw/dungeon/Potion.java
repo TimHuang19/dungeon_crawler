@@ -1,17 +1,10 @@
 package unsw.dungeon;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.util.Duration;
 
 /**
  * The Class Potion.
  */
 public class Potion extends Entity {
-	
-	/** The timeline. */
-	private Timeline timeline;
 	
 	/**
 	 * Instantiates a new potion.
@@ -21,7 +14,6 @@ public class Potion extends Entity {
 	 */
 	public Potion(int x, int y) {
 		super(x, y);
-		timeline = new Timeline();
 	}
 
 	/**
