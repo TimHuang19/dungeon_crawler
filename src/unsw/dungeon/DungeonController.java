@@ -22,21 +22,34 @@ import javafx.util.Duration;
  */
 public class DungeonController implements DungeonObserver{
 
+    /** The squares. */
     @FXML
     private GridPane squares;
 
+    /** The initial entities. */
     private List<ImageView> initialEntities;
 
+    /** The player. */
     private Player player;
     
+    /** The dungeon. */
     private Dungeon dungeon;
         
+    /** The stage. */
     private Stage stage;
     
+    /** The file name. */
     private String fileName;
         
+    /** The pause screen. */
     private PauseScreen pauseScreen;
     
+    /**
+     * Instantiates a new dungeon controller.
+     *
+     * @param dungeon the dungeon
+     * @param initialEntities the initial entities
+     */
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
@@ -45,6 +58,9 @@ public class DungeonController implements DungeonObserver{
         this.dungeon.setController(this);
     }
 	
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
@@ -60,6 +76,11 @@ public class DungeonController implements DungeonObserver{
             squares.getChildren().add(entity);
     }
 
+    /**
+     * Handle key press.
+     *
+     * @param event the event
+     */
     @FXML
     public void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
@@ -92,22 +113,46 @@ public class DungeonController implements DungeonObserver{
         }
     }
     
+    /**
+     * Un pause.
+     */
     public void unPause() {
     	dungeon.unPause();
     }
     
+    /**
+     * Adds the stage.
+     *
+     * @param stage the stage
+     */
     public void addStage(Stage stage) {
     	this.stage = stage;
     }
     
+    /**
+     * Adds the name.
+     *
+     * @param fileName the file name
+     */
     public void addName(String fileName) {
     	this.fileName = fileName;
     }
     
+    /**
+     * Adds the pause screen.
+     *
+     * @param dungeonScreen the dungeon screen
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void addPauseScreen(DungeonScreen dungeonScreen) throws IOException {
     	this.pauseScreen = new PauseScreen(stage, fileName, dungeonScreen);
     }
     
+	/**
+	 * Update.
+	 *
+	 * @param obj the obj
+	 */
 	@Override
 	public void update(DungeonSubject obj) {
 		if (obj instanceof Dungeon) {
@@ -221,6 +266,11 @@ public class DungeonController implements DungeonObserver{
 		
 	}
 	
+	/**
+	 * Change the bomb to first stage.
+	 *
+	 * @param bomb the bomb
+	 */
 	private void bombChangeFirst(Bomb bomb) {
 		squares.getChildren().remove(bomb.getZeroImage());
 		squares.getChildren().add(bomb.getOneImage());
@@ -232,6 +282,11 @@ public class DungeonController implements DungeonObserver{
 		timeline.play();
 	}
 	
+	/**
+	 * Change the bomb to second stage.
+	 *
+	 * @param bomb the bomb
+	 */
 	private void bombChangeSecond(Bomb bomb) {
 		squares.getChildren().remove(bomb.getOneImage());
 		squares.getChildren().add(bomb.getTwoImage());
@@ -243,6 +298,11 @@ public class DungeonController implements DungeonObserver{
 		timeline.play();
 	}
 	
+	/**
+	 * Change the bomb to last stage.
+	 *
+	 * @param bomb the bomb
+	 */
 	private void bombChangeLast(Bomb bomb) {
 		squares.getChildren().remove(bomb.getTwoImage());
 		squares.getChildren().add(bomb.getExplodeImage());

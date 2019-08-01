@@ -18,10 +18,21 @@ import org.json.JSONTokener;
  */
 public abstract class DungeonLoader {
 
+    /** The json. */
     private JSONObject json;
+    
+    /** The key id. */
     private int keyId;
+    
+    /** The door id. */
     private int doorId;
 
+    /**
+     * Instantiates a new dungeon loader.
+     *
+     * @param filename the filename
+     * @throws FileNotFoundException the file not found exception
+     */
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
         keyId = 0;
@@ -30,7 +41,8 @@ public abstract class DungeonLoader {
 
     /**
      * Parses the JSON to create a dungeon.
-     * @return
+     *
+     * @return the dungeon
      */
     public Dungeon load() {
         int width = json.getInt("width");
@@ -50,6 +62,12 @@ public abstract class DungeonLoader {
         return dungeon;
     }
 
+    /**
+     * Load entity.
+     *
+     * @param dungeon the dungeon
+     * @param json the JSONObject containing entities
+     */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -125,6 +143,12 @@ public abstract class DungeonLoader {
     }
     
 
+    /**
+     * Load goals.
+     *
+     * @param dungeon the dungeon
+     * @param json the JSONobject containing goals
+     */
     private void loadGoals(Dungeon dungeon, JSONObject json) {
     	JSONArray subgoals;
     	BasicGoal b;
@@ -163,6 +187,12 @@ public abstract class DungeonLoader {
         }
     }
     
+    /**
+     * Load subgoals.
+     *
+     * @param c the complex goal
+     * @param subgoals the subgoals
+     */
     private void loadSubgoals(ComplexGoal c, JSONArray subgoals) {
     	JSONObject subgoal;
     	JSONArray subgoals2;
@@ -205,27 +235,87 @@ public abstract class DungeonLoader {
         }
     }
     
+    /**
+     * On load.
+     *
+     * @param player the player
+     */
     public abstract void onLoad(Player player);
 
+    /**
+     * On load.
+     *
+     * @param wall the wall
+     */
     public abstract void onLoad(Wall wall);
 
+    /**
+     * On load.
+     *
+     * @param exit the exit
+     */
     public abstract void onLoad(Exit exit);
     
+    /**
+     * On load.
+     *
+     * @param enemy the enemy
+     */
     public abstract void onLoad(Enemy enemy);
     
+    /**
+     * On load.
+     *
+     * @param boulder the boulder
+     */
     public abstract void onLoad(Boulder boulder);
     
+    /**
+     * On load.
+     *
+     * @param s the switch
+     */
     public abstract void onLoad(Switch s);
     
+    /**
+     * On load.
+     *
+     * @param potion the potion
+     */
     public abstract void onLoad(Potion potion);
     
+    /**
+     * On load.
+     *
+     * @param sword the sword
+     */
     public abstract void onLoad(Sword sword);
     
+    /**
+     * On load.
+     *
+     * @param bomb the bomb
+     */
     public abstract void onLoad(Bomb bomb);
     
+    /**
+     * On load.
+     *
+     * @param treasure the treasure
+     */
     public abstract void onLoad(Treasure treasure);
     
+    /**
+     * On load.
+     *
+     * @param key the key
+     */
     public abstract void onLoad(Key key);
     
+    /**
+     * On load.
+     *
+     * @param door the door
+     */
     public abstract void onLoad(Door door);
 }

@@ -7,13 +7,29 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The Class StartScreen.
+ */
 public class StartScreen {
 
+    /** The stage. */
     private Stage stage;
+    
+    /** The title. */
     private String title;
+    
+    /** The controller. */
     private StartController controller;
+    
+    /** The scene. */
     private Scene scene;
 
+    /**
+     * Instantiates a new start screen.
+     *
+     * @param stage 	The stage
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public StartScreen(Stage stage) throws IOException {
         this.stage = stage;
         title = "Dungeon Crawler";
@@ -27,6 +43,9 @@ public class StartScreen {
         scene = new Scene(root);
     }
 
+    /**
+     * Start.
+     */
     public void start() {
         stage.setTitle(title);
         stage.setScene(scene);

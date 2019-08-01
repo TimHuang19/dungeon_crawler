@@ -4,12 +4,28 @@ import java.util.Queue;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * The Class EnemyMoveAway.
+ */
 public class EnemyMoveAway implements EnemyMovementStrategy {
     
+	/**
+	 * Instantiates a new enemy move away class.
+	 */
 	public EnemyMoveAway() {
 		
 	}
 	
+	/**
+	 * Enemy movement.
+	 *
+	 * @param playerX the player X position
+	 * @param playerY the player Y position
+	 * @param enemyX the enemy X position
+	 * @param enemyY the enemy Y position
+	 * @param dungeon the dungeon
+	 * @return the direction the enemy shoudl move toward
+	 */
 	public Direction enemyMovement(int playerX, int playerY, int enemyX, int enemyY, Dungeon dungeon) {
 		int width = dungeon.getWidth();
 		int height = dungeon.getHeight();
@@ -113,6 +129,14 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
 		
 	}
 	
+    /**
+     * Checks if is obstacle.
+     *
+     * @param targetX the target X position
+     * @param targetY the target Y position
+     * @param dungeon the dungeon
+     * @return true, if is obstacle
+     */
     private boolean isObstacle(int targetX, int targetY, Dungeon dungeon) {
     	if(targetX<0 || targetX >= dungeon.getWidth() || targetY < 0 || targetY >= dungeon.getHeight()) {
     		return false;
@@ -135,6 +159,14 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
     	return false;
     }
     
+    /**
+     * Checks if is within bounds.
+     *
+     * @param targetX the target X position
+     * @param targetY the target Y position
+     * @param dungeon the dungeon
+     * @return true, if is within bounds
+     */
     private boolean isWithinBounds(int targetX, int targetY, Dungeon dungeon) {
     	if(targetX<0 || targetX > dungeon.getWidth()-1 || targetY < 0 || targetY > dungeon.getHeight()-1) {
     		return false;
@@ -142,26 +174,57 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
     	return true;
     }
     
+    /**
+     * The Helper Class Point.
+     */
     private class Point {
-    	private int x;
-    	private int y;
-    	private Direction signature;
     	
-    	public Point(int x, int y, Direction signature) {
+	    /** The x position. */
+	    private int x;
+    	
+	    /** The y position. */
+	    private int y;
+    	
+	    /** The signature, the first move traversed in a path */
+	    private Direction signature;
+    	
+    	/**
+	     * Instantiates a new point.
+	     *
+	     * @param x the x position
+	     * @param y the y position
+	     * @param signature the signature
+	     */
+	    public Point(int x, int y, Direction signature) {
     		this.x = x;
     		this.y = y;
     		this.signature = signature;
     	}
     	
-    	public int getX() {
+    	/**
+	     * Gets the x position.
+	     *
+	     * @return the x
+	     */
+	    public int getX() {
     		return x;
     	}
     	
-    	public int getY() {
+    	/**
+	     * Gets the y position.
+	     *
+	     * @return the y
+	     */
+	    public int getY() {
     		return y;
     	}
     	
-    	public Direction getSignature() {
+    	/**
+	     * Gets the signature.
+	     *
+	     * @return the signature
+	     */
+	    public Direction getSignature() {
     		return this.signature;
     	}
     }

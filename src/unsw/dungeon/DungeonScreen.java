@@ -7,14 +7,33 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The Class DungeonScreen.
+ */
 public class DungeonScreen {
 
+    /** The stage. */
     private Stage stage;
+    
+    /** The title. */
     private String title;
+    
+    /** The loader. */
     private DungeonControllerLoader loader;
+    
+    /** The controller. */
     private DungeonController controller;
+    
+    /** The scene. */
     private Scene scene;
 
+    /**
+     * Instantiates a new dungeon screen.
+     *
+     * @param stage the stage
+     * @param fileName the file name
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public DungeonScreen(Stage stage, String fileName) throws IOException {
         this.stage = stage;
         title = "Dungeon Crawler";
@@ -34,12 +53,18 @@ public class DungeonScreen {
         root.requestFocus();
     }
 
+    /**
+     * Start.
+     */
     public void start() {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
     }
     
+    /**
+     * Un pause.
+     */
     public void unPause() {
     	controller.unPause();
     }

@@ -19,42 +19,112 @@ import javafx.scene.layout.GridPane;
  */
 public class DungeonControllerLoader extends DungeonLoader {
 
+    /** The entities. */
     private List<ImageView> entities;
 
+    /** The player down image. */
     //Images
     private Image playerDownImage;
+    
+    /** The player facing up image. */
     private Image playerUpImage;
+    
+    /** The player facing right image. */
     private Image playerRightImage;
+    
+    /** The player facing left image. */
     private Image playerLeftImage;
+    
+    /** The player facing down with sword image. */
     private Image playerDownSwordImage;
+    
+    /** The player facing up with sword image. */
     private Image playerUpSwordImage;
+    
+    /** The player facing right with sword image. */
     private Image playerRightSwordImage;
+    
+    /** The player facing left with sword image. */
     private Image playerLeftSwordImage;
+    
+    /** The invincible player facing down image. */
     private Image playerDownInvincibleImage;
+    
+    /** The invincible player facing up image. */
     private Image playerUpInvincibleImage;
+    
+    /** The invincible player facing right image. */
     private Image playerRightInvincibleImage;
+    
+    /** The invincible player facing left image. */
     private Image playerLeftInvincibleImage;
+    
+    /** The invincible player facing down with sword image. */
     private Image playerDownSwordInvincibleImage;
+    
+    /** The invincible player facing up with sword image. */
     private Image playerUpSwordInvincibleImage;
+    
+    /** The invincible player facing right with sword image. */
     private Image playerRightSwordInvincibleImage;
+    
+    /** The invincible player facing left with sword image. */
     private Image playerLeftSwordInvincibleImage;
+    
+    /** The wall image. */
     private Image wallImage;
+    
+    /** The exit image. */
     private Image exitImage;
+    
+    /** The enemy image. */
     private Image enemyImage;
+    
+    /** The boulder image. */
     private Image boulderImage;
+    
+    /** The switch image. */
     private Image switchImage;
+    
+    /** The potion image. */
     private Image potionImage;
+    
+    /** The sword image. */
     private Image swordImage;
+    
+    /** The bomb image. */
     private Image bombImage;
+    
+    /** The bomb lit stage zero image. */
     private Image bombLitZeroImage;
+    
+    /** The bomb lit stage one image. */
     private Image bombLitOneImage;
+    
+    /** The bomb lit stage two image. */
     private Image bombLitTwoImage;
+    
+    /** The bomb explode image. */
     private Image bombExplodeImage;
+    
+    /** The treasure image. */
     private Image treasureImage;
+    
+    /** The key image. */
     private Image keyImage;
+    
+    /** The door image. */
     private Image doorImage;
+    
+    /** The open door image. */
     private Image openDoorImage;
 
+    /**
+     * Instantiates a new dungeon controller loader.
+     *
+     * @param filename the filename
+     * @throws FileNotFoundException the file not found exception
+     */
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
@@ -93,6 +163,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         openDoorImage = new Image("/open_door.png");
     }
 
+    /**
+     * On load.
+     *
+     * @param player the player
+     */
     @Override
     public void onLoad(Player player) {
         ImageView down = new ImageView(playerDownImage);
@@ -173,6 +248,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(player, down);
     }
 
+    /**
+     * On load.
+     *
+     * @param wall the wall
+     */
     @Override
     public void onLoad(Wall wall) {
         ImageView view = new ImageView(wallImage);
@@ -180,6 +260,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(wall, view);
     }
     
+    /**
+     * On load.
+     *
+     * @param exit the exit
+     */
     @Override
     public void onLoad(Exit exit) {
         ImageView view = new ImageView(exitImage);
@@ -187,6 +272,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(exit, view);
     }
     
+    /**
+     * On load.
+     *
+     * @param enemy the enemy
+     */
     @Override
     public void onLoad(Enemy enemy) {
         ImageView view = new ImageView(enemyImage);
@@ -194,6 +284,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(enemy, view);
     }
     
+    /**
+     * On load.
+     *
+     * @param boulder the boulder
+     */
     @Override
     public void onLoad(Boulder boulder) {
     	ImageView view = new ImageView(boulderImage);
@@ -201,6 +296,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(boulder, view);
     }
     
+    /**
+     * On load.
+     *
+     * @param s the switch
+     */
     @Override
     public void onLoad(Switch s) {
     	ImageView view = new ImageView(switchImage);
@@ -208,6 +308,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(s, view);
     }
     
+    /**
+     * On load.
+     *
+     * @param potion the potion
+     */
     @Override
     public void onLoad(Potion potion) {
     	ImageView view = new ImageView(potionImage);
@@ -215,6 +320,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(potion, view);
     }
 
+	/**
+	 * On load.
+	 *
+	 * @param sword the sword
+	 */
 	@Override
 	public void onLoad(Sword sword) {
     	ImageView view = new ImageView(swordImage);
@@ -222,6 +332,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(sword, view);		
 	}
 
+	/**
+	 * On load.
+	 *
+	 * @param bomb the bomb
+	 */
 	@Override
 	public void onLoad(Bomb bomb) {
     	ImageView view = new ImageView(bombImage);
@@ -241,6 +356,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(bomb, view);		
 	}
 
+	/**
+	 * On load.
+	 *
+	 * @param treasure the treasure
+	 */
 	@Override
 	public void onLoad(Treasure treasure) {
     	ImageView view = new ImageView(treasureImage);
@@ -248,6 +368,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(treasure, view);		
 	}
 	
+	/**
+	 * On load.
+	 *
+	 * @param key the key
+	 */
 	@Override
 	public void onLoad(Key key) {
     	ImageView view = new ImageView(keyImage);
@@ -255,6 +380,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(key, view);		
 	}
 
+	/**
+	 * On load.
+	 *
+	 * @param door the door
+	 */
 	@Override
 	public void onLoad(Door door) {
     	ImageView view = new ImageView(doorImage);
@@ -265,6 +395,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(door, view);
 	}
 	
+    /**
+     * Adds the entity.
+     *
+     * @param entity the entity
+     * @param view the view
+     */
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entities.add(view);
@@ -273,12 +409,13 @@ public class DungeonControllerLoader extends DungeonLoader {
     /**
      * Set a node in a GridPane to have its position track the position of an
      * entity in the dungeon.
-     *
+     * 
      * By connecting the model with the view in this way, the model requires no
      * knowledge of the view and changes to the position of entities in the
      * model will automatically be reflected in the view.
-     * @param entity
-     * @param node
+     *
+     * @param entity the entity
+     * @param node the node
      */
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
@@ -302,8 +439,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
-     * @return
-     * @throws FileNotFoundException
+     *
+     * @return the dungeon controller
+     * @throws FileNotFoundException the file not found exception
      */
     public DungeonController loadController() throws FileNotFoundException {
         return new DungeonController(load(), entities);

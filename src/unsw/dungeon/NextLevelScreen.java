@@ -7,13 +7,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The Class NextLevelScreen.
+ */
 public class NextLevelScreen {
 
+    /** The stage. */
     private Stage stage;
+    
+    /** The title. */
     private String title;
+    
+    /** The controller. */
     private NextLevelController controller;
+    
+    /** The scene. */
     private Scene scene;
 
+    /**
+     * Instantiates a new next level screen.
+     *
+     * @param stage the stage
+     * @param fileName the file name
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public NextLevelScreen(Stage stage, String fileName) throws IOException {
         this.stage = stage;
         title = "Dungeon Crawler";
@@ -27,6 +44,9 @@ public class NextLevelScreen {
         scene = new Scene(root);
     }
 
+    /**
+     * Start.
+     */
     public void start() {
         stage.setTitle(title);
         stage.setScene(scene);

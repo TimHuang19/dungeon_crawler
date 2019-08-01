@@ -2,12 +2,30 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * The Class Boulder.
+ */
 public class Boulder extends Entity implements Subject {
+	
+	/** The observers. */
 	private ArrayList<Observer> observers;
+	
+	/** Boolean indicating whether the boulder is on switch */
 	private boolean onSwitch;
+	
+	/** Boolean indicating if boulder is destroyed */
 	private boolean destroyed;
+	
+	/** The dungeon. */
 	private Dungeon dungeon;
 
+	/**
+	 * Instantiates a new boulder.
+	 *
+	 * @param dungeon 	The dungeon
+	 * @param x 		The x position
+	 * @param y 		The y position
+	 */
 	public Boulder(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		observers = new ArrayList<Observer>();
@@ -25,40 +43,77 @@ public class Boulder extends Entity implements Subject {
 		
 	}
 	
+	/**
+	 * Move boulder.
+	 *
+	 * @param x 	The new x position
+	 * @param y 	The new y position
+	 */
 	public void moveBoulder(int x, int y) {
 		x().set(x);
 		y().set(y);
 		notifyObservers();
 	}
 	
+	/**
+	 * Destroy.
+	 */
 	public void destroy() {
 		destroyed = true;
 		notifyDungeonObservers();
 		notifyObservers();
 	}
 	
+	/**
+	 * Determines if boulder is destroyed
+	 *
+	 * @return true, if boulder is destroyed
+	 */
 	public boolean gotDestroyed() {
 		return destroyed;
 	}
 	
+	/**
+	 * Determines if boulder is on a switch
+	 *
+	 * @return true, if boulder is on a switch
+	 */
 	public boolean getOnSwitch() {
 		return onSwitch;
 	}
 	
+	/**
+	 * Sets the boolean value of whether the boulder is on a switch
+	 *
+	 * @param onSwitch 		The new boolean value
+	 */
 	public void setOnSwitch(boolean onSwitch) {
 		this.onSwitch = onSwitch;
 	}
 	
+	/**
+	 * Register observer.
+	 *
+	 * @param o 	The observer
+	 */
 	@Override
 	public void registerObserver(Observer o) {
 		observers.add(o);
 	}
 
+	/**
+	 * Removes the observer.
+	 *
+	 * @param o the o
+	 */
 	@Override
 	public void removeObserver(Observer o) {
 		observers.remove(o);
 	}
 
+	/**
+	 * Notify observers.
+	 */
 	@Override
 	public void notifyObservers() {
 		for (Observer o : observers) {
@@ -66,6 +121,12 @@ public class Boulder extends Entity implements Subject {
 		}
 	}
 
+	/**
+	 * Checks if boulder is an obstacle to the player.
+	 *
+	 * @param p 	The player
+	 * @return true, if the boulder is an obstacle to the player
+	 */
 	@Override
 	public boolean isObstacle(Player p) {
 		if (blockedBoulder(p)) {
@@ -74,6 +135,12 @@ public class Boulder extends Entity implements Subject {
 		return false;
 	}
 	
+    /**
+     * Blocked boulder.
+     *
+     * @param p 	The player
+     * @return true, if the boulder is blocked relative to the player
+     */
     private boolean blockedBoulder(Player p) {
 		int playerX = p.getX();
 		int playerY = p.getY();
@@ -116,16 +183,33 @@ public class Boulder extends Entity implements Subject {
 		return true;
     }
 
+	/**
+	 * Checks if boulder is an obstacle to an enemy
+	 *
+	 * @param e 	The enemy
+	 * @return true, if the boulder is an obstacle to the enemy
+	 */
 	@Override
 	public boolean isObstacle(Enemy e) {
 		return true;
 	}
 
+	/**
+	 * Pick up.
+	 *
+	 * @param p 	The player
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean pickUp(Player p) {
 		return false;
 	}
 
+	/**
+	 * Determines if this object blocks a boulder
+	 *
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean blocksBoulder() {
 		return true;
