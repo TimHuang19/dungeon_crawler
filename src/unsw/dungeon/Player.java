@@ -39,6 +39,9 @@ public class Player extends Entity implements Subject, Observer {
     /** The amount of steps it is invincible for */
     private int invincibleSteps;
     
+    /** A boolean indicating whether player is swinging sword */
+    private boolean swinging;
+
     /** The bombs. */
     private ArrayList<Bomb> bombs;
     
@@ -93,16 +96,18 @@ public class Player extends Entity implements Subject, Observer {
     /** The views. */
     private ArrayList<ImageView> views;
     
+    /** The view of a left slash */
     private ImageView leftSlashView;
     
+    /** The view of a right slash */
     private ImageView rightSlashView;
     
+    /** The view of an up slash */
     private ImageView upSlashView;
     
+    /** The view of a down slash */
     private ImageView downSlashView;
     
-    private boolean swinging;
-
 	/**
 	 * Create a player positioned in square (x,y).
 	 *
