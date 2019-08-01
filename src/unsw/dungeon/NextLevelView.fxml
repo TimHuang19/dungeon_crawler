@@ -2,30 +2,53 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="completionName" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="63.0" prefHeight="68.0" prefWidth="477.0" text="Level 1 of 6 Clear" textAlignment="CENTER">
+      <Button fx:id="homeNextButton" layoutX="72.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleHomeNextButton" prefHeight="27.0" prefWidth="97.0" text="Home">
          <font>
-            <Font name="Luminari" size="41.0" />
+            <Font name="Lucida Bright Regular" size="13.0" />
          </font>
+      </Button>
+      <Button fx:id="quitNextButton" layoutX="439.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleQuitNextButton" prefHeight="27.0" prefWidth="97.0" text="Quit">
+         <font>
+            <Font name="Lucida Bright Regular" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="continueButton" layoutX="199.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="27.0" prefWidth="202.0" text="Continue">
+         <font>
+            <Font name="Lucida Bright Regular" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="completionName" alignment="CENTER" layoutX="47.0" layoutY="82.0" prefHeight="68.0" prefWidth="506.0" text="Level 1 of 6 Clear">
+         <font>
+            <Font name="Silom" size="37.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.3798076923076924" startX="1.0" startY="0.9711538461538461">
+               <stops>
+                  <Stop color="#803218" />
+                  <Stop color="#db471f" offset="0.544404520645025" />
+                  <Stop color="#ff4a00" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Label>
-      <Button fx:id="homeNextButton" layoutX="85.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleHomeNextButton" prefHeight="27.0" prefWidth="97.0" text="Home">
-         <font>
-            <Font name="Lucida Bright Regular" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="quitNextButton" layoutX="440.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleQuitNextButton" prefHeight="27.0" prefWidth="97.0" text="Quit Game">
-         <font>
-            <Font name="Lucida Bright Regular" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="continueButton" layoutX="209.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="27.0" prefWidth="202.0" text="Continue">
-         <font>
-            <Font name="Lucida Bright Regular" size="13.0" />
-         </font>
-      </Button>
+      <ImageView fitHeight="185.0" fitWidth="202.0" layoutX="-61.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
+         <image>
+            <Image url="@../../../images/fire.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="202.0" layoutX="476.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
+         <image>
+            <Image url="@../../../images/fire.gif" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
