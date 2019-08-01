@@ -25,7 +25,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="startButton" layoutX="199.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="27.0" prefWidth="202.0" styleClass="record-sales" stylesheets="@style.css" text="Start Game">
+      <Button fx:id="startButton" layoutX="199.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="27.0" prefWidth="202.0" styleClass="record-sales" stylesheets="@style.css" text="Play">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
