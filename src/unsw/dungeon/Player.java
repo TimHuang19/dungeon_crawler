@@ -594,6 +594,18 @@ public class Player extends Entity implements Subject, Observer {
 		return false;
 	}
 	
+	
+	/**
+	 * Checks if a bomb is an obstacle to an enemy using a particular movement strategy
+	 *
+	 * @param e 		The enemy
+	 * @return true, if it is obstacle
+	 */
+	@Override
+	public boolean isObstacle(EnemyMovementStrategy strategy) {
+		return false;
+	}
+	
 	/**
 	 * Determines if the player blocks a boulder.
 	 *

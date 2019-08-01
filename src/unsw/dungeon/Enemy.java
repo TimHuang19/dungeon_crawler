@@ -224,6 +224,7 @@ public class Enemy extends Entity implements Subject, Observer {
 	 * Used only for unit testing
 	 *
 	 * @param invincible the new boolean indicating if player is invincible
+	 */
 	public void setInvincible(boolean invincible) {
 		this.invincible = invincible;
 	}
@@ -249,6 +250,19 @@ public class Enemy extends Entity implements Subject, Observer {
 	public boolean isObstacle(Enemy e) {
 		return true;
 	}
+	
+	
+	/**
+	 * Checks if a bomb is an obstacle to an enemy using a particular movement strategy
+	 *
+	 * @param e 		The enemy
+	 * @return true, if it is obstacle
+	 */
+	@Override
+	public boolean isObstacle(EnemyMovementStrategy strategy) {
+		return true;
+	}
+	
 	
 	/**
 	 * Determines if the enemy blocks a boulder.

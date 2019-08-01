@@ -142,21 +142,11 @@ public class EnemyMoveAway implements EnemyMovementStrategy {
     		return false;
     	}
     	ArrayList<Entity> entities = dungeon.getEntities(targetX, targetY);
+    	boolean obstacle = false;
     	for (Entity e : entities) {
-	    	if (e instanceof Wall) {
-	    		return true;
-	    	} else if (e instanceof Door) {
-	    		Door d = (Door) e;
-	    		if (d.isClosed()) {
-	    			return true;
-	    		}
-	    	} else if (e instanceof Boulder) {
-	    		return true;
-	    	} else if (e instanceof Enemy) {
-	    		return true;
-	    	}
+    		obstacle = obstacle || e.isObstacle(this);
     	}
-    	return false;
+    	return obstacle;
     }
     
     /**

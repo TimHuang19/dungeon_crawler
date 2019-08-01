@@ -38,6 +38,17 @@ public class Exit extends Entity{
 	}
 
 	/**
+	 * Checks if a bomb is an obstacle to an enemy using a particular movement strategy
+	 *
+	 * @param e 		The enemy
+	 * @return true, if it is obstacle
+	 */
+	@Override
+	public boolean isObstacle(EnemyMovementStrategy strategy) {
+		return true;
+	}
+	
+	/**
 	 * Determines if the exit blocks a boulder.
 	 *
 	 * @return true, if exit blocks the boulder

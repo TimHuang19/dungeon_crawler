@@ -137,10 +137,20 @@ public abstract class Entity implements DungeonSubject{
     public abstract boolean isObstacle(Enemy e);
     
 	/**
+	 * Checks if is obstacle to an enemy using a particular movement strategy.
+	 *
+	 * @param e 	The enemy
+	 * @return true, if it is obstacle to an enemy
+	 */
+    public abstract boolean isObstacle(EnemyMovementStrategy strategy);
+    
+	/**
 	 * Determines if the entity blocks a boulder.
 	 *
 	 * @return true, if entity blocks the boulder
 	 */
+    
+    
     public abstract boolean blocksBoulder();
     
 	/**

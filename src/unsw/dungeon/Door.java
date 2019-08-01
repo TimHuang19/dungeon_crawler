@@ -144,6 +144,20 @@ public class Door extends Entity {
 	}
 	
 	/**
+	 * Checks if a bomb is an obstacle to an enemy using a particular movement strategy
+	 *
+	 * @param e 		The enemy
+	 * @return true, if it is obstacle
+	 */
+	@Override
+	public boolean isObstacle(EnemyMovementStrategy strategy) {
+		if (isClosed()) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Determines if door blocks boulder.
 	 *
 	 * @return true, if it blocks boulder
