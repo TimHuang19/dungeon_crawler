@@ -1,10 +1,12 @@
 package unsw.dungeon;
 
+import java.io.File;
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +28,7 @@ public class StartController {
     
     /** The stage. */
     private Stage stage;
+    
     
     /**
      * Instantiates a new start controller.
@@ -63,5 +66,5 @@ public class StartController {
     public void handleQuitButton() {
     	System.exit(0);
     }
-
+    
 }
