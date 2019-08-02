@@ -41,6 +41,9 @@ public class Player extends Entity implements Subject, Observer {
     
     /** A boolean indicating whether player is swinging sword */
     private boolean swinging;
+    
+    /** The number of treasure held by player **/
+    private int treasures;
 
     /** The bombs. */
     private ArrayList<Bomb> bombs;
@@ -128,6 +131,25 @@ public class Player extends Entity implements Subject, Observer {
         this.observers = new ArrayList<Observer>();
         this.initialisedObservers = false;
         this.swinging = false;
+        this.treasures = 0;
+    }
+    
+    public boolean atRightBoundary() {
+    	if (getX() == dungeon.getWidth()-1) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public int getSwings() {
+    	if (sword != null) {
+    		return sword.getSwings();
+    	}
+    	return 0;
+    }
+    
+    public int getTreasures() {
+    	return treasures;
     }
     
     /**
@@ -146,6 +168,7 @@ public class Player extends Entity implements Subject, Observer {
      */
     public void setKeyId(int keyId) {
     	this.keyId = keyId;
+    	notifyDungeonObservers();
     }
     
     /**
@@ -318,6 +341,7 @@ public class Player extends Entity implements Subject, Observer {
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
 
@@ -335,6 +359,7 @@ public class Player extends Entity implements Subject, Observer {
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
 
@@ -352,6 +377,7 @@ public class Player extends Entity implements Subject, Observer {
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
 
@@ -369,6 +395,7 @@ public class Player extends Entity implements Subject, Observer {
             updateInvincibility();
             updateExitGoal();
             notifyObservers();
+        	notifyDungeonObservers();
         }
     }
     
@@ -391,8 +418,10 @@ public class Player extends Entity implements Subject, Observer {
 	 */
 	public void reduceTreasures() {
 		dungeon.reduceTreasures();
+		treasures++;
+		notifyDungeonObservers();
 	}
-	
+
     /**
      * Swing sword.
      */
@@ -424,7 +453,7 @@ public class Player extends Entity implements Subject, Observer {
     		x = getX() + 1;
     		y = getY();
     	}
-    	
+    	    	
     	ArrayList<Entity> entities = dungeon.getEntities(x, y);
     	for (Entity e : entities) {
     		if (e instanceof Enemy) {
@@ -442,12 +471,14 @@ public class Player extends Entity implements Subject, Observer {
 		timeline.play();
     	
     	if (!sword.swing()) {
+        	notifyDungeonObservers();
     		Timeline timeline2 = new Timeline();
     		timeline2.setCycleCount(1);
     		KeyFrame kf2 = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> setSword(null));
     		timeline2.getKeyFrames().add(kf2);
     		timeline2.play();
-
+    	} else {
+        	notifyDungeonObservers();
     	}
 
     }
@@ -479,6 +510,7 @@ public class Player extends Entity implements Subject, Observer {
     	}
     	
     	Bomb b = bombs.remove(0);
+    	notifyDungeonObservers();
     	b.dropBomb();
     	b.x().set(getX());
     	b.y().set(getY());

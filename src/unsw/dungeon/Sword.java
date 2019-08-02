@@ -19,6 +19,10 @@ public class Sword extends Entity {
 		swings = 5;
 	}
 	
+	public int getSwings() {
+		return swings;
+	}
+	
 	/**
 	 * Swing the sword.
 	 *
