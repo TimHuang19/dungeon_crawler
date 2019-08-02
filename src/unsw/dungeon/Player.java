@@ -550,6 +550,8 @@ public class Player extends Entity implements Subject, Observer {
     	for (Entity e : entities) {
     		if (e instanceof Exit) {
     			dungeon.setComplete(Goal.EXIT, true);
+    		} else {
+    			dungeon.setComplete(Goal.EXIT, false);
     		}
     	}
     }

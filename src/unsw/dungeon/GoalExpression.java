@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 /**
  * The Interface GoalExpression.
  */
@@ -26,6 +28,13 @@ public interface GoalExpression {
 	 * @return 			The goal
 	 */
 	public Goal getGoal();
+	
+	/**
+	 * Gets the subGoals.
+	 *
+	 * @return 			The subGoals
+	 */
+	public ArrayList<GoalExpression> getSubGoals();
 	
 	/**
 	 * Adds a sub goal.

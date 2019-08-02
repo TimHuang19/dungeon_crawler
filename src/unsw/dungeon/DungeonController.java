@@ -57,6 +57,8 @@ public class DungeonController implements DungeonObserver{
     
     private Label treasureLabel;
     
+    ArrayList<Label> goalLabels;
+        
     /**
      * Instantiates a new dungeon controller.
      *
@@ -74,6 +76,7 @@ public class DungeonController implements DungeonObserver{
         this.bombLabel = new Label();
         this.keyLabel = new Label();
         this.treasureLabel = new Label();
+        this.goalLabels = new ArrayList<>();
         
         potionLabel.setTextFill(Color.YELLOW);
         swordLabel.setTextFill(Color.YELLOW);
@@ -89,11 +92,11 @@ public class DungeonController implements DungeonObserver{
         keyLabel.setFont(font);
         treasureLabel.setFont(font);
         
-        potionLabel.setText("0 steps");
-        swordLabel.setText("0 swings");
-        bombLabel.setText("0 bombs");
-        keyLabel.setText("not held");
-        treasureLabel.setText("0 found");
+        potionLabel.setText("         0 steps");
+        swordLabel.setText("         0 swings");
+        bombLabel.setText("         0 bombs");
+        keyLabel.setText("         not held");
+        treasureLabel.setText("         0 found");
     }
 	
     /**
@@ -110,34 +113,45 @@ public class DungeonController implements DungeonObserver{
             }
         }
         
-        Image brick = new Image("/grey_dirt1.png");
-        
-        Image shadow = new Image("/shadow_w.png");
-        for (int y = 0; y < dungeon.getHeight(); y++) {
-        	squares.add(new ImageView(brick), dungeon.getWidth(), y);
-        	squares.add(new ImageView(shadow), dungeon.getWidth(), y);
-        	squares.add(new ImageView(brick), dungeon.getWidth()+1, y);
+        Image upperBrick = new Image("/grey_dirt2.png");
+        Image shadowUp = new Image("/shadow_up.png");
+        Image shadowDown = new Image("/shadow_down.png");
+        Image shadowLeft = new Image("/shadow_left.png");
+        Image shadowRight = new Image("/shadow_right.png");
+
+    	squares.add(new ImageView(shadowUp), dungeon.getWidth(), 0);
+    	squares.add(new ImageView(shadowDown), dungeon.getWidth(), dungeon.getHeight()-1);
+
+        for (int y = 0; y < dungeon.getHeight(); y ++) {
+        	squares.add(new ImageView(upperBrick), dungeon.getWidth(), y);
+        	squares.add(new ImageView(shadowLeft), dungeon.getWidth(), y);
+        	squares.add(new ImageView(shadowRight), dungeon.getWidth(), y);
         }
+        
+        GoalExpression goals = dungeon.getGoals();
+        
+        
+        addGoalLabels(goals, "", dungeon.getWidth(), 0);
         
         Image potion = new Image("/potion_wide.png");
         squares.add(new ImageView(potion), dungeon.getWidth(), dungeon.getHeight()-5);
-        squares.add(potionLabel, dungeon.getWidth()+1, dungeon.getHeight()-5);
+        squares.add(potionLabel, dungeon.getWidth(), dungeon.getHeight()-5);
         
         Image sword = new Image("/sword_wide.png");
         squares.add(new ImageView(sword), dungeon.getWidth(), dungeon.getHeight()-4);
-        squares.add(swordLabel, dungeon.getWidth()+1, dungeon.getHeight()-4);
+        squares.add(swordLabel, dungeon.getWidth(), dungeon.getHeight()-4);
         
         Image bomb = new Image("/bomb_wide.png");
         squares.add(new ImageView(bomb), dungeon.getWidth(), dungeon.getHeight()-3);
-        squares.add(bombLabel, dungeon.getWidth()+1, dungeon.getHeight()-3);
+        squares.add(bombLabel, dungeon.getWidth(), dungeon.getHeight()-3);
         
         Image treasure = new Image("/treasure_wide.png");
         squares.add(new ImageView(treasure), dungeon.getWidth(), dungeon.getHeight()-2);
-        squares.add(treasureLabel, dungeon.getWidth()+1, dungeon.getHeight()-2);
+        squares.add(treasureLabel, dungeon.getWidth(), dungeon.getHeight()-2);
         
         Image key = new Image("/key_wide.png");
         squares.add(new ImageView(key), dungeon.getWidth(), dungeon.getHeight()-1);
-        squares.add(keyLabel, dungeon.getWidth()+1, dungeon.getHeight()-1);
+        squares.add(keyLabel, dungeon.getWidth(), dungeon.getHeight()-1);
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
@@ -224,6 +238,13 @@ public class DungeonController implements DungeonObserver{
 	public void update(DungeonSubject obj) {
 		if (obj instanceof Dungeon) {
 			Dungeon dungeon = (Dungeon) obj;
+			
+			for (Label label : goalLabels) {
+				squares.getChildren().remove(label);
+			}
+			goalLabels = new ArrayList<Label>();
+	        addGoalLabels(dungeon.getGoals(), "", dungeon.getWidth(), 0);
+			
 			Timeline timeline = new Timeline();
 			timeline.setCycleCount(1);
 			
@@ -263,18 +284,18 @@ public class DungeonController implements DungeonObserver{
 		} else if (obj instanceof Player) {
 			Player player = (Player) obj;
 			
-			potionLabel.setText(player.getInvincibleSteps() + " steps");
+			potionLabel.setText("         " + player.getInvincibleSteps() + " steps");
 			
-			swordLabel.setText(player.getSwings() + " swings");
+			swordLabel.setText("         " + player.getSwings() + " swings");
 			
-			bombLabel.setText(player.getBombs().size() + " bombs");
+			bombLabel.setText("         " + player.getBombs().size() + " bombs");
 			
-			treasureLabel.setText(player.getTreasures() + " found");
+			treasureLabel.setText("         " + player.getTreasures() + " found");
 			
 			if (player.getKeyId() == -1) {
-				keyLabel.setText("not held");
+				keyLabel.setText("         " + "not held");
 			} else {
-				keyLabel.setText("held");
+				keyLabel.setText("         " + "held");
 			}
 			
 			if (player.isSwinging()) {
@@ -386,6 +407,81 @@ public class DungeonController implements DungeonObserver{
 			squares.getChildren().remove(((Entity) obj).getImageView());
 		}
 		
+	}
+	
+	private void addGoalLabels(GoalExpression goals, String space, int x, int y) {
+		Label label = new Label();
+        label.setTextFill(Color.ORANGERED);
+        Font font = new Font("Ayuthaya", 12);
+        label.setFont(font);
+        
+		switch(goals.getGoal()) {
+			case AND:
+				if (goals.isComplete()) {
+					label.setText(space + "* All of:");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* All of:");
+				}
+				squares.add(label, x, y);
+				y++;
+				for (GoalExpression g : goals.getSubGoals()) {
+					addGoalLabels(g, "  " + space, x, y);
+					y++;
+				}
+				break;
+			case OR:
+				if (goals.isComplete()) {
+					label.setText(space + "* One of:");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* One of:");
+				}
+				squares.add(label, x, y);
+				y++;
+				for (GoalExpression g : goals.getSubGoals()) {
+					addGoalLabels(g, "  " + space, x, y);
+					y++;
+				}
+				break;
+			case BOULDERS:
+				if (goals.isComplete()) {
+					label.setText(space + "* BOULDERS");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* BOULDERS");
+				}
+				squares.add(label, x, y);
+				break;
+			case ENEMIES:
+				if (goals.isComplete()) {
+					label.setText(space + "* ENEMIES");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* ENEMIES");
+				}
+				squares.add(label, x, y);
+				break;
+			case TREASURE:
+				if (goals.isComplete()) {
+					label.setText(space + "* TREASURE");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* TREASURE");
+				}
+				squares.add(label, x, y);
+				break;
+			case EXIT:
+				if (goals.isComplete()) {
+					label.setText(space + "* EXIT");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* EXIT");
+				}
+				squares.add(label, x, y);
+				break;
+		}
+		goalLabels.add(label);
 	}
 	
 	/**

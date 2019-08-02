@@ -94,6 +94,8 @@ public class ComplexGoal implements GoalExpression {
 		return this.goal;
 	}
 	
+	
+	
 	/**
 	 * Adds a sub goal to the goal
 	 *
@@ -116,6 +118,15 @@ public class ComplexGoal implements GoalExpression {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Gets the subGoals.
+	 *
+	 * @return 			The subGoals
+	 */
+	public ArrayList<GoalExpression> getSubGoals() {
+		return subGoals;
 	}
 
 }

@@ -164,6 +164,15 @@ public class Dungeon implements DungeonSubject, Observer {
     }
     
     /**
+     * Gets the goals.
+     *
+     * @return the goals
+     */
+    public GoalExpression getGoals() {
+    	return goals;
+    }
+    
+    /**
      * Makes the game over.
      */
     public void gameOver() {
@@ -250,6 +259,7 @@ public class Dungeon implements DungeonSubject, Observer {
     public void setComplete(Goal goal, boolean complete) {
     	goals.setComplete(goal, complete);
     	
+    	notifyDungeonObservers();
     	if (goals.isComplete()) {
     		this.complete = true;
     		pause();
