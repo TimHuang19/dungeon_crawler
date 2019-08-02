@@ -103,30 +103,6 @@ public class EnemyMovementTest {
 	}
 	
 	@Test
-	public void playerMovingTwiceShouldMakeEnemyMoveOnce() {
-		assertEquals("Enemy X start position is 7", 7, e.getX());
-		assertEquals("Enemy Y start position is 5", 5, e.getY());
-		p.moveLeft();
-		p.moveLeft();
-		assertEquals("Enemy X position must decrease by 1 to chase player", 6, e.getX());
-		assertEquals("Enemy Y position must be the same", 5, e.getY());
-	}
-	
-	@Test
-	public void playerMovingFourTimesShouldMakeEnemyMoveTwice() {
-		assertEquals("Enemy X start position is 7", 7, e.getX());
-		assertEquals("Enemy Y start position is 5", 5, e.getY());
-		p.moveLeft();
-		p.moveLeft();
-		assertEquals("Enemy X position must decrease by 1 to chase player", 6, e.getX());
-		assertEquals("Enemy Y position must be the same", 5, e.getY());
-		p.moveRight();
-		p.moveLeft();
-		assertEquals("Enemy X position must decrease by 1 twice to chase player", 5, e.getX());
-		assertEquals("Enemy Y position must be the same", 5, e.getY());
-	}
-	
-	@Test
 	public void enemyShouldNotMoveIntoWall() {
 		d.addEntity(new Wall(7,3));
 		

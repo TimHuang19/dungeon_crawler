@@ -51,8 +51,23 @@ public class NextLevelController {
     @FXML
     public void initialize() {
     	switch (fileName) {
-		case "maze.json":
+		case "level_1.json":
 	    	completionName.setText("Level 1 of 6 Clear");
+	    	break;
+		case "level_2.json":
+	    	completionName.setText("Level 2 of 6 Clear");
+	    	break;
+		case "level_3.json":
+	    	completionName.setText("Level 3 of 6 Clear");
+	    	break;
+		case "level_4.json":
+	    	completionName.setText("Level 4 of 6 Clear");
+	    	break;
+		case "level_5.json":
+	    	completionName.setText("Level 5 of 6 Clear");
+	    	break;
+		case "level_6.json":
+	    	completionName.setText("Level 6 of 6 Clear");
 	    	break;
     	}
     }
@@ -65,8 +80,20 @@ public class NextLevelController {
     @FXML
     public void handleContinueButton() throws IOException {
     	switch (fileName) {
-		case "maze.json":
-	    	(new DungeonScreen(stage, "last.json")).start();
+		case "level_1.json":
+	    	(new DungeonScreen(stage, "level_2.json")).start();
+	    	break;
+		case "level_2.json":
+	    	(new DungeonScreen(stage, "level_3.json")).start();
+	    	break;
+		case "level_3.json":
+	    	(new DungeonScreen(stage, "level_4.json")).start();
+	    	break;
+		case "level_4.json":
+	    	(new DungeonScreen(stage, "level_5.json")).start();
+	    	break;
+		case "level_5.json":
+	    	(new DungeonScreen(stage, "level_6.json")).start();
 	    	break;
     	}
     }

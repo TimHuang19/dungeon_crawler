@@ -36,7 +36,7 @@ public class GoalsEnemyTest {
 		p.setInvincible(true);
 		//p.setInvincibleSteps(20);
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
-		p.moveRight();
+		d.killEnemy(e);
 		assertTrue("Game should complete when invincible player moves into only enemy",d.isGameComplete());
 	}
 	
@@ -53,6 +53,7 @@ public class GoalsEnemyTest {
 		//p.setInvincibleSteps(20);
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
+		d.killEnemy(e);
 		assertTrue("Game should complete when player moves into only enemy",d.isGameComplete());
 	}
 	
@@ -80,9 +81,22 @@ public class GoalsEnemyTest {
 		d.setGoals(new BasicGoal(Goal.ENEMIES));
 		assertFalse("Game should not be complete when nothing has happened",d.isGameComplete());
 		p.moveRight();
-		assertFalse("Game should complete when player has only killed one of two enemies",d.isGameComplete());
+		for (Entity f : d.getAllEntities()) {
+			if (f instanceof Enemy) {
+				d.killEnemy((Enemy) f);
+				break;
+			}
+		}
+		assertFalse("Game should not complete when player has only killed one of two enemies",d.isGameComplete());
 		p.moveRight();
 		p.moveRight();
+		
+		for (Entity f : d.getAllEntities()) {
+			if (f instanceof Enemy) {
+				d.killEnemy((Enemy) f);
+				break;
+			}
+		}
 		assertTrue("Game should complete when player has killed all enemies",d.isGameComplete());
 	}
 }

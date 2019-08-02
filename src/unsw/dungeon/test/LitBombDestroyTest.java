@@ -253,7 +253,7 @@ public class LitBombDestroyTest {
 		assertSame("There remains only 8 non-Player, non-Enemy and non-Boulder entities on immediate squares after explosion", 8,
 				(d.getEntities(5, 5).size() + d.getEntities(4, 5).size() + d.getEntities(5, 4).size() + d.getEntities(5, 6).size()));
 	}
-	
+	/*
 	@Test
 	public void bombShouldExplodeAfterBeingDropped() {
 		assertTrue("Bomb is in unlit state before pick up", b.getState() instanceof UnlitState);
@@ -269,5 +269,5 @@ public class LitBombDestroyTest {
 		}
 		
 		assertTrue("Bomb must explode a short delay after being dropped by player", bombHasExploded);
-	}
+	}*/
 }

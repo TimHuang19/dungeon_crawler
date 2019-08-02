@@ -547,11 +547,10 @@ public class Player extends Entity implements Subject, Observer {
     private void updateExitGoal() {
     	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
     	
+		dungeon.setComplete(Goal.EXIT, false);
     	for (Entity e : entities) {
     		if (e instanceof Exit) {
     			dungeon.setComplete(Goal.EXIT, true);
-    		} else {
-    			dungeon.setComplete(Goal.EXIT, false);
     		}
     	}
     }

@@ -43,7 +43,7 @@ public class StartController {
      */
     @FXML
     public void handleStartButton() throws IOException {
-        (new DungeonScreen(stage, "maze.json")).start();
+        (new DungeonScreen(stage, "level_1.json")).start();
     }
     
     /**
@@ -53,7 +53,7 @@ public class StartController {
      */
     @FXML
     public void handleLevelButton() throws IOException {
-    	(new DungeonScreen(stage, "last.json")).start();
+    	(new LevelSelectScreen(stage)).start();
     }
     
     /**

@@ -56,11 +56,7 @@ public class PlayerUseSwordTest {
 		
 		int swingCounter = 0;
 		
-		while(p.getSword() != null) {
-			p.swingSword();
-			swingCounter++;
-		}
-		
+
 		assertSame("Sword should have 5 swings", 5, swingCounter);
 	}
 	

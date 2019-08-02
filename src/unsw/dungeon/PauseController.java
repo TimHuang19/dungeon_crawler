@@ -60,12 +60,24 @@ public class PauseController {
     @FXML
     public void initialize() {
     	switch (fileName) {
-			case "maze.json":
+			case "level_1.json":
 		    	levelName.setText("Level 1 of 6");
 		    	break;
-			case "last.json":
-				levelName.setText("Level 6 of 6");
-				break;
+			case "level_2.json":
+		    	levelName.setText("Level 2 of 6");
+		    	break;
+			case "level_3.json":
+		    	levelName.setText("Level 3 of 6");
+		    	break;
+			case "level_4.json":
+		    	levelName.setText("Level 4 of 6");
+		    	break;
+			case "level_5.json":
+		    	levelName.setText("Level 5 of 6");
+		    	break;
+			case "level_6.json":
+		    	levelName.setText("Level 6 of 6");
+		    	break;
     	}
     }
     

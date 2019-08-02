@@ -58,6 +58,10 @@ public class DungeonController implements DungeonObserver{
     private Label treasureLabel;
     
     ArrayList<Label> goalLabels;
+    
+    private int labelX;
+    
+    private int labelY;
         
     /**
      * Instantiates a new dungeon controller.
@@ -113,25 +117,37 @@ public class DungeonController implements DungeonObserver{
             }
         }
         
-        Image upperBrick = new Image("/grey_dirt2.png");
+        Image upperBrick = new Image("/title.png");
+        Image lowerBrick = new Image("/grey_dirt2.png");
         Image shadowUp = new Image("/shadow_up.png");
         Image shadowDown = new Image("/shadow_down.png");
         Image shadowLeft = new Image("/shadow_left.png");
         Image shadowRight = new Image("/shadow_right.png");
 
-    	squares.add(new ImageView(shadowUp), dungeon.getWidth(), 0);
-    	squares.add(new ImageView(shadowDown), dungeon.getWidth(), dungeon.getHeight()-1);
 
         for (int y = 0; y < dungeon.getHeight(); y ++) {
-        	squares.add(new ImageView(upperBrick), dungeon.getWidth(), y);
+        	if (y == 0) {
+            	squares.add(new ImageView(new Image("/goals.png")), dungeon.getWidth(), 0);
+        	} else if (y < dungeon.getHeight()-5){
+            	squares.add(new ImageView(lowerBrick), dungeon.getWidth(), y);
+        	} else {
+            	squares.add(new ImageView(upperBrick), dungeon.getWidth(), y);
+        	}
         	squares.add(new ImageView(shadowLeft), dungeon.getWidth(), y);
         	squares.add(new ImageView(shadowRight), dungeon.getWidth(), y);
         }
         
+
+    	
+    	squares.add(new ImageView(shadowUp), dungeon.getWidth(), 0);
+    	squares.add(new ImageView(shadowDown), dungeon.getWidth(), dungeon.getHeight()-1);
+
         GoalExpression goals = dungeon.getGoals();
         
+        labelX = dungeon.getWidth();
+        labelY = 1;
         
-        addGoalLabels(goals, " ", dungeon.getWidth(), 0);
+        addGoalLabels(goals, " ");
         
         Image potion = new Image("/potion_wide.png");
         squares.add(new ImageView(potion), dungeon.getWidth(), dungeon.getHeight()-5);
@@ -254,7 +270,9 @@ public class DungeonController implements DungeonObserver{
 			squares.getChildren().remove(label);
 		}
 		goalLabels = new ArrayList<Label>();
-        addGoalLabels(dungeon.getGoals(), " ", dungeon.getWidth(), 0);
+		labelX = dungeon.getWidth();
+		labelY = 1;
+        addGoalLabels(dungeon.getGoals(), " ");
 		
 		Timeline timeline = new Timeline();
 		timeline.setCycleCount(1);
@@ -270,7 +288,7 @@ public class DungeonController implements DungeonObserver{
 			timeline.getKeyFrames().add(kf);
 			timeline.play();
 		} else if (dungeon.isGameComplete()) {
-			if (fileName.equals("advanced.json")) {
+			if (fileName.equals("level_6.json")) {
 				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
 					try {
 						(new CompletedDungeonScreen(stage)).start();
@@ -418,7 +436,7 @@ public class DungeonController implements DungeonObserver{
 		}
 	}
 	
-	private void addGoalLabels(GoalExpression goals, String space, int x, int y) {
+	private void addGoalLabels(GoalExpression goals, String space) {
 		Label label = new Label();
         label.setTextFill(Color.ORANGERED);
         Font font = new Font("Ayuthaya", 12);
@@ -432,11 +450,10 @@ public class DungeonController implements DungeonObserver{
 				} else {
 					label.setText(space + "* All of:");
 				}
-				squares.add(label, x, y);
-				y++;
+				squares.add(label, labelX, labelY);
+				labelY++;
 				for (GoalExpression g : goals.getSubGoals()) {
-					addGoalLabels(g, "  " + space, x, y);
-					y++;
+					addGoalLabels(g, "  " + space);
 				}
 				break;
 			case OR:
@@ -446,11 +463,10 @@ public class DungeonController implements DungeonObserver{
 				} else {
 					label.setText(space + "* One of:");
 				}
-				squares.add(label, x, y);
-				y++;
+				squares.add(label, labelX, labelY);
+				labelY++;
 				for (GoalExpression g : goals.getSubGoals()) {
-					addGoalLabels(g, "  " + space, x, y);
-					y++;
+					addGoalLabels(g, "  " + space);
 				}
 				break;
 			case BOULDERS:
@@ -460,7 +476,8 @@ public class DungeonController implements DungeonObserver{
 				} else {
 					label.setText(space + "* BOULDERS");
 				}
-				squares.add(label, x, y);
+				squares.add(label, labelX, labelY);
+				labelY++;
 				break;
 			case ENEMIES:
 				if (goals.isComplete()) {
@@ -469,7 +486,8 @@ public class DungeonController implements DungeonObserver{
 				} else {
 					label.setText(space + "* ENEMIES");
 				}
-				squares.add(label, x, y);
+				squares.add(label, labelX, labelY);
+				labelY++;
 				break;
 			case TREASURE:
 				if (goals.isComplete()) {
@@ -478,7 +496,8 @@ public class DungeonController implements DungeonObserver{
 				} else {
 					label.setText(space + "* TREASURE");
 				}
-				squares.add(label, x, y);
+				squares.add(label, labelX, labelY);
+				labelY++;
 				break;
 			case EXIT:
 				if (goals.isComplete()) {
@@ -487,7 +506,8 @@ public class DungeonController implements DungeonObserver{
 				} else {
 					label.setText(space + "* EXIT");
 				}
-				squares.add(label, x, y);
+				squares.add(label, labelX, labelY);
+				labelY++;
 				break;
 		}
 		goalLabels.add(label);

@@ -31,7 +31,7 @@
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="130.0" layoutY="57.0" prefHeight="68.0" prefWidth="343.0" text="Hide In Darkness">
+      <Label alignment="CENTER" layoutX="130.0" layoutY="60.0" prefHeight="68.0" prefWidth="343.0" text="Hide In Darkness">
          <font>
             <Font name="Silom" size="37.0" />
          </font>

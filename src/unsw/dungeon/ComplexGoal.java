@@ -57,30 +57,8 @@ public class ComplexGoal implements GoalExpression {
 	 */
 	@Override
 	public void setComplete(Goal goal, boolean completed) {
-		boolean nonExitCompleted = true;
-		if (goal == Goal.EXIT && this.goal == Goal.AND) {
-			if (containsExit()) {
-				GoalExpression exit = null;
-				for (GoalExpression g : subGoals) {
-					if (g.getGoal() == Goal.EXIT) {
-						exit = g;
-					} else {
-						g.setComplete(goal,  completed);
-						nonExitCompleted = nonExitCompleted && g.isComplete();
-					}
-				}
-				if (exit != null) {
-					exit.setComplete(goal, nonExitCompleted);
-				}
-			} else {
-				for (GoalExpression g : subGoals) {
-					g.setComplete(goal, completed);
-				}
-			}
-		} else {
-			for (GoalExpression g : subGoals) {
-				g.setComplete(goal, completed);
-			}
+		for (GoalExpression g : subGoals) {
+			g.setComplete(goal, completed);
 		}
 	}
 	
