@@ -271,6 +271,7 @@ public class Bomb extends Entity {
 			return false;
 		}
 		p.addBomb(this);
+		dungeon.getPlayer().notifyDungeonObservers();
 		return true;
 	}
 

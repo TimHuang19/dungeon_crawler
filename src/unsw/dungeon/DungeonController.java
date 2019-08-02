@@ -8,10 +8,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -44,6 +47,16 @@ public class DungeonController implements DungeonObserver{
     /** The pause screen. */
     private PauseScreen pauseScreen;
     
+    private Label potionLabel;
+    
+    private Label swordLabel;
+    
+    private Label bombLabel;
+    
+    private Label keyLabel;
+    
+    private Label treasureLabel;
+    
     /**
      * Instantiates a new dungeon controller.
      *
@@ -56,6 +69,31 @@ public class DungeonController implements DungeonObserver{
         this.dungeon.registerDungeonObserver(this);
         this.initialEntities = new ArrayList<>(initialEntities);
         this.dungeon.setController(this);
+        this.potionLabel = new Label();
+        this.swordLabel = new Label();
+        this.bombLabel = new Label();
+        this.keyLabel = new Label();
+        this.treasureLabel = new Label();
+        
+        potionLabel.setTextFill(Color.YELLOW);
+        swordLabel.setTextFill(Color.YELLOW);
+        bombLabel.setTextFill(Color.YELLOW);
+        keyLabel.setTextFill(Color.YELLOW);
+        treasureLabel.setTextFill(Color.YELLOW);
+        
+        Font font = new Font("Ayuthaya", 12);
+        
+        potionLabel.setFont(font);
+        swordLabel.setFont(font);
+        bombLabel.setFont(font);
+        keyLabel.setFont(font);
+        treasureLabel.setFont(font);
+        
+        potionLabel.setText("0 steps");
+        swordLabel.setText("0 swings");
+        bombLabel.setText("0 bombs");
+        keyLabel.setText("not held");
+        treasureLabel.setText("0 found");
     }
 	
     /**
@@ -71,6 +109,35 @@ public class DungeonController implements DungeonObserver{
                 squares.add(new ImageView(ground), x, y);
             }
         }
+        
+        Image brick = new Image("/grey_dirt1.png");
+        
+        Image shadow = new Image("/shadow_w.png");
+        for (int y = 0; y < dungeon.getHeight(); y++) {
+        	squares.add(new ImageView(brick), dungeon.getWidth(), y);
+        	squares.add(new ImageView(shadow), dungeon.getWidth(), y);
+        	squares.add(new ImageView(brick), dungeon.getWidth()+1, y);
+        }
+        
+        Image potion = new Image("/potion_wide.png");
+        squares.add(new ImageView(potion), dungeon.getWidth(), dungeon.getHeight()-5);
+        squares.add(potionLabel, dungeon.getWidth()+1, dungeon.getHeight()-5);
+        
+        Image sword = new Image("/sword_wide.png");
+        squares.add(new ImageView(sword), dungeon.getWidth(), dungeon.getHeight()-4);
+        squares.add(swordLabel, dungeon.getWidth()+1, dungeon.getHeight()-4);
+        
+        Image bomb = new Image("/bomb_wide.png");
+        squares.add(new ImageView(bomb), dungeon.getWidth(), dungeon.getHeight()-3);
+        squares.add(bombLabel, dungeon.getWidth()+1, dungeon.getHeight()-3);
+        
+        Image treasure = new Image("/treasure_wide.png");
+        squares.add(new ImageView(treasure), dungeon.getWidth(), dungeon.getHeight()-2);
+        squares.add(treasureLabel, dungeon.getWidth()+1, dungeon.getHeight()-2);
+        
+        Image key = new Image("/key_wide.png");
+        squares.add(new ImageView(key), dungeon.getWidth(), dungeon.getHeight()-1);
+        squares.add(keyLabel, dungeon.getWidth()+1, dungeon.getHeight()-1);
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
@@ -196,6 +263,20 @@ public class DungeonController implements DungeonObserver{
 		} else if (obj instanceof Player) {
 			Player player = (Player) obj;
 			
+			potionLabel.setText(player.getInvincibleSteps() + " steps");
+			
+			swordLabel.setText(player.getSwings() + " swings");
+			
+			bombLabel.setText(player.getBombs().size() + " bombs");
+			
+			treasureLabel.setText(player.getTreasures() + " found");
+			
+			if (player.getKeyId() == -1) {
+				keyLabel.setText("not held");
+			} else {
+				keyLabel.setText("held");
+			}
+			
 			if (player.isSwinging()) {
 				squares.getChildren().remove(player.getLeftSlashView());
 				squares.getChildren().remove(player.getRightSlashView());
@@ -209,6 +290,9 @@ public class DungeonController implements DungeonObserver{
 					timeline.getKeyFrames().add(kf);
 					timeline.play();
 				} else if (player.getDirection() == Direction.RIGHT) {
+					if (player.atRightBoundary()) {
+						return;
+					}
 					squares.getChildren().add(player.getRightSlashView());
 					Timeline timeline = new Timeline();
 					timeline.setCycleCount(1);

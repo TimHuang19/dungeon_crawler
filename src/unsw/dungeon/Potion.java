@@ -68,8 +68,8 @@ public class Potion extends Entity {
 	 */
 	@Override
 	public boolean pickUp(Player p) {
-		p.setInvincible(true);
 		p.setInvincibleSteps(20);
+		p.setInvincible(true);
 		return true;
 	}
 
