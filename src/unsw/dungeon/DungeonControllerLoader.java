@@ -155,6 +155,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         wallImage = new Image("/brick_brown_0.png");
         exitImage = new Image("/exit.png");
         enemyImage = new Image("/deep_elf_master_archer.png");
+        enemyImage = new Image("/hound.png");
         boulderImage = new Image("/boulder.png");
         switchImage = new Image("/pressure_plate.png");
         potionImage = new Image("/brilliant_blue_new.png");
@@ -308,6 +309,13 @@ public class DungeonControllerLoader extends DungeonLoader {
         ImageView view = new ImageView(enemyImage);
         enemy.setImageView(view);
         addEntity(enemy, view);
+    }
+    
+    @Override
+    public void onLoad(Hound hound) {
+        ImageView view = new ImageView(enemyImage);
+        hound.setImageView(view);
+        addEntity(hound, view);
     }
     
     /**

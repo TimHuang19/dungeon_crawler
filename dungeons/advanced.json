@@ -3,34 +3,14 @@
   "height": 16,
   "entities": [
     {
-        "x": 5,
-        "y": 4,
-        "type": "key"
+      "x": 1,
+      "y": 1,
+      "type": "hound"
     },
     {
-        "x": 10,
-        "y": 4,
-        "type": "key"
-    },
-    {
-        "x": 12,
-        "y": 3,
-        "type": "sword"
-    },
-    {
-        "x": 2,
-        "y": 7,
-        "type": "door"
-    },
-    {
-        "x": 11,
-        "y": 6,
-        "type": "door"
-    },
-    {
-        "x": 11,
-        "y": 8,
-        "type": "invincibility"
+      "x": 1,
+      "y": 5,
+      "type": "player"
     },
     {
       "x": 0,
@@ -128,102 +108,12 @@
       "type": "wall"
     },
     {
-      "x": 1,
-      "y": 1,
-      "type": "player"
-    },
-    {
-      "x": 6,
-      "y": 1,
-      "type": "sword"
-    },
-    {
-        "x": 7,
-        "y": 1,
-        "type": "enemy"
-    },
-    {
-      "x": 17,
-      "y": 1,
-      "type": "wall"
-    },
-    {
       "x": 0,
       "y": 2,
       "type": "wall"
     },
     {
-      "x": 3,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 6,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 7,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 8,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 9,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 12,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 14,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 15,
-      "y": 2,
-      "type": "wall"
-    },
-    {
-      "x": 17,
-      "y": 2,
-      "type": "wall"
-    },
-    {
       "x": 0,
-      "y": 3,
-      "type": "wall"
-    },
-    {
-      "x": 3,
-      "y": 3,
-      "type": "wall"
-    },
-    {
-      "x": 4,
-      "y": 3,
-      "type": "wall"
-    },
-    {
-      "x": 15,
-      "y": 3,
-      "type": "wall"
-    },
-    {
-      "x": 17,
       "y": 3,
       "type": "wall"
     },
@@ -233,72 +123,12 @@
       "type": "wall"
     },
     {
-      "x": 8,
-      "y": 4,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 4,
-      "type": "bomb"
-    },
-    {
-      "x": 17,
-      "y": 4,
-      "type": "wall"
-    },
-    {
       "x": 0,
       "y": 5,
       "type": "wall"
     },
     {
-      "x": 3,
-      "y": 5,
-      "type": "enemy"
-    },
-    {
-        "x": 4,
-        "y": 5,
-        "type": "boulder"
-    },
-    {
-      "x": 8,
-      "y": 5,
-      "type": "wall"
-    },
-    {
-      "x": 17,
-      "y": 5,
-      "type": "wall"
-    },
-    {
       "x": 0,
-      "y": 6,
-      "type": "wall"
-    },
-    {
-      "x": 6,
-      "y": 6,
-      "type": "wall"
-    },
-    {
-      "x": 8,
-      "y": 6,
-      "type": "wall"
-    },
-    {
-      "x": 9,
-      "y": 6,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 6,
-      "type": "wall"
-    },
-    {
-      "x": 17,
       "y": 6,
       "type": "wall"
     },
@@ -308,72 +138,7 @@
       "type": "wall"
     },
     {
-      "x": 6,
-      "y": 7,
-      "type": "wall"
-    },
-    {
-      "x": 12,
-      "y": 7,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 7,
-      "type": "wall"
-    },
-    {
-      "x": 17,
-      "y": 7,
-      "type": "wall"
-    },
-    {
       "x": 0,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 3,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 4,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 5,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 6,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 8,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 9,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 10,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 8,
-      "type": "wall"
-    },
-    {
-      "x": 17,
       "y": 8,
       "type": "wall"
     },
@@ -383,72 +148,7 @@
       "type": "wall"
     },
     {
-      "x": 9,
-      "y": 9,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 9,
-      "type": "wall"
-    },
-    {
-      "x": 14,
-      "y": 9,
-      "type": "wall"
-    },
-    {
-      "x": 17,
-      "y": 9,
-      "type": "wall"
-    },
-    {
       "x": 0,
-      "y": 10,
-      "type": "wall"
-    },
-    {
-      "x": 3,
-      "y": 10,
-      "type": "wall"
-    },
-    {
-      "x": 5,
-      "y": 10,
-      "type": "wall"
-    },
-    {
-      "x": 6,
-      "y": 10,
-      "type": "wall"
-    },
-    {
-      "x": 7,
-      "y": 10,
-      "type": "treasure"
-    },
-    {
-        "x": 7,
-        "y": 12,
-        "type": "bomb"
-    },
-    {
-        "x": 7,
-        "y": 13,
-        "type": "bomb"
-    },
-    {
-        "x": 8,
-        "y": 14,
-        "type": "bomb"
-    },
-    {
-      "x": 11,
-      "y": 10,
-      "type": "invincibility"
-    },
-    {
-      "x": 17,
       "y": 10,
       "type": "wall"
     },
@@ -458,102 +158,12 @@
       "type": "wall"
     },
     {
-      "x": 3,
-      "y": 11,
-      "type": "wall"
-    },
-    {
-      "x": 6,
-      "y": 11,
-      "type": "wall"
-    },
-    {
-      "x": 8,
-      "y": 11,
-      "type": "wall"
-    },
-    {
-      "x": 9,
-      "y": 11,
-      "type": "wall"
-    },
-    {
-      "x": 10,
-      "y": 11,
-      "type": "wall"
-    },
-    {
-      "x": 12,
-      "y": 11,
-      "type": "wall"
-    },
-    {
-      "x": 17,
-      "y": 11,
-      "type": "wall"
-    },
-    {
       "x": 0,
       "y": 12,
       "type": "wall"
     },
     {
-      "x": 3,
-      "y": 12,
-      "type": "wall"
-    },
-    {
-      "x": 9,
-      "y": 12,
-      "type": "wall"
-    },
-    {
-      "x": 12,
-      "y": 12,
-      "type": "wall"
-    },
-    {
-      "x": 17,
-      "y": 12,
-      "type": "wall"
-    },
-    {
       "x": 0,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 3,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 4,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 5,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 12,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 14,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 17,
       "y": 13,
       "type": "wall"
     },
@@ -563,14 +173,9 @@
       "type": "wall"
     },
     {
-      "x": 17,
-      "y": 14,
+      "x": 0,
+      "y": 15,
       "type": "wall"
-    },
-    {
-        "x": 4,
-        "y": 4,
-        "type": "switch"
     },
     {
       "x": 0,
@@ -578,14 +183,84 @@
       "type": "wall"
     },
     {
-      "x": 1,
+      "x": 17,
+      "y": 1,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 3,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 4,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 5,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 9,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 10,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 12,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 14,
+      "type": "wall"
+    },
+    {
+      "x": 17,
       "y": 15,
       "type": "wall"
     },
     {
-        "x": 17,
-        "y": 15,
-        "type": "exit"
+      "x": 1,
+      "y": 15,
+      "type": "wall"
     },
     {
       "x": 2,
@@ -601,25 +276,514 @@
       "x": 4,
       "y": 15,
       "type": "wall"
+    },
+    {
+      "x": 5,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 8,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 10,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 12,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 10,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 12,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 12,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 14,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 14,
+      "type": "wall"
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "type": "wall"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 8,
+      "y": 12,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 3,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 10,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 1,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 1,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 4,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 12,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 3,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 14,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 10,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 12,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 9,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 10,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 11,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 13,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 14,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 7,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 5,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 6,
+      "type": "wall"
+    },
+    {
+      "x": 16,
+      "y": 8,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 14,
+      "type": "wall"
+    },
+    {
+      "x": 16,
+      "y": 14,
+      "type": "exit"
     }
   ],
   "goal-condition": {
-    "goal": "AND",
-    "subgoals": [
-      {
-        "goal": "treasure"
-      },
-      {
-        "goal": "OR",
-        "subgoals": [
-            {
-                "goal": "enemies"
-            },
-            {
-                "goal": "exit"
-            }
-        ]
-      }
-    ]
+    "goal": "exit"
   }
 }

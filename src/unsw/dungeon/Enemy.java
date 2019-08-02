@@ -315,4 +315,8 @@ public class Enemy extends Entity implements Subject, Observer {
 		}
 	}
 
+	public void setTimeline(Timeline timeline) {
+		this.timeline.stop();
+		this.timeline = timeline;
+	}
 }

@@ -96,6 +96,11 @@ public abstract class DungeonLoader {
     		onLoad(enemy);
     		entity = enemy;
     		break;
+    	case "hound":
+    		Hound hound = new Hound(dungeon, x, y);
+    		onLoad(hound);
+    		entity = hound;
+    		break;
         case "boulder":
         	Boulder boulder = new Boulder(dungeon, x, y);
         	onLoad(boulder);
@@ -262,6 +267,13 @@ public abstract class DungeonLoader {
      * @param enemy the enemy
      */
     public abstract void onLoad(Enemy enemy);
+    
+    /**
+     * On load.
+     *
+     * @param enemy the enemy
+     */
+    public abstract void onLoad(Hound hound);
     
     /**
      * On load.
