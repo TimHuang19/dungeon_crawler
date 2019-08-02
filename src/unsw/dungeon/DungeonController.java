@@ -57,6 +57,8 @@ public class DungeonController implements DungeonObserver{
     
     private Label treasureLabel;
     
+    ArrayList<Label> goalLabels;
+        
     /**
      * Instantiates a new dungeon controller.
      *
@@ -74,6 +76,7 @@ public class DungeonController implements DungeonObserver{
         this.bombLabel = new Label();
         this.keyLabel = new Label();
         this.treasureLabel = new Label();
+        this.goalLabels = new ArrayList<>();
         
         potionLabel.setTextFill(Color.YELLOW);
         swordLabel.setTextFill(Color.YELLOW);
@@ -89,11 +92,11 @@ public class DungeonController implements DungeonObserver{
         keyLabel.setFont(font);
         treasureLabel.setFont(font);
         
-        potionLabel.setText("0 steps");
-        swordLabel.setText("0 swings");
-        bombLabel.setText("0 bombs");
-        keyLabel.setText("not held");
-        treasureLabel.setText("0 found");
+        potionLabel.setText("          0 steps");
+        swordLabel.setText("          0 swings");
+        bombLabel.setText("          0 bombs");
+        keyLabel.setText("          not held");
+        treasureLabel.setText("          0 found");
     }
 	
     /**
@@ -110,34 +113,45 @@ public class DungeonController implements DungeonObserver{
             }
         }
         
-        Image brick = new Image("/grey_dirt1.png");
-        
-        Image shadow = new Image("/shadow_w.png");
-        for (int y = 0; y < dungeon.getHeight(); y++) {
-        	squares.add(new ImageView(brick), dungeon.getWidth(), y);
-        	squares.add(new ImageView(shadow), dungeon.getWidth(), y);
-        	squares.add(new ImageView(brick), dungeon.getWidth()+1, y);
+        Image upperBrick = new Image("/grey_dirt2.png");
+        Image shadowUp = new Image("/shadow_up.png");
+        Image shadowDown = new Image("/shadow_down.png");
+        Image shadowLeft = new Image("/shadow_left.png");
+        Image shadowRight = new Image("/shadow_right.png");
+
+    	squares.add(new ImageView(shadowUp), dungeon.getWidth(), 0);
+    	squares.add(new ImageView(shadowDown), dungeon.getWidth(), dungeon.getHeight()-1);
+
+        for (int y = 0; y < dungeon.getHeight(); y ++) {
+        	squares.add(new ImageView(upperBrick), dungeon.getWidth(), y);
+        	squares.add(new ImageView(shadowLeft), dungeon.getWidth(), y);
+        	squares.add(new ImageView(shadowRight), dungeon.getWidth(), y);
         }
+        
+        GoalExpression goals = dungeon.getGoals();
+        
+        
+        addGoalLabels(goals, " ", dungeon.getWidth(), 0);
         
         Image potion = new Image("/potion_wide.png");
         squares.add(new ImageView(potion), dungeon.getWidth(), dungeon.getHeight()-5);
-        squares.add(potionLabel, dungeon.getWidth()+1, dungeon.getHeight()-5);
+        squares.add(potionLabel, dungeon.getWidth(), dungeon.getHeight()-5);
         
         Image sword = new Image("/sword_wide.png");
         squares.add(new ImageView(sword), dungeon.getWidth(), dungeon.getHeight()-4);
-        squares.add(swordLabel, dungeon.getWidth()+1, dungeon.getHeight()-4);
+        squares.add(swordLabel, dungeon.getWidth(), dungeon.getHeight()-4);
         
         Image bomb = new Image("/bomb_wide.png");
         squares.add(new ImageView(bomb), dungeon.getWidth(), dungeon.getHeight()-3);
-        squares.add(bombLabel, dungeon.getWidth()+1, dungeon.getHeight()-3);
+        squares.add(bombLabel, dungeon.getWidth(), dungeon.getHeight()-3);
         
         Image treasure = new Image("/treasure_wide.png");
         squares.add(new ImageView(treasure), dungeon.getWidth(), dungeon.getHeight()-2);
-        squares.add(treasureLabel, dungeon.getWidth()+1, dungeon.getHeight()-2);
+        squares.add(treasureLabel, dungeon.getWidth(), dungeon.getHeight()-2);
         
         Image key = new Image("/key_wide.png");
         squares.add(new ImageView(key), dungeon.getWidth(), dungeon.getHeight()-1);
-        squares.add(keyLabel, dungeon.getWidth()+1, dungeon.getHeight()-1);
+        squares.add(keyLabel, dungeon.getWidth(), dungeon.getHeight()-1);
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
@@ -223,169 +237,260 @@ public class DungeonController implements DungeonObserver{
 	@Override
 	public void update(DungeonSubject obj) {
 		if (obj instanceof Dungeon) {
-			Dungeon dungeon = (Dungeon) obj;
-			Timeline timeline = new Timeline();
-			timeline.setCycleCount(1);
-			
-			if (dungeon.isGameOver()) {
+			update((Dungeon) obj);
+		} else if (obj instanceof Player) {
+			update((Player) obj);
+		} else if (obj instanceof Bomb) {
+			update((Bomb) obj);
+		} else if (obj instanceof Door) {
+			update((Door) obj);
+		} else {
+			squares.getChildren().remove(((Entity) obj).getImageView());
+		}
+	}
+	
+	public void update(Dungeon dungeon) {		
+		for (Label label : goalLabels) {
+			squares.getChildren().remove(label);
+		}
+		goalLabels = new ArrayList<Label>();
+        addGoalLabels(dungeon.getGoals(), " ", dungeon.getWidth(), 0);
+		
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(1);
+		
+		if (dungeon.isGameOver()) {
+			KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
+				try {
+					(new GameOverScreen(stage, fileName)).start();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+			timeline.getKeyFrames().add(kf);
+			timeline.play();
+		} else if (dungeon.isGameComplete()) {
+			if (fileName.equals("advanced.json")) {
 				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
 					try {
-						(new GameOverScreen(stage, fileName)).start();
+						(new CompletedDungeonScreen(stage)).start();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				});
 				timeline.getKeyFrames().add(kf);
 				timeline.play();
-			} else if (dungeon.isGameComplete()) {
-				if (fileName.equals("advanced.json")) {
-					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
-						try {
-							(new CompletedDungeonScreen(stage)).start();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					});
-					timeline.getKeyFrames().add(kf);
-					timeline.play();
-				} else {
-					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
-						try {
-							(new NextLevelScreen(stage, fileName)).start();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					});
-					timeline.getKeyFrames().add(kf);
-					timeline.play();
-				}
-			}
-		} else if (obj instanceof Player) {
-			Player player = (Player) obj;
-			
-			potionLabel.setText(player.getInvincibleSteps() + " steps");
-			
-			swordLabel.setText(player.getSwings() + " swings");
-			
-			bombLabel.setText(player.getBombs().size() + " bombs");
-			
-			treasureLabel.setText(player.getTreasures() + " found");
-			
-			if (player.getKeyId() == -1) {
-				keyLabel.setText("not held");
 			} else {
-				keyLabel.setText("held");
-			}
-			
-			if (player.isSwinging()) {
-				squares.getChildren().remove(player.getLeftSlashView());
-				squares.getChildren().remove(player.getRightSlashView());
-				squares.getChildren().remove(player.getUpSlashView());
-				squares.getChildren().remove(player.getDownSlashView());
-				if (player.getDirection() == Direction.LEFT) {
-					squares.getChildren().add(player.getLeftSlashView());
-					Timeline timeline = new Timeline();
-					timeline.setCycleCount(1);
-					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getLeftSlashView()));
-					timeline.getKeyFrames().add(kf);
-					timeline.play();
-				} else if (player.getDirection() == Direction.RIGHT) {
-					if (player.atRightBoundary()) {
-						return;
+				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
+					try {
+						(new NextLevelScreen(stage, fileName)).start();
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
-					squares.getChildren().add(player.getRightSlashView());
-					Timeline timeline = new Timeline();
-					timeline.setCycleCount(1);
-					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getRightSlashView()));
-					timeline.getKeyFrames().add(kf);
-					timeline.play();
-				} else if (player.getDirection() == Direction.UP) {
-					squares.getChildren().add(player.getUpSlashView());
-					Timeline timeline = new Timeline();
-					timeline.setCycleCount(1);
-					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getUpSlashView()));
-					timeline.getKeyFrames().add(kf);
-					timeline.play();
-				} else {
-					squares.getChildren().add(player.getDownSlashView());
-					Timeline timeline = new Timeline();
-					timeline.setCycleCount(1);
-					KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getDownSlashView()));
-					timeline.getKeyFrames().add(kf);
-					timeline.play();
-				}
-				return;
-			}
-			
-			for (ImageView view : player.getViews()) {
-				squares.getChildren().remove(view);
-			}
-			
-			if (player.getDirection() == Direction.LEFT) {
-				if (player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getLeftSwordInvincibleView());
-				} else if (player.isInvincible() && player.getSword() == null) {
-					squares.getChildren().add(player.getLeftInvincibleView());
-				} else if (!player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getLeftSwordView());
-				} else {
-					squares.getChildren().add(player.getLeftView());
-				}
-			} else if (player.getDirection() == Direction.RIGHT) {
-				if (player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getRightSwordInvincibleView());
-				} else if (player.isInvincible() && player.getSword() == null) {
-					squares.getChildren().add(player.getRightInvincibleView());
-				} else if (!player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getRightSwordView());
-				} else {
-					squares.getChildren().add(player.getRightView());
-				}
-			} else if (player.getDirection() == Direction.UP) {
-				if (player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getUpSwordInvincibleView());
-				} else if (player.isInvincible() && player.getSword() == null) {
-					squares.getChildren().add(player.getUpInvincibleView());
-				} else if (!player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getUpSwordView());
-				} else {
-					squares.getChildren().add(player.getUpView());
-				}
-			} else {
-				if (player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getDownSwordInvincibleView());
-				} else if (player.isInvincible() && player.getSword() == null) {
-					squares.getChildren().add(player.getDownInvincibleView());
-				} else if (!player.isInvincible() && player.getSword() != null) {
-					squares.getChildren().add(player.getDownSwordView());
-				} else {
-					squares.getChildren().add(player.getDownView());
-				}
-			}
-		} else if (obj instanceof Bomb) {
-			Bomb bomb = (Bomb) obj;
-			if (bomb.isLit()) {
-				squares.getChildren().add(bomb.getZeroImage());
-				Timeline timeline = new Timeline();
-				timeline.setCycleCount(1);
-				KeyFrame kf = new KeyFrame(Duration.seconds(1), (ActionEvent event) -> bombChangeFirst(bomb));
+				});
 				timeline.getKeyFrames().add(kf);
 				timeline.play();
-			} else if (bomb.isExplode()) {
-				squares.getChildren().remove(bomb.getExplodeImage());
-			} else {
-				squares.getChildren().remove(bomb.getImageView());
 			}
-		} else if (obj instanceof Door) {
-			Door door = (Door) obj;
-			if (!door.isClosed()) {
-				squares.getChildren().remove(door.getImageView());
-				squares.getChildren().add(door.getOpenDoorView());
-			}
+		}
+	}
+	
+	public void update(Player player) {		
+		potionLabel.setText("          " + player.getInvincibleSteps() + " steps");
+		
+		swordLabel.setText("          " + player.getSwings() + " swings");
+		
+		bombLabel.setText("          " + player.getBombs().size() + " bombs");
+		
+		treasureLabel.setText("          " + player.getTreasures() + " found");
+		
+		if (player.getKeyId() == -1) {
+			keyLabel.setText("          " + "not held");
 		} else {
-			squares.getChildren().remove(((Entity) obj).getImageView());
+			keyLabel.setText("          " + "held");
 		}
 		
+		if (player.isSwinging()) {
+			squares.getChildren().remove(player.getLeftSlashView());
+			squares.getChildren().remove(player.getRightSlashView());
+			squares.getChildren().remove(player.getUpSlashView());
+			squares.getChildren().remove(player.getDownSlashView());
+			if (player.getDirection() == Direction.LEFT) {
+				squares.getChildren().add(player.getLeftSlashView());
+				Timeline timeline = new Timeline();
+				timeline.setCycleCount(1);
+				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getLeftSlashView()));
+				timeline.getKeyFrames().add(kf);
+				timeline.play();
+			} else if (player.getDirection() == Direction.RIGHT) {
+				if (player.atRightBoundary()) {
+					return;
+				}
+				squares.getChildren().add(player.getRightSlashView());
+				Timeline timeline = new Timeline();
+				timeline.setCycleCount(1);
+				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getRightSlashView()));
+				timeline.getKeyFrames().add(kf);
+				timeline.play();
+			} else if (player.getDirection() == Direction.UP) {
+				squares.getChildren().add(player.getUpSlashView());
+				Timeline timeline = new Timeline();
+				timeline.setCycleCount(1);
+				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getUpSlashView()));
+				timeline.getKeyFrames().add(kf);
+				timeline.play();
+			} else {
+				squares.getChildren().add(player.getDownSlashView());
+				Timeline timeline = new Timeline();
+				timeline.setCycleCount(1);
+				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> squares.getChildren().remove(player.getDownSlashView()));
+				timeline.getKeyFrames().add(kf);
+				timeline.play();
+			}
+			return;
+		}
+		
+		for (ImageView view : player.getViews()) {
+			squares.getChildren().remove(view);
+		}
+		
+		if (player.getDirection() == Direction.LEFT) {
+			if (player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getLeftSwordInvincibleView());
+			} else if (player.isInvincible() && player.getSword() == null) {
+				squares.getChildren().add(player.getLeftInvincibleView());
+			} else if (!player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getLeftSwordView());
+			} else {
+				squares.getChildren().add(player.getLeftView());
+			}
+		} else if (player.getDirection() == Direction.RIGHT) {
+			if (player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getRightSwordInvincibleView());
+			} else if (player.isInvincible() && player.getSword() == null) {
+				squares.getChildren().add(player.getRightInvincibleView());
+			} else if (!player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getRightSwordView());
+			} else {
+				squares.getChildren().add(player.getRightView());
+			}
+		} else if (player.getDirection() == Direction.UP) {
+			if (player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getUpSwordInvincibleView());
+			} else if (player.isInvincible() && player.getSword() == null) {
+				squares.getChildren().add(player.getUpInvincibleView());
+			} else if (!player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getUpSwordView());
+			} else {
+				squares.getChildren().add(player.getUpView());
+			}
+		} else {
+			if (player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getDownSwordInvincibleView());
+			} else if (player.isInvincible() && player.getSword() == null) {
+				squares.getChildren().add(player.getDownInvincibleView());
+			} else if (!player.isInvincible() && player.getSword() != null) {
+				squares.getChildren().add(player.getDownSwordView());
+			} else {
+				squares.getChildren().add(player.getDownView());
+			}
+		}
+	}
+	
+	public void update(Bomb bomb) {
+		if (bomb.isLit()) {
+			squares.getChildren().add(bomb.getZeroImage());
+			Timeline timeline = new Timeline();
+			timeline.setCycleCount(1);
+			KeyFrame kf = new KeyFrame(Duration.seconds(1), (ActionEvent event) -> bombChangeFirst(bomb));
+			timeline.getKeyFrames().add(kf);
+			timeline.play();
+		} else if (bomb.isExplode()) {
+			squares.getChildren().remove(bomb.getExplodeImage());
+		} else {
+			squares.getChildren().remove(bomb.getImageView());
+		}
+	}
+	
+	public void update(Door door) {
+		if (!door.isClosed()) {
+			squares.getChildren().remove(door.getImageView());
+			squares.getChildren().add(door.getOpenDoorView());
+		}
+	}
+	
+	private void addGoalLabels(GoalExpression goals, String space, int x, int y) {
+		Label label = new Label();
+        label.setTextFill(Color.ORANGERED);
+        Font font = new Font("Ayuthaya", 12);
+        label.setFont(font);
+        
+		switch(goals.getGoal()) {
+			case AND:
+				if (goals.isComplete()) {
+					label.setText(space + "* All of:");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* All of:");
+				}
+				squares.add(label, x, y);
+				y++;
+				for (GoalExpression g : goals.getSubGoals()) {
+					addGoalLabels(g, "  " + space, x, y);
+					y++;
+				}
+				break;
+			case OR:
+				if (goals.isComplete()) {
+					label.setText(space + "* One of:");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* One of:");
+				}
+				squares.add(label, x, y);
+				y++;
+				for (GoalExpression g : goals.getSubGoals()) {
+					addGoalLabels(g, "  " + space, x, y);
+					y++;
+				}
+				break;
+			case BOULDERS:
+				if (goals.isComplete()) {
+					label.setText(space + "* BOULDERS");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* BOULDERS");
+				}
+				squares.add(label, x, y);
+				break;
+			case ENEMIES:
+				if (goals.isComplete()) {
+					label.setText(space + "* ENEMIES");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* ENEMIES");
+				}
+				squares.add(label, x, y);
+				break;
+			case TREASURE:
+				if (goals.isComplete()) {
+					label.setText(space + "* TREASURE");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* TREASURE");
+				}
+				squares.add(label, x, y);
+				break;
+			case EXIT:
+				if (goals.isComplete()) {
+					label.setText(space + "* EXIT");
+					label.setTextFill(Color.LAWNGREEN);
+				} else {
+					label.setText(space + "* EXIT");
+				}
+				squares.add(label, x, y);
+				break;
+		}
+		goalLabels.add(label);
 	}
 	
 	/**

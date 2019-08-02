@@ -63,7 +63,7 @@ public class PauseController {
 			case "maze.json":
 		    	levelName.setText("Level 1 of 6");
 		    	break;
-			case "advanced.json":
+			case "last.json":
 				levelName.setText("Level 6 of 6");
 				break;
     	}

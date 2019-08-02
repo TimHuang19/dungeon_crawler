@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 /**
  * The Class BasicGoal.
  */
@@ -71,6 +73,16 @@ public class BasicGoal implements GoalExpression {
 	@Override
 	public void addSubGoal(GoalExpression goal) {
 		// do nothing
+	}
+
+	/**
+	 * Gets the subGoals.
+	 *
+	 * @return 			The subGoals
+	 */
+	@Override
+	public ArrayList<GoalExpression> getSubGoals() {
+		return new ArrayList<GoalExpression>();
 	}
 
 }

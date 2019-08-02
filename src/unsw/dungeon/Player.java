@@ -550,6 +550,8 @@ public class Player extends Entity implements Subject, Observer {
     	for (Entity e : entities) {
     		if (e instanceof Exit) {
     			dungeon.setComplete(Goal.EXIT, true);
+    		} else {
+    			dungeon.setComplete(Goal.EXIT, false);
     		}
     	}
     }
@@ -631,14 +633,21 @@ public class Player extends Entity implements Subject, Observer {
 	@Override
 	public void update(Subject obj) {
 		if (obj instanceof Enemy) {
-			Enemy enemy = (Enemy) obj;
-			
-			if (enemy.collided(this)) {
-				if (!invincible) {
-					dungeon.gameOver();
-				} else {
-					dungeon.killEnemy(enemy);
-				}
+			update((Enemy) obj);
+		}
+	}
+	
+	/**
+	 * Update
+	 *
+	 * @param enemy the subject
+	 */
+	public void update(Enemy enemy) {
+		if (enemy.collided(this)) {
+			if (!invincible) {
+				dungeon.gameOver();
+			} else {
+				dungeon.killEnemy(enemy);
 			}
 		}
 	}

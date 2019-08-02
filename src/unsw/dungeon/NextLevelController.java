@@ -66,7 +66,7 @@ public class NextLevelController {
     public void handleContinueButton() throws IOException {
     	switch (fileName) {
 		case "maze.json":
-	    	(new DungeonScreen(stage, "advanced.json")).start();
+	    	(new DungeonScreen(stage, "last.json")).start();
 	    	break;
     	}
     }
