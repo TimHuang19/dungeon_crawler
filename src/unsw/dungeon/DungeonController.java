@@ -57,7 +57,7 @@ public class DungeonController implements DungeonObserver{
     
     private Label treasureLabel;
     
-    ArrayList<Label> goalLabels;
+    private ArrayList<Label> goalLabels;
     
     private int labelX;
     
