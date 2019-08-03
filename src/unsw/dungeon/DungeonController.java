@@ -292,7 +292,7 @@ public class DungeonController implements DungeonObserver{
 			timeline.getKeyFrames().add(kf);
 			timeline.play();
 		} else if (dungeon.isGameComplete()) {
-			if (fileName.equals("level_6.json")) {
+			if (fileName.equals("level_8.json")) {
 				KeyFrame kf = new KeyFrame(Duration.seconds(0.1), (ActionEvent event) -> {
 					try {
 						(new CompletedDungeonScreen(stage)).start();

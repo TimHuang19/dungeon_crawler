@@ -1,0 +1,194 @@
+{
+    "width": 15,
+    "height": 15,
+    "entities": [
+        {
+            "x": 0,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 1,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 2,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 3,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 6,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 8,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 9,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 10,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 11,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 12,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 13,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 14,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 7,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 0,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 1,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 2,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 3,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 6,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 8,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 9,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 10,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 11,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 12,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 13,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 14,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 3,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
+            "x": 5,
+            "y": 7,
+            "type": "telepad"
+        },
+
+        {
+        "x": 0,
+        "y": 7,
+        "type": "exit"
+        },
+      {
+        "x": 1,
+        "y": 7,
+        "type": "player"
+      }
+
+    ],
+    "goal-condition": {
+        "goal": "AND",
+        "subgoals": [
+          {
+            "goal": "treasure"
+          },
+          {
+            "goal": "exit"
+          }
+        ]
+    }
+  }  

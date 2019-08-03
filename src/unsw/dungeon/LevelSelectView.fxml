@@ -9,7 +9,6 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="185.0" fitWidth="202.0" layoutX="-61.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
@@ -36,7 +35,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="oneButton" layoutX="55.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleOneButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="1">
+      <Button fx:id="oneButton" layoutX="105.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleOneButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="1">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
@@ -46,27 +45,37 @@
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="twoButton" layoutX="139.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleTwoButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="2">
+      <Button fx:id="twoButton" layoutX="212.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleTwoButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="2">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="threeButton" layoutX="223.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleThreeButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="3">
+      <Button fx:id="threeButton" layoutX="319.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleThreeButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="3">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="fourButton" layoutX="307.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleFourButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="4">
+      <Button fx:id="fourButton" layoutX="426.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleFourButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="4">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="fiveButton" layoutX="391.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleFiveButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="5">
+      <Button fx:id="fiveButton" layoutX="105.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleFiveButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="5">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="sixButton" layoutX="475.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleSixButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="6">
+      <Button fx:id="sixButton" layoutX="212.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleSixButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="6">
+         <font>
+            <Font name="Lucida Bright Regular" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="sevenButton" layoutX="319.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleSevenButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="7">
+         <font>
+            <Font name="Lucida Bright Regular" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="eightButton" layoutX="426.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleEightButton" prefHeight="70.0" prefWidth="70.0" styleClass="record-sales" stylesheets="@style.css" text="8">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>

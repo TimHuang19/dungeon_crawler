@@ -236,9 +236,12 @@ public class Dungeon implements DungeonSubject, Observer {
      * @return the matching telepad
      */
     public Telepad getMatchingTelepad(Telepad telepad) {
+
     	Telepad matchingTelepad = null;
     	for (Telepad t : idToTelepads.get(telepad.getId())) {
-    		if (t.getX() != telepad.getX() && t.getY() != telepad.getY()) {
+    		if (t.getX() == telepad.getX() && t.getY() == telepad.getY()) {
+    			continue;
+    		} else {
     			matchingTelepad = t;
     		}
     	}
@@ -260,10 +263,12 @@ public class Dungeon implements DungeonSubject, Observer {
         	this.enemyCount++;
         } else if (entity instanceof Telepad) {
         	Telepad telepad = (Telepad) entity;
+    		ArrayList<Telepad> telepads;
         	if (idToTelepads.containsKey(telepad.getId())) {
-        		idToTelepads.get(telepad.getId()).add(telepad);
+        		telepads = idToTelepads.get(telepad.getId());
+        		telepads.add(telepad);
         	} else {
-        		ArrayList<Telepad> telepads = new ArrayList<>();
+        		telepads = new ArrayList<>();
         		telepads.add(telepad);
         		idToTelepads.put(telepad.getId(), telepads);
         	}
