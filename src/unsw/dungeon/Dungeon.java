@@ -353,9 +353,11 @@ public class Dungeon implements DungeonSubject, Observer {
 			Boulder b = (Boulder) obj;
 			
 			if (b.gotDestroyed()) {
-				this.pressedSwitches++;
-				if (this.pressedSwitches == 1) {
-					setComplete(Goal.BOULDERS, false);
+				if (b.getOnSwitch()) {
+					this.pressedSwitches++;
+					if (this.pressedSwitches == 1) {
+						setComplete(Goal.BOULDERS, false);
+					}
 				}
 				removeEntity((Entity) b);
 				return;

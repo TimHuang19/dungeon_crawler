@@ -198,8 +198,8 @@ public class DungeonController implements DungeonObserver{
             player.moveRight();
             break;
         case Z:
-        	player.pickUp();
         	player.teleport();
+        	player.pickUp();
         	break;
         case X:
         	player.swingSword();
