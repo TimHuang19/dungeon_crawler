@@ -450,10 +450,10 @@ public class DungeonController implements DungeonObserver{
 		switch(goals.getGoal()) {
 			case AND:
 				if (goals.isComplete()) {
-					label.setText(space + "* All of:");
+					label.setText(space + "- All of:");
 					label.setTextFill(Color.LAWNGREEN);
 				} else {
-					label.setText(space + "* All of:");
+					label.setText(space + "- All of:");
 				}
 				squares.add(label, labelX, labelY);
 				labelY++;
@@ -463,10 +463,10 @@ public class DungeonController implements DungeonObserver{
 				break;
 			case OR:
 				if (goals.isComplete()) {
-					label.setText(space + "* One of:");
+					label.setText(space + "- One of:");
 					label.setTextFill(Color.LAWNGREEN);
 				} else {
-					label.setText(space + "* One of:");
+					label.setText(space + "- One of:");
 				}
 				squares.add(label, labelX, labelY);
 				labelY++;
