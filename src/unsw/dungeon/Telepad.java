@@ -39,7 +39,7 @@ public class Telepad extends Entity{
 	@Override
 	public boolean pickUp(Player p) {
 		Telepad matchingTelepad = dungeon.getMatchingTelepad(this);
-		
+
 		p.x().set(matchingTelepad.getX());
 		p.y().set(matchingTelepad.getY());
 		return false;
