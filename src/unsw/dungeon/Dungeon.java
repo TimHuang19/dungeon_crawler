@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -43,6 +44,9 @@ public class Dungeon implements DungeonSubject, Observer {
     /** The enemy count. */
     private int enemyCount;
     
+    /** Telepad groupings */
+    private HashMap<Integer, ArrayList<Telepad>> idToTelepads;
+    
     /**
      * Instantiates a new dungeon.
      *
@@ -61,6 +65,7 @@ public class Dungeon implements DungeonSubject, Observer {
         this.pressedSwitches = 0;
         this.treasureCount = 0;
         this.enemyCount = 0;
+        this.idToTelepads = new HashMap<>();
     }
     
     /**
@@ -224,6 +229,21 @@ public class Dungeon implements DungeonSubject, Observer {
     		setComplete(Goal.ENEMIES, true);
     	}
     }
+    
+    /**
+     * Get the matching telepad
+     *
+     * @return the matching telepad
+     */
+    public Telepad getMatchingTelepad(Telepad telepad) {
+    	Telepad matchingTelepad = null;
+    	for (Telepad t : idToTelepads.get(telepad.getId())) {
+    		if (t.getX() != telepad.getX() && t.getY() != telepad.getY()) {
+    			matchingTelepad = t;
+    		}
+    	}
+    	return matchingTelepad;
+    }
 
     /**
      * Adds the entity.
@@ -238,6 +258,15 @@ public class Dungeon implements DungeonSubject, Observer {
         	this.treasureCount++;
         } else if (entity instanceof Enemy) {
         	this.enemyCount++;
+        } else if (entity instanceof Telepad) {
+        	Telepad telepad = (Telepad) entity;
+        	if (idToTelepads.containsKey(telepad.getId())) {
+        		idToTelepads.get(telepad.getId()).add(telepad);
+        	} else {
+        		ArrayList<Telepad> telepads = new ArrayList<>();
+        		telepads.add(telepad);
+        		idToTelepads.put(telepad.getId(), telepads);
+        	}
         }
     }
     

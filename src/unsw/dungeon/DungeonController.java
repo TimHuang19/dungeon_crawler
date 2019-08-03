@@ -95,7 +95,7 @@ public class DungeonController implements DungeonObserver{
         bombLabel.setFont(font);
         keyLabel.setFont(font);
         treasureLabel.setFont(font);
-        
+                
         potionLabel.setText("          0 steps");
         swordLabel.setText("          0 swings");
         bombLabel.setText("          0 bombs");
@@ -128,6 +128,7 @@ public class DungeonController implements DungeonObserver{
         for (int y = 0; y < dungeon.getHeight(); y ++) {
         	if (y == 0) {
             	squares.add(new ImageView(new Image("/goals.png")), dungeon.getWidth(), 0);
+            	squares.add(new ImageView(shadowDown), dungeon.getWidth(), 0);
         	} else if (y < dungeon.getHeight()-5){
             	squares.add(new ImageView(lowerBrick), dungeon.getWidth(), y);
         	} else {
@@ -137,7 +138,10 @@ public class DungeonController implements DungeonObserver{
         	squares.add(new ImageView(shadowRight), dungeon.getWidth(), y);
         }
         
-
+    	squares.add(new ImageView(shadowUp), dungeon.getWidth(), 1);
+    	
+    	squares.add(new ImageView(shadowDown), dungeon.getWidth(), dungeon.getHeight()-6);
+    	squares.add(new ImageView(shadowUp), dungeon.getWidth(), dungeon.getHeight()-5);
     	
     	squares.add(new ImageView(shadowUp), dungeon.getWidth(), 0);
     	squares.add(new ImageView(shadowDown), dungeon.getWidth(), dungeon.getHeight()-1);

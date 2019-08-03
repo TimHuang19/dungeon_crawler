@@ -456,7 +456,7 @@ public class Player extends Entity implements Subject, Observer {
     	    	
     	ArrayList<Entity> entities = dungeon.getEntities(x, y);
     	for (Entity e : entities) {
-    		if (e instanceof Enemy) {
+    		if (e instanceof Enemy && !(e instanceof Hound)) {
     			dungeon.killEnemy((Enemy) e);
     		}
     	}

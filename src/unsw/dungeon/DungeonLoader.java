@@ -26,7 +26,13 @@ public abstract class DungeonLoader {
     
     /** The door id. */
     private int doorId;
-
+    
+    /** The telepad id. */
+    private int teleId;
+    
+    /** The telepad counter */
+    private int teleCounter;
+    
     /**
      * Instantiates a new dungeon loader.
      *
@@ -37,6 +43,8 @@ public abstract class DungeonLoader {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
         keyId = 0;
         doorId = 0;
+        teleId = 0;
+        teleCounter = 0;
     }
 
     /**
@@ -120,6 +128,15 @@ public abstract class DungeonLoader {
         	Sword sword = new Sword(x, y);
         	onLoad(sword);
         	entity = sword;
+        	break;
+        case "telepad":
+        	Telepad telepad = new Telepad(x, y, dungeon, teleId);
+        	onLoad(telepad);
+        	entity = telepad;
+        	teleCounter++;
+        	if (teleCounter % 2 == 0) {
+        		teleId++;
+        	}
         	break;
         case "bomb":
         	Bomb bomb = new Bomb(dungeon, x, y);
@@ -302,6 +319,13 @@ public abstract class DungeonLoader {
      * @param sword the sword
      */
     public abstract void onLoad(Sword sword);
+    
+    /**
+     * On load.
+     *
+     * @param telepad the telepad
+     */
+    public abstract void onLoad(Telepad telepad);
     
     /**
      * On load.
