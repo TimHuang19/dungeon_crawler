@@ -1,732 +1,568 @@
 {
-    "width": 20,
-    "height": 20,
+    "width": 15,
+    "height": 15,
     "entities": [
-      {
-        "x": 0,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 1,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 2,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 3,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 4,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 5,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 6,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 7,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 8,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 9,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 11,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 12,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 13,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 14,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 15,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 16,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 1,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 2,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 3,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 4,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 5,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 6,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 7,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 8,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 10,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 12,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 13,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 1,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 2,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 3,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 4,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 5,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 6,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 7,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 8,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 10,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 12,
-        "type": "wall"
-      },
-      {
-        "x": 1,
-        "y": 10,
-        "type": "player"
-      },
-      {
-        "x": 1,
-        "y": 9,
-        "type": "boulder"
-      },
-      {
-        "x": 1,
-        "y": 11,
-        "type": "boulder"
-      },
-      {
-        "x": 2,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 3,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 4,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 5,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 6,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 7,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 8,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 9,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 11,
-        "y": 9,
-        "type": "boulder"
-      },
-      {
-        "x": 12,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 13,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 14,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 15,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 16,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 17,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 18,
-        "y": 9,
-        "type": "wall"
-      },
-      {
-        "x": 2,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 3,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 4,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 5,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 6,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 7,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 8,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 9,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 11,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 12,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 13,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 14,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 15,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 16,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 17,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 18,
-        "y": 11,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 1,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 2,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 3,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 4,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 5,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 6,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 7,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 8,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 13,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 14,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 14,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 1,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 2,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 3,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 4,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 5,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 6,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 7,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 8,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 9,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 10,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 11,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 12,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 13,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 14,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 15,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 16,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 17,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 18,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 15,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 16,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 17,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 18,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 15,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 16,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 17,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 18,
-        "type": "wall"
-      },
-      {
-        "x": 19,
-        "y": 19,
-        "type": "wall"
-      },
-      {
-        "x": 17,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 18,
-        "y": 0,
-        "type": "wall"
-      },
-      {
-        "x": 3,
-        "y": 7,
-        "type": "invincibility"
-      },
-      {
-        "x": 2,
-        "y": 6,
-        "type": "bomb"
-      },
-      {
-        "x": 4,
-        "y": 8,
-        "type": "sword"
-      },
-      {
-        "x": 1,
-        "y": 1,
-        "type": "enemy"
-      },
-      {
-        "x": 9,
-        "y": 1,
-        "type": "enemy"
-      },
-      {
-        "x": 9,
-        "y": 8,
-        "type": "enemy"
-      },
-      {
-        "x": 1,
-        "y": 17,
-        "type": "boulder"
-      },
-      {
-        "x": 2,
-        "y": 17,
-        "type": "boulder"
-      },
-      {
-        "x": 1,
-        "y": 18,
-        "type": "switch"
-      },
-      {
-        "x": 2,
-        "y": 18,
-        "type": "switch"
-      },
-      {
-        "x": 18,
-        "y": 1,
-        "type": "treasure"
-      },
-      {
-        "x": 17,
-        "y": 1,
-        "type": "treasure"
-      },
-      {
-        "x": 18,
-        "y": 10,
-        "type": "exit"
-      }
-    ],
-    "goal-condition": {
-      "goal": "AND",
-      "subgoals": [
         {
-          "goal": "exit"
+            "x": 0,
+            "y": 6,
+            "type": "wall"
         },
         {
-          "goal": "OR",
-          "subgoals": [
-        	{
-          		"goal": "AND",
-          		"subgoals": [
-        		{
-          			"goal": "enemies"
-        		},
-        		{
-          			"goal": "treasure"
-        		}
-        		]
-        	},
-        	{
-          		"goal": "AND",
-          		"subgoals": [
-        		{
-          			"goal": "enemies"
-        		},
-        		{
-          			"goal": "boulders"
-        		}
-        		]
-        	},
-        	{
-          		"goal": "AND",
-          		"subgoals": [
-        		{
-          			"goal": "boulders"
-        		},
-        		{
-          			"goal": "treasure"
-        		}
-        		]
-        	}
-      		]
-        }
-      ]
+            "x": 1,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 2,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 3,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 6,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 8,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 9,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 10,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 11,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 12,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 13,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 14,
+            "y": 6,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 7,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 0,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 1,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 2,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 3,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 6,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 8,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 9,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 10,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 11,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 12,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 13,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 14,
+            "y": 8,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 2,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 3,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 4,
+            "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 5,
+            "type": "wall"
+        },
+        {
+            "x": 0,
+            "y": 2,
+            "type": "boulder"
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "type": "enemy"
+        },
+        {
+            "x": 0,
+            "y": 1,
+            "type": "enemy"
+        },
+        {
+            "x": 5,
+            "y": 1,
+            "type": "bomb"
+        },
+        {
+            "x": 0,
+            "y": 4,
+            "type": "wall"
+        },
+        {
+            "x": 1,
+            "y": 4,
+            "type": "wall"
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "type": "wall"
+        },
+        {
+            "x": 1,
+            "y": 2,
+            "type": "wall"
+        },
+        {
+            "x": 2,
+            "y": 2,
+            "type": "wall"
+        },
+        {
+            "x": 3,
+            "y": 2,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 2,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 2,
+            "type": "wall"
+        },
+        {
+            "x": 6,
+            "y": 2,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 5,
+            "type": "wall"
+        },
+        {
+            "x": 4,
+            "y": 5,
+            "type": "wall"
+        },
+        {
+            "x": 0,
+            "y": 5,
+            "type": "treasure"
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "type": "boulder"
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "type": "wall"
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "type": "wall"
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "type": "telepad"
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "type": "telepad"
+        },
+        {
+            "x": 3,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
+            "x": 6,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
+            "x": 2,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
+            "x": 14,
+            "y": 14,
+            "type": "telepad"
+        },
+        {
+            "x": 14,
+            "y": 12,
+            "type": "telepad"
+        },
+        {
+            "x": 7,
+            "y": 12,
+            "type": "telepad"
+        },
+        {
+            "x": 14,
+            "y": 9,
+            "type": "telepad"
+        },
+        {
+            "x": 7,
+            "y": 12,
+            "type": "telepad"
+        },
+        {
+            "x": 1,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
+            "x": 14,
+            "y": 0,
+            "type": "telepad"
+        },
+        {
+            "x": 0,
+            "y": 14,
+            "type": "telepad"
+        },
+        {
+            "x": 14,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
+            "x": 8,
+            "y": 5,
+            "type": "telepad"
+        },
+        {
+            "x": 6,
+            "y": 5,
+            "type": "telepad"
+        },
+        {
+            "x": 10,
+            "y": 3,
+            "type": "telepad"
+        },
+        {
+            "x": 7,
+            "y": 12,
+            "type": "telepad"
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "type": "telepad"
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "type": "telepad"
+        },
+        {
+            "x": 0,
+            "y": 9,
+            "type": "bomb"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "type": "bomb"
+        },
+        {
+            "x": 13,
+            "y": 7,
+            "type": "boulder"
+        },
+        {
+            "x": 10,
+            "y": 4,
+            "type": "boulder"
+        },
+        {
+            "x": 8,
+            "y": 4,
+            "type": "boulder"
+        },
+        {
+            "x": 9,
+            "y": 4,
+            "type": "boulder"
+        },
+        {
+            "x": 10,
+            "y": 5,
+            "type": "boulder"
+        },
+        {
+            "x": 10,
+            "y": 7,
+            "type": "sword"
+        },
+        {
+            "x": 9,
+            "y": 5,
+            "type": "invincibility"
+        },
+        {
+            "x": 12,
+            "y": 7,
+            "type": "treasure"
+        },
+        {
+            "x": 11,
+            "y": 7,
+            "type": "boulder"
+        },
+        {
+        "x": 0,
+        "y": 7,
+        "type": "exit"
+        },
+        {
+            "x": 8,
+            "y": 9,
+            "type": "hound"
+        },
+        {
+            "x": 8,
+            "y": 10,
+            "type": "hound"
+        },
+        {
+            "x": 8,
+            "y": 11,
+            "type": "hound"
+        },
+        {
+            "x": 8,
+            "y": 12,
+            "type": "hound"
+        },
+        {
+            "x": 8,
+            "y": 13,
+            "type": "hound"
+        },
+        {
+            "x": 8,
+            "y": 14,
+            "type": "hound"
+        },
+        {
+            "x": 6,
+            "y": 9,
+            "type": "hound"
+        },
+        {
+            "x": 6,
+            "y": 10,
+            "type": "hound"
+        },
+        {
+            "x": 6,
+            "y": 11,
+            "type": "hound"
+        },
+        {
+            "x": 6,
+            "y": 12,
+            "type": "hound"
+        },
+        {
+            "x": 6,
+            "y": 13,
+            "type": "hound"
+        },
+        {
+            "x": 6,
+            "y": 14,
+            "type": "hound"
+        },
+        {
+            "x": 7,
+            "y": 9,
+            "type": "hound"
+        },
+        {
+            "x": 7,
+            "y": 10,
+            "type": "hound"
+        },
+        {
+            "x": 7,
+            "y": 11,
+            "type": "hound"
+        },
+        {
+            "x": 7,
+            "y": 13,
+            "type": "hound"
+        },
+        {
+            "x": 7,
+            "y": 14,
+            "type": "hound"
+        },
+        {
+            "x": 1,
+            "y": 5,
+            "type": "enemy"
+        },
+        {
+            "x": 6,
+            "y": 4,
+            "type": "enemy"
+        },
+        {
+            "x": 5,
+            "y": 7,
+            "type": "enemy"
+        },
+      {
+        "x": 1,
+        "y": 7,
+        "type": "player"
+      }
+
+    ],
+    "goal-condition": {
+        "goal": "AND",
+        "subgoals": [
+          {
+            "goal": "treasure"
+          },
+          {
+            "goal": "exit"
+          }
+        ]
     }
   }  

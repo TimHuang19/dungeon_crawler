@@ -45,6 +45,9 @@ public class Telepad extends Entity{
 	
 	public void teleport(Player p) {
 		Telepad matchingTelepad = dungeon.getMatchingTelepad(this);
+		if (matchingTelepad == null) {
+			return;
+		}
 		int targetX = matchingTelepad.getX();
 		int targetY = matchingTelepad.getY();
 		
