@@ -101,6 +101,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     private Image downSlashImage;
     
+    private Image telepadImage;
+    
     /** The bomb image. */
     private Image bombImage;
     
@@ -166,6 +168,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         rightSlashImage = new Image("/slash_right.png");
         downSlashImage = new Image("/slash_down.png");
         upSlashImage = new Image("/slash_up.png");
+        telepadImage = new Image("/telepad.png");
         bombImage = new Image("/bomb_unlit.png");
         bombLitZeroImage = new Image("/bomb_lit_1.png");
         bombLitOneImage = new Image("/bomb_lit_2.png");
@@ -366,6 +369,18 @@ public class DungeonControllerLoader extends DungeonLoader {
     	ImageView view = new ImageView(swordImage);
     	sword.setImageView(view);
     	addEntity(sword, view);		
+	}
+	
+	/**
+	 * On load.
+	 *
+	 * @param telepad the telepad
+	 */
+	@Override
+	public void onLoad(Telepad telepad) {
+		ImageView view = new ImageView(telepadImage);
+		telepad.setImageView(view);
+		addEntity(telepad, view);
 	}
 
 	/**

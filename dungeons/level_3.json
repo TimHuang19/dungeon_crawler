@@ -588,6 +588,11 @@
           "type": "exit"
       },
       {
+          "x": 16,
+          "y": 15,
+          "type": "hound"
+      },
+      {
         "x": 2,
         "y": 15,
         "type": "wall"
