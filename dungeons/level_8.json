@@ -288,6 +288,26 @@
             "type": "wall"
         },
         {
+            "x": 7,
+            "y": 12,
+            "type": "telepad"
+        },
+        {
+            "x": 7,
+            "y": 12,
+            "type": "telepad"
+        },
+        {
+            "x": 14,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
+            "x": 14,
+            "y": 7,
+            "type": "telepad"
+        },
+        {
             "x": 6,
             "y": 0,
             "type": "telepad"
@@ -387,6 +407,7 @@
             "y": 0,
             "type": "telepad"
         },
+
         {
             "x": 0,
             "y": 9,

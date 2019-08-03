@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -45,7 +45,7 @@ public class Dungeon implements DungeonSubject, Observer {
     private int enemyCount;
     
     /** Telepad groupings */
-    private HashMap<Integer, ArrayList<Telepad>> idToTelepads;
+    private LinkedHashMap<Integer, ArrayList<Telepad>> idToTelepads;
     
     /**
      * Instantiates a new dungeon.
@@ -65,7 +65,7 @@ public class Dungeon implements DungeonSubject, Observer {
         this.pressedSwitches = 0;
         this.treasureCount = 0;
         this.enemyCount = 0;
-        this.idToTelepads = new HashMap<>();
+        this.idToTelepads = new LinkedHashMap<>();
     }
     
     /**
