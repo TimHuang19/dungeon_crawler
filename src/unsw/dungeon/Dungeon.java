@@ -247,33 +247,6 @@ public class Dungeon implements DungeonSubject, Observer {
     	}
     	return matchingTelepad;
     }
-
-    /**
-     * Adds the entity.
-     *
-     * @param entity 	The entity
-     */
-    public void addEntity(Entity entity) {
-        entities.add(entity);
-        if (entity instanceof Switch) {
-        	this.pressedSwitches++;
-        } else if (entity instanceof Treasure) {
-        	this.treasureCount++;
-        } else if (entity instanceof Enemy) {
-        	this.enemyCount++;
-        } else if (entity instanceof Telepad) {
-        	Telepad telepad = (Telepad) entity;
-    		ArrayList<Telepad> telepads;
-        	if (idToTelepads.containsKey(telepad.getId())) {
-        		telepads = idToTelepads.get(telepad.getId());
-        		telepads.add(telepad);
-        	} else {
-        		telepads = new ArrayList<>();
-        		telepads.add(telepad);
-        		idToTelepads.put(telepad.getId(), telepads);
-        	}
-        }
-    }
     
     /**
      * Removes the entity.
@@ -349,38 +322,46 @@ public class Dungeon implements DungeonSubject, Observer {
 	@Override
 	public void update(Subject obj) {
 		if (obj instanceof Boulder) {
-			boolean onSwitch = false;
-			Boulder b = (Boulder) obj;
-			
-			if (b.gotDestroyed()) {
-				if (b.getOnSwitch()) {
-					this.pressedSwitches++;
-					if (this.pressedSwitches == 1) {
-						setComplete(Goal.BOULDERS, false);
-					}
-				}
-				removeEntity((Entity) b);
-				return;
-			}
-			
-			for (Entity e : entities) {
-				if (e instanceof Switch && b.getX() == e.getX() && b.getY() == e.getY()) {
-					onSwitch = true;
-					this.pressedSwitches--;
-					if (this.pressedSwitches == 0) {
-						setComplete(Goal.BOULDERS, true);
-					}
-				}
-			}
-			
-			if (b.getOnSwitch() && onSwitch == false) {
+			update((Boulder) obj);
+		}
+	}
+	
+	/**
+	 * Update boulder.
+	 *
+	 * @param b the boulder
+	 */
+	public void update(Boulder b) {
+		boolean onSwitch = false;
+		
+		if (b.gotDestroyed()) {
+			if (b.getOnSwitch()) {
 				this.pressedSwitches++;
 				if (this.pressedSwitches == 1) {
 					setComplete(Goal.BOULDERS, false);
 				}
 			}
-			b.setOnSwitch(onSwitch);
+			removeEntity((Entity) b);
+			return;
 		}
+		
+		for (Entity e : entities) {
+			if (e instanceof Switch && b.getX() == e.getX() && b.getY() == e.getY()) {
+				onSwitch = true;
+				this.pressedSwitches--;
+				if (this.pressedSwitches == 0) {
+					setComplete(Goal.BOULDERS, true);
+				}
+			}
+		}
+		
+		if (b.getOnSwitch() && onSwitch == false) {
+			this.pressedSwitches++;
+			if (this.pressedSwitches == 1) {
+				setComplete(Goal.BOULDERS, false);
+			}
+		}
+		b.setOnSwitch(onSwitch);
 	}
 
 	/**
@@ -423,4 +404,31 @@ public class Dungeon implements DungeonSubject, Observer {
 			o.update(this);
 		}
 	}
+	
+    /**
+     * Adds the entity.
+     *
+     * @param entity 	The entity
+     */
+    public void addEntity(Entity entity) {
+        entities.add(entity);
+        if (entity instanceof Switch) {
+        	this.pressedSwitches++;
+        } else if (entity instanceof Treasure) {
+        	this.treasureCount++;
+        } else if (entity instanceof Enemy) {
+        	this.enemyCount++;
+        } else if (entity instanceof Telepad) {
+        	Telepad telepad = (Telepad) entity;
+    		ArrayList<Telepad> telepads;
+        	if (idToTelepads.containsKey(telepad.getId())) {
+        		telepads = idToTelepads.get(telepad.getId());
+        		telepads.add(telepad);
+        	} else {
+        		telepads = new ArrayList<>();
+        		telepads.add(telepad);
+        		idToTelepads.put(telepad.getId(), telepads);
+        	}
+        }
+    }
 }

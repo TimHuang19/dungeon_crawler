@@ -458,7 +458,7 @@ public class DungeonController implements DungeonObserver{
 				squares.add(label, labelX, labelY);
 				labelY++;
 				for (GoalExpression g : goals.getSubGoals()) {
-					addGoalLabels(g, "  " + space);
+					addGoalLabels(g, "   " + space);
 				}
 				break;
 			case OR:
@@ -471,7 +471,7 @@ public class DungeonController implements DungeonObserver{
 				squares.add(label, labelX, labelY);
 				labelY++;
 				for (GoalExpression g : goals.getSubGoals()) {
-					addGoalLabels(g, "  " + space);
+					addGoalLabels(g, "   " + space);
 				}
 				break;
 			case BOULDERS:
