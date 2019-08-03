@@ -494,7 +494,11 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-                GridPane.setColumnIndex(node, newValue.intValue()-1);
+            	if (newValue.intValue() == 0) {
+            		GridPane.setColumnIndex(node, newValue.intValue());
+            	} else {
+            		GridPane.setColumnIndex(node, newValue.intValue()-1);
+            	}
             }
         });
         entity.y().addListener(new ChangeListener<Number>() {
@@ -539,7 +543,11 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-                GridPane.setRowIndex(node, newValue.intValue()-1);
+            	if (newValue.intValue() == 0) {
+            		GridPane.setRowIndex(node, newValue.intValue());
+            	} else {
+            		GridPane.setRowIndex(node, newValue.intValue()-1);
+            	}
             }
         });
     }

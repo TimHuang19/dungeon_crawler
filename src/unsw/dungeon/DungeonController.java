@@ -199,6 +199,7 @@ public class DungeonController implements DungeonObserver{
             break;
         case Z:
         	player.pickUp();
+        	player.teleport();
         	break;
         case X:
         	player.swingSword();

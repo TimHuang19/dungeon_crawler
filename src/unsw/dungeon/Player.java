@@ -412,6 +412,20 @@ public class Player extends Entity implements Subject, Observer {
     		}
     	}
     }
+    
+    /**
+     * Teleport.
+     */
+    public void teleport() {
+    	ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
+    	
+    	for (Entity e : entities) {
+    		if (e instanceof Telepad) {
+    			((Telepad) e).teleport(this);
+    			break;
+    		}
+    	}
+    }
 	
 	/**
 	 * Reduce count in the the dungeon

@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class Telepad extends Entity{
 	
 	private int id;
@@ -35,14 +37,32 @@ public class Telepad extends Entity{
 	public boolean blocksBoulder() {
 		return false;
 	}
-
+	
 	@Override
 	public boolean pickUp(Player p) {
-		Telepad matchingTelepad = dungeon.getMatchingTelepad(this);
-
-		p.x().set(matchingTelepad.getX());
-		p.y().set(matchingTelepad.getY());
 		return false;
+	}
+	
+	public void teleport(Player p) {
+		Telepad matchingTelepad = dungeon.getMatchingTelepad(this);
+		int targetX = matchingTelepad.getX();
+		int targetY = matchingTelepad.getY();
+		
+		ArrayList<Entity> entities = dungeon.getEntities(targetX, targetY);
+		
+		boolean canTeleport = true;
+		
+		for (Entity e : entities) {
+			if (e.isObstacle(p)) {
+				canTeleport = false;
+			}
+		}
+		
+		if (canTeleport) {
+			p.x().set(targetX);
+			p.y().set(targetY);
+			p.notifyObservers();
+		}
 	}
 
 }
