@@ -32,6 +32,14 @@ public class LevelSelectController {
     @FXML
     private Button sixButton;
     
+    /** The seventh level button. */
+    @FXML
+    private Button sevenButton;
+    
+    /** The eighth level button. */
+    @FXML
+    private Button eightButton;
+    
     /** The back button. */
     @FXML
     private Button backButton;
@@ -77,6 +85,16 @@ public class LevelSelectController {
     @FXML
     public void handleSixButton() throws IOException {
         (new DungeonScreen(stage, "level_6.json")).start();
+    }
+    
+    @FXML
+    public void handleSevenButton() throws IOException {
+        (new DungeonScreen(stage, "level_7.json")).start();
+    }
+    
+    @FXML
+    public void handleEightButton() throws IOException {
+        (new DungeonScreen(stage, "level_8.json")).start();
     }
     
     @FXML

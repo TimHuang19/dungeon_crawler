@@ -52,22 +52,28 @@ public class NextLevelController {
     public void initialize() {
     	switch (fileName) {
 		case "level_1.json":
-	    	completionName.setText("Level 1 of 6 Clear");
+	    	completionName.setText("Level 1 of 8 Clear");
 	    	break;
 		case "level_2.json":
-	    	completionName.setText("Level 2 of 6 Clear");
+	    	completionName.setText("Level 2 of 8 Clear");
 	    	break;
 		case "level_3.json":
-	    	completionName.setText("Level 3 of 6 Clear");
+	    	completionName.setText("Level 3 of 8 Clear");
 	    	break;
 		case "level_4.json":
-	    	completionName.setText("Level 4 of 6 Clear");
+	    	completionName.setText("Level 4 of 8 Clear");
 	    	break;
 		case "level_5.json":
-	    	completionName.setText("Level 5 of 6 Clear");
+	    	completionName.setText("Level 5 of 8 Clear");
 	    	break;
 		case "level_6.json":
-	    	completionName.setText("Level 6 of 6 Clear");
+	    	completionName.setText("Level 6 of 8 Clear");
+	    	break;
+		case "level_7.json":
+	    	completionName.setText("Level 7 of 8 Clear");
+	    	break;
+		case "level_8.json":
+	    	completionName.setText("Level 8 of 8 Clear");
 	    	break;
     	}
     }
@@ -94,6 +100,12 @@ public class NextLevelController {
 	    	break;
 		case "level_5.json":
 	    	(new DungeonScreen(stage, "level_6.json")).start();
+	    	break;
+		case "level_6.json":
+	    	(new DungeonScreen(stage, "level_7.json")).start();
+	    	break;
+		case "level_7.json":
+	    	(new DungeonScreen(stage, "level_8.json")).start();
 	    	break;
     	}
     }

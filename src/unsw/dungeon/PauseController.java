@@ -61,22 +61,28 @@ public class PauseController {
     public void initialize() {
     	switch (fileName) {
 			case "level_1.json":
-		    	levelName.setText("Level 1 of 6");
+		    	levelName.setText("Level 1 of 8");
 		    	break;
 			case "level_2.json":
-		    	levelName.setText("Level 2 of 6");
+		    	levelName.setText("Level 2 of 8");
 		    	break;
 			case "level_3.json":
-		    	levelName.setText("Level 3 of 6");
+		    	levelName.setText("Level 3 of 8");
 		    	break;
 			case "level_4.json":
-		    	levelName.setText("Level 4 of 6");
+		    	levelName.setText("Level 4 of 8");
 		    	break;
 			case "level_5.json":
-		    	levelName.setText("Level 5 of 6");
+		    	levelName.setText("Level 5 of 8");
 		    	break;
 			case "level_6.json":
-		    	levelName.setText("Level 6 of 6");
+		    	levelName.setText("Level 6 of 8");
+		    	break;
+			case "level_7.json":
+		    	levelName.setText("Level 7 of 8");
+		    	break;
+			case "level_8.json":
+		    	levelName.setText("Level 8 of 8");
 		    	break;
     	}
     }
