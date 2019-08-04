@@ -134,6 +134,33 @@ public class Player extends Entity implements Subject, Observer {
         this.treasures = 0;
     }
     
+    /**
+     * Gets the height.
+     *
+     * @return the height
+     */
+    public int getHeight() {
+    	return dungeon.getHeight();
+    }
+    
+    /**
+     * Gets the width.
+     *
+     * @return the width
+     */
+    public int getWidth() {
+    	return dungeon.getWidth();
+    }
+    
+    /**
+     * Gets the entities.
+     *
+     * @return the entities
+     */
+    public ArrayList<Entity> getEntities(int x, int y) {
+    	return dungeon.getEntities(x, y);
+    }
+    
     public boolean atRightBoundary() {
     	if (getX() == dungeon.getWidth()-1) {
     		return true;

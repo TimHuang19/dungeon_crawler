@@ -25,17 +25,17 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="startButton" layoutX="199.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="27.0" prefWidth="202.0" styleClass="record-sales" stylesheets="@style.css" text="Play">
+      <Button fx:id="startButton" layoutX="199.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="27.0" prefWidth="202.0" styleClass="record-sales" stylesheets="@style.css" text="Play">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="quitButton" layoutX="199.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="27.0" prefWidth="202.0" text="Quit">
+      <Button fx:id="quitButton" layoutX="427.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="45.0" prefWidth="142.0" text="Quit">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="levelButton" layoutX="199.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleLevelButton" prefHeight="27.0" prefWidth="202.0" text="Select Level">
+      <Button fx:id="levelButton" layoutX="201.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleLevelButton" prefHeight="27.0" prefWidth="202.0" text="Select Level">
          <font>
             <Font name="Lucida Bright Regular" size="13.0" />
          </font>
@@ -50,5 +50,10 @@
             <Image url="@../../../images/fire.gif" />
          </image>
       </ImageView>
+      <Button fx:id="instructionButton" layoutX="32.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleInstructionButton" prefHeight="45.0" prefWidth="142.0" styleClass="record-sales" stylesheets="@style.css" text="Instructions">
+         <font>
+            <Font name="Lucida Bright Regular" size="13.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

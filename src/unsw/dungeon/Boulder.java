@@ -16,9 +16,6 @@ public class Boulder extends Entity implements Subject {
 	/** Boolean indicating if boulder is destroyed */
 	private boolean destroyed;
 	
-	/** The dungeon. */
-	private Dungeon dungeon;
-
 	/**
 	 * Instantiates a new boulder.
 	 *
@@ -30,7 +27,6 @@ public class Boulder extends Entity implements Subject {
 		super(x, y);
 		observers = new ArrayList<Observer>();
 		this.registerObserver(dungeon);
-		this.dungeon = dungeon;
 		onSwitch = false;
 		destroyed = false;
 		ArrayList<Entity> entities = dungeon.getEntities(x, y);
@@ -150,23 +146,23 @@ public class Boulder extends Entity implements Subject {
 		
 		int targetX;
 		int targetY;
-		
+				
 		if (playerX == boulderX) {
 			targetX = playerX;
 			targetY = (boulderY > playerY) ? boulderY + 1 : boulderY - 1;
-			if (targetY == -1 || targetY == dungeon.getHeight()) {
+			if (targetY == -1 || targetY == p.getHeight()) {
 				return true;
 			}
 			
 		} else {
 			targetY = playerY;
 			targetX = (boulderX > playerX) ? boulderX + 1 : boulderX - 1;
-			if (targetX == -1 || targetX == dungeon.getWidth()) {
+			if (targetX == -1 || targetX == p.getWidth()) {
 				return true;
 			}
 		}
 				
-		ArrayList<Entity> entities = dungeon.getEntities(targetX, targetY);
+		ArrayList<Entity> entities = p.getEntities(targetX, targetY);
 		
 		boolean canMove = true;
 		for (Entity e : entities) {

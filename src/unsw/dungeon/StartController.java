@@ -23,6 +23,10 @@ public class StartController {
     @FXML
     private Button quitButton;
     
+    /** The instruction button. */
+    @FXML
+    private Button instructionButton;
+    
     /** The stage. */
     private Stage stage;
     
@@ -54,6 +58,16 @@ public class StartController {
     @FXML
     public void handleLevelButton() throws IOException {
     	(new LevelSelectScreen(stage)).start();
+    }
+    
+    /**
+     * Handle level button.
+     *
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    @FXML
+    public void handleInstructionButton() throws IOException {
+    	(new InstructionScreen(stage)).start();
     }
     
     /**
