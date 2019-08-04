@@ -47,20 +47,28 @@ public class DungeonController implements DungeonObserver{
     /** The pause screen. */
     private PauseScreen pauseScreen;
     
+    /** The potion label. */
     private Label potionLabel;
     
+    /** The sword label. */
     private Label swordLabel;
     
+    /** The bomb label. */
     private Label bombLabel;
     
+    /** The key label. */
     private Label keyLabel;
     
+    /** The treasure label. */
     private Label treasureLabel;
     
+    /** The goal labels. */
     private ArrayList<Label> goalLabels;
     
+    /** The label X. */
     private int labelX;
     
+    /** The label Y. */
     private int labelY;
         
     /**
@@ -270,6 +278,11 @@ public class DungeonController implements DungeonObserver{
 		}
 	}
 	
+	/**
+	 * Update from dungeon.
+	 *
+	 * @param dungeon the dungeon
+	 */
 	public void update(Dungeon dungeon) {		
 		for (Label label : goalLabels) {
 			squares.getChildren().remove(label);
@@ -317,6 +330,11 @@ public class DungeonController implements DungeonObserver{
 		}
 	}
 	
+	/**
+	 * Update from player.
+	 *
+	 * @param player the player
+	 */
 	public void update(Player player) {		
 		potionLabel.setText("          " + player.getInvincibleSteps() + " steps");
 		
@@ -419,6 +437,11 @@ public class DungeonController implements DungeonObserver{
 		}
 	}
 	
+	/**
+	 * Update from bomb.
+	 *
+	 * @param bomb the bomb
+	 */
 	public void update(Bomb bomb) {
 		if (bomb.isLit()) {
 			squares.getChildren().add(bomb.getZeroImage());
@@ -434,6 +457,11 @@ public class DungeonController implements DungeonObserver{
 		}
 	}
 	
+	/**
+	 * Update from door.
+	 *
+	 * @param door the door
+	 */
 	public void update(Door door) {
 		if (!door.isClosed()) {
 			squares.getChildren().remove(door.getImageView());
@@ -441,6 +469,12 @@ public class DungeonController implements DungeonObserver{
 		}
 	}
 	
+	/**
+	 * Adds the goal labels.
+	 *
+	 * @param goals 	the goals
+	 * @param space 	a number of space characters
+	 */
 	private void addGoalLabels(GoalExpression goals, String space) {
 		Label label = new Label();
         label.setTextFill(Color.ORANGERED);

@@ -315,7 +315,7 @@ public class Dungeon implements DungeonSubject, Observer {
     }
     
 	/**
-	 * Update observers.
+	 * Update.
 	 *
 	 * @param obj the subject
 	 */
@@ -327,7 +327,7 @@ public class Dungeon implements DungeonSubject, Observer {
 	}
 	
 	/**
-	 * Update boulder.
+	 * Update from boulder.
 	 *
 	 * @param b the boulder
 	 */

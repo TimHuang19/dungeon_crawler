@@ -79,6 +79,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     /** The enemy image. */
     private Image enemyImage;
     
+    /** The hound image. */
     private Image houndImage;
     
     /** The boulder image. */
@@ -93,14 +94,19 @@ public class DungeonControllerLoader extends DungeonLoader {
     /** The sword image. */
     private Image swordImage;
     
+    /** The left slash image. */
     private Image leftSlashImage;
     
+    /** The right slash image. */
     private Image rightSlashImage;
     
+    /** The up slash image. */
     private Image upSlashImage;
     
+    /** The down slash image. */
     private Image downSlashImage;
     
+    /** The telepad image. */
     private Image telepadImage;
     
     /** The bomb image. */
@@ -316,6 +322,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(enemy, view);
     }
     
+    /**
+     * On load.
+     *
+     * @param hound the hound
+     */
     @Override
     public void onLoad(Hound hound) {
         ImageView view = new ImageView(houndImage);
@@ -487,6 +498,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
+    /**
+     * Track left position.
+     *
+     * @param entity the entity
+     * @param node the node
+     */
     private void trackLeftPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX()-1);
         GridPane.setRowIndex(node, entity.getY());
@@ -510,6 +527,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
     
+    /**
+     * Track right position.
+     *
+     * @param entity the entity
+     * @param node the node
+     */
     private void trackRightPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX()+1);
         GridPane.setRowIndex(node, entity.getY());
@@ -529,6 +552,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
     
+    /**
+     * Track up position.
+     *
+     * @param entity the entity
+     * @param node the node
+     */
     private void trackUpPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY()-1);
@@ -552,6 +581,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
     
+    /**
+     * Track down position.
+     *
+     * @param entity the entity
+     * @param node the node
+     */
     private void trackDownPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY()+1);

@@ -5,7 +5,18 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
 
+/**
+ * The Class Hound.
+ */
 public class Hound extends Enemy {
+	
+	/**
+	 * Instantiates a new hound.
+	 *
+	 * @param dungeon 	the dungeon
+	 * @param x 		the x position
+	 * @param y 		the y position
+	 */
 	public Hound(Dungeon dungeon, int x, int y) {
 		super(dungeon,x ,y);
 		Timeline timeline = new Timeline();

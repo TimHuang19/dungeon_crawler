@@ -96,7 +96,7 @@ public class Enemy extends Entity implements Subject, Observer {
 	}
 	
 	/**
-	 * Determines if enemy has collided with player
+	 * Determines if enemy has collided with player.
 	 *
 	 * @param p the player
 	 * @return true, if enemy collides with player
@@ -188,7 +188,7 @@ public class Enemy extends Entity implements Subject, Observer {
     }
     
     /**
-     * Checks if a list of entities are obstacles to the enemy
+     * Checks if a list of entities are obstacles to the enemy.
      *
      * @param entities 	the list of entities
      * @return true, if is obstacle
@@ -253,9 +253,9 @@ public class Enemy extends Entity implements Subject, Observer {
 	
 	
 	/**
-	 * Checks if a bomb is an obstacle to an enemy using a particular movement strategy
+	 * Checks if a bomb is an obstacle to an enemy using a particular movement strategy.
 	 *
-	 * @param e 		The enemy
+	 * @param strategy the strategy
 	 * @return true, if it is obstacle
 	 */
 	@Override
@@ -315,6 +315,11 @@ public class Enemy extends Entity implements Subject, Observer {
 		}
 	}
 
+	/**
+	 * Sets the timeline.
+	 *
+	 * @param timeline the new timeline
+	 */
 	public void setTimeline(Timeline timeline) {
 		this.timeline.stop();
 		this.timeline = timeline;
