@@ -21,7 +21,6 @@ import unsw.dungeon.Potion;
 import unsw.dungeon.Switch;
 import unsw.dungeon.Sword;
 import unsw.dungeon.Treasure;
-import unsw.dungeon.UnlitState;
 import unsw.dungeon.Wall;
 
 public class LitBombDestroyTest {

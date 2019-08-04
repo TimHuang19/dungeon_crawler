@@ -181,8 +181,9 @@ public class DungeonController implements DungeonObserver{
         squares.add(new ImageView(key), dungeon.getWidth(), dungeon.getHeight()-1);
         squares.add(keyLabel, dungeon.getWidth(), dungeon.getHeight()-1);
 
-        for (ImageView entity : initialEntities)
+        for (ImageView entity : initialEntities) {
             squares.getChildren().add(entity);
+        }
     }
 
     /**
